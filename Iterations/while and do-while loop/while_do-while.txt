@@ -1,0 +1,81 @@
+while Loop:
+￣￣￣￣￣￣
+- A while loop repeatedly executes a block of code as long as a specified condition remains true.
+- The condition is checked before each iteration, and if it's true, the loop body is executed.   
+- If the condition is initially false, the loop body is never executed.
+
+Basic Example:
+--------------
+
+let count = 0;
+while (count < 5) {
+  console.log("Count:", count);
+  count++;
+}
+
+Output:
+
+Count: 0
+Count: 1
+Count: 2
+Count: 3
+Count: 4
+
+Advanced Usage:
+---------------
+
+- Infinite loops: Be cautious of infinite loops. If the condition never becomes false, the loop will continue indefinitely.
+- Nested loops: You can use while loops within other while loops to create nested structures.
+- Breaking out of a loop: Use the break statement to exit a while loop prematurely.
+- Continuing to the next iteration: Use the continue statement to skip the current iteration and proceed to the next one.
+
+Example:
+
+let number = 1;
+while (true) {
+  if (number > 10) {
+    break;
+  }
+  console.log("Number:", number);
+  number++;
+}
+
+do-while Loop:
+￣￣￣￣￣￣￣￣
+
+- A do-while loop executes a block of code at least once, and then it repeats as long as a specified condition remains true.
+- The condition is checked after each iteration, so the loop body is always executed at least once.
+
+Basic Example:
+--------------
+
+let input = "";
+do {
+  input = prompt("Enter a number (or 'quit' to exit):");
+  if (input !== "quit") {
+    console.log("You entered:", input);
+  }
+} while (input !== "quit");
+
+Advanced Usage:
+---------------
+
+- Guaranteeing at least one iteration: The do-while loop is useful when you want to ensure that the loop body is executed at least once, regardless of the initial condition.
+- Nested loops: You can use do-while loops within other loops.
+- Breaking out of a loop: Use the break statement to exit a do-while loop prematurely.
+- Continuing to the next iteration: Use the continue statement to skip the current iteration and proceed to the next one.
+
+Example:
+
+let number = 1;
+do {
+  console.log("Number:", number);
+  number++;
+} while (number <= 10);
+
+
+--> Key Differences:
+
+Condition check: The while loop checks the condition before the first iteration, while the do-while loop checks it after the first iteration.
+Guaranteed execution: The do-while loop is guaranteed to execute at least once, while the while loop might not execute if the condition is initially false.
+I hope this explanation, along with the examples, provides a clear understanding of while and do-while loops in JavaScript!
