@@ -29,10 +29,10 @@ Advanced Usage:
 ￣￣￣￣￣￣￣￣￣
 
 - Nested for loops: You can use for loops within other for loops to create nested structures.
-- Breaking out of a loop: Use the break statement to "exit a loop prematurely".⭐
-- Continuing to the next iteration: Use the continue statement to "skip the current iteration and proceed to the next one".⭐
-- Iterating over arrays: Use the "for...of" loop to iterate over the elements of an array.⭐
-- Iterating over objects: Use the "for...in" loop to iterate over the properties of an object.⭐
+- ⭐ Breaking out of a loop: Use the break statement to "exit a loop prematurely".
+- ⭐ Continuing to the next iteration: Use the continue statement to "skip the current iteration and proceed to the next one".
+- ⭐ Iterating over arrays: Use the "for...of" loop to iterate over the elements of an array.
+- ⭐ Iterating over objects: Use the "for...in" loop to iterate over the properties of an object.
 
 Examples:
 
@@ -68,7 +68,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 
-4) Iterating over arrays:
+4) Iterating over arrays: [for of]
 --------------------------
 
 const numbers = [1, 2, 3, 4, 5];
@@ -78,7 +78,7 @@ for (let number of numbers) {
 }
 
 
-5) Iterating over objects:
+5) Iterating over objects: [for in]
 --------------------------
 
 const person = {
@@ -92,4 +92,14 @@ for (let property in person) {
 }
 
 
-By understanding these concepts and examples, you can effectively use for loops to perform various tasks in your Node.js applications.
+By understanding these concepts and examples, we can effectively use for loops to perform various tasks in your Node.js applications.
+
+⭐ Iterating over objects using Object.entries()
+const myObject = {
+  game1: 'NFS',
+  game2: 'Spiderman'
+};
+
+for (const [key, value] of Object.entries(myObject)) {
+  console.log(key, ':-', value);
+}
