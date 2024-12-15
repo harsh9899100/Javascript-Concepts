@@ -1,0 +1,13 @@
+<!-- Working with Document Fragments : A lightweight container to improve performance by reducing reflows. -->
+
+<div id="parent"></div>
+<script>
+  const parent = document.getElementById("parent");
+  const fragment = document.createDocumentFragment();
+  for (let i = 1; i <= 3; i++) {
+    const item = document.createElement("p");
+    item.textContent = `Item ${i}`;
+    fragment.appendChild(item);
+  }
+  parent.appendChild(fragment); // Appends all items at once.
+</script>

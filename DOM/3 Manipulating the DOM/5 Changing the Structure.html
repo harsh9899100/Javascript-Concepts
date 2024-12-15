@@ -1,0 +1,26 @@
+<!-- Changing the Structure : Moving or replacing elements. -->
+
+<!-- a. Move Elements -->
+    
+    <div id="parent1">
+      <p id="child1">Move me</p>
+    </div>
+    <div id="parent2"></div>
+    <script>
+      const child = document.getElementById("child1");
+      const parent2 = document.getElementById("parent2");
+      parent2.appendChild(child); // Moves the element to a new parent.
+    </script>
+    
+<!-- b. Replace Elements -->
+    
+    <div id="parent">
+      <p id="oldChild">Replace me</p>
+    </div>
+    <script>
+      const parent = document.getElementById("parent");
+      const oldChild = document.getElementById("oldChild");
+      const newChild = document.createElement("p");
+      newChild.textContent = "I replaced the old child!";
+      parent.replaceChild(newChild, oldChild);
+    </script>

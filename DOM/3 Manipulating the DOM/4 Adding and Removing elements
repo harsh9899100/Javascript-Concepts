@@ -1,0 +1,43 @@
+<!-- Adding and Removing Elements -->
+   
+   
+<!-- a. Create and Append Elements -->
+   
+   <!-- document.createElement to create new elements -->
+   <!-- appendChild or append to add them. -->
+   
+   <div id="parent"></div>
+   <script>
+     const parent = document.getElementById("parent");
+     const newElement = document.createElement("p");
+     newElement.textContent = "I am a new paragraph!";
+     parent.appendChild(newElement);
+   </script> 
+
+<!-- b. Insert Elements at Specific Positions -->
+
+  <!-- Use insertBefore or insertAdjacentHTML. -->
+  
+   <div id="parentt">
+     <p id="childd">Original Child</p>
+   </div>
+   <script>
+     const parentt = document.getElementById("parentt");
+     const newElementt = document.createElement("p");
+     newElementt.textContent = "Inserted Before!";
+     const childd = document.getElementById("childd");
+     parentt.insertBefore(newElementt, childd);
+   </script>
+
+<!-- c. Remove Elements -->
+
+  <!-- Use removeChild or remove. -->
+
+   <div id="parenttt">
+     <p id="childdd">Remove me</p>
+   </div>
+   <script>
+     const parenttt = document.getElementById("parenttt");
+     const childdd = document.getElementById("childdd");
+     parenttt.removeChild(childdd); // or child.remove();
+   </script>

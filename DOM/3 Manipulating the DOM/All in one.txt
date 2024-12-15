@@ -1,0 +1,97 @@
+The Document Object Model (DOM) provides a powerful way to interact with the structure and content of web pages using JavaScript. 
+
+1. Changing Content
+￣￣￣￣￣￣￣￣￣￣￣
+ - element.innerHTML: Sets or retrieves the HTML content of an element, including nested elements and tags.
+   -----------------
+   
+   const title = document.getElementById("my-title");
+   title.innerHTML = "<h1>Updated Title!</h1>"; // Replaces the entire content
+   
+ - element.textContent: Sets or retrieves the text content of an element, excluding HTML tags.
+   --------------------
+   
+   const paragraph = document.getElementById("my-paragraph");
+   paragraph.textContent = "This is the updated paragraph text."; // Replaces the text
+
+2. Changing Attributes
+￣￣￣￣￣￣￣￣￣￣￣￣
+ - element.setAttribute("name", "value"): Sets an attribute on an element.
+   --------------------------------------
+
+   const image = document.getElementById("my-image");
+   image.setAttribute("src", "new_image.jpg"); // Sets the image source
+   
+ - element.getAttribute("name"): Retrieves the value of an attribute.
+   -----------------------------
+
+   const link = document.getElementById("my-link");
+   const href = link.getAttribute("href");
+   console.log(href); // Outputs the link's URL
+   
+ - element.removeAttribute("name"): Removes an attribute from an element.
+   --------------------------------
+   
+   const button = document.getElementById("my-button");
+   button.removeAttribute("disabled"); // Enables a disabled button
+   
+ - Direct property manipulation (for certain attributes): Modifies attributes as object properties (not recommended for all attributes).
+   ------------------------------------------------------
+   
+   const input = document.getElementById("my-input");
+   input.value = "New input value"; // Sets the input value
+
+3. Changing Styles
+￣￣￣￣￣￣￣￣￣￣
+  Inline styles: Set styles directly using the style property as an object.
+  --------------
+  
+  const heading = document.getElementById("my-heading");
+  heading.style.color = "red";
+  heading.style.fontSize = "2em"; // Modifies color and font size
+  
+  Adding/removing classes: Use class methods to manage class lists.
+  ------------------------                             -----------
+  
+  const element = document.getElementById("my-element");
+  element.classList.add("my-new-class"); // Adds a class
+  element.classList.remove("old-class"); // Removes a class
+  element.classList.toggle("toggle-class"); // Toggles a class
+  console.log(element.classList.contains("some-class")); // Checks if a class exists
+
+4. Adding/Removing Elements
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+ - document.createElement("tag"): Creates a new element of the specified tag.
+   ------------------------------
+   
+   const newParagraph = document.createElement("p");
+   newParagraph.textContent = "This is a new paragraph.";
+   
+ - Appending elements: Insert elements as children of another element.
+   -------------------
+   
+   const container = document.getElementById("my-container");
+   container.appendChild(newParagraph); // Appends the paragraph as the last child
+   container.append(anotherElement); // Appends another element efficiently (modern browsers)
+   
+ - Inserting elements: Insert elements at specific positions within a parent element.
+   -------------------
+   
+   const referenceElement = document.getElementById("reference-element");
+   container.insertBefore(newParagraph, referenceElement); // Inserts before the reference
+   
+   container.insertAdjacentHTML("beforebegin", "<h2>New content</h2>"); // Inserts before the container
+   
+ - Removing elements: Remove elements from the DOM.
+   ------------------
+   
+   container.removeChild(newParagraph); // Removes the new paragraph
+   element.remove(); // Removes itself from the DOM (modern browsers)
+
+
+5. Changing the Structure
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+6. Working with Document Fragments
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+7. Manipulating the DOM Safely
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
