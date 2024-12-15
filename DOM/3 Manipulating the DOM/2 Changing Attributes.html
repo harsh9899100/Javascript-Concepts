@@ -1,0 +1,25 @@
+<!-- Changing Attributes -->
+
+
+<!-- a. Using setAttribute, getAttribute, and removeAttribute -->
+
+ <!-- - Modify or access attributes. -->
+   
+   <img id="myImage" src="old.jpg" alt="Old Image">
+   <script>
+     const img = document.getElementById("myImage");
+     img.setAttribute("src", "new.jpg");
+     console.log(img.getAttribute("src")); // Output: new.jpg
+     img.removeAttribute("alt");
+   </script>
+   
+<!-- b. Using direct property assignment -->
+   
+ <!-- - Modify attributes directly. -->
+   
+   <img id="myImage" src="old.jpg">
+   <script>
+     const imgs = document.getElementById("myImage");
+     imgs.src = "new.jpg";
+     console.log(imgs.src); // Output: full URL of new.jpg
+   </script>

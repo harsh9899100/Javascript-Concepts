@@ -1,0 +1,26 @@
+<!-- Changing Styles -->
+
+
+<!-- a. Inline Styles -->
+
+   <!-- Modify styles directly via the style property. -->
+   
+   <div id="myDiv">Styled Div</div>
+   <script>
+     const div = document.getElementById("myDiv");
+     div.style.color = "red";
+     div.style.backgroundColor = "yellow";
+   </script>
+   
+<!-- b. Using classList -->
+   
+   <!-- Add, remove, toggle, and check classes. -->
+   
+   <div id="myDiv" class="box"></div>
+   <script>
+     const div = document.getElementById("myDiv");
+     div.classList.add("highlight");
+     div.classList.remove("box");
+     div.classList.toggle("hidden");
+     console.log(div.classList.contains("hidden")); // Output: true
+   </script>
