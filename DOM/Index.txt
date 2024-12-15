@@ -1,7 +1,8 @@
 
-The Document Object Model (DOM) is a programming interface that represents an HTML or XML document as a tree structure, 
-where each node is an object representing a part of the document. 
-JavaScript can interact with and manipulate the DOM to dynamically update a webpage.
+-> The Document Object Model (DOM) is a programming interface that represents an HTML or XML document as a tree structure,
+   allowing you to manipulate and interact with the document's elements, attributes, and content.
+   - where each node is an object representing a part of the document. 
+   - JavaScript can interact with and manipulate the DOM to dynamically update a webpage.
 
 Here's a comprehensive guide to all DOM concepts in JavaScript:
 

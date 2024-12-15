@@ -1,0 +1,56 @@
+-> DOM Tree Structure : The DOM tree is a hierarchical structure that mirrors the structure of an HTML document. Each node in the tree represents an element, attribute, or text content of the document.
+
+Key Components of the DOM Tree:
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+
+1) Root Node:
+   - The topmost node in the tree.
+   - Represents the entire HTML document.
+   - Typically, it's the <html> element.
+
+2) Child Nodes:     
+   - Nodes directly below a parent node.
+   - For example, the <head> and <body> elements are child nodes of the <html> element.
+     
+3) Parent Node:
+   - The node directly above a child node.
+
+4) Sibling Nodes:
+   - Nodes that share the same parent node.
+   - For example, the <head> and <body> elements are siblings.
+
+5) Leaf Nodes:
+   - Nodes that have no children.
+   - These are typically text nodes or empty elements like <br>.
+
+Visual Representation of a Simple DOM Tree:
+-------------------------------------------
+
+<html>
+  <head>
+    <title>My Web Page</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+    <p>This is a paragraph.</p>
+  </body>
+</html>
+
+DOM Tree:
+---------
+
+html
+  head
+    title
+  body
+    h1
+    p
+
+Manipulating the DOM:
+￣￣￣￣￣￣￣￣￣￣￣
+-> JavaScript can interact with the DOM to dynamically modify the structure and content of a web page. Common DOM manipulation techniques include:
+     - Creating elements: document.createElement()
+     - Adding elements: parentNode.appendChild(childNode)
+     - Removing elements: parentNode.removeChild(childNode)
+     - Modifying element attributes: element.setAttribute(attributeName, attributeValue)
+     - Modifying element content: element.textContent or element.innerHTML

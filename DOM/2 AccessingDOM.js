@@ -1,9 +1,8 @@
-// Methods for Accessing the DOM:
-// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+// --> Methods for Accessing the DOM:
 
 
 // 1. document.getElementById()
-// ----------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // Selects an element by its id attribute.
 // Returns a single element or null if no element is found.
 
@@ -11,7 +10,7 @@
   console.log(elementById?.textContent); // Output: Hello World  
   
 // 2. document.getElementsByClassName()
-// ------------------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // Selects elements by their class attribute.
 // Returns an HTMLCollection (live list of elements).
 
@@ -20,7 +19,7 @@
   console.log(elementsByClassName[1]?.textContent); // Output: Second
 
 // 3. document.getElementsByTagName()
-// ----------------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // Selects elements by their tag name (e.g., div, p, span).
 // Returns an HTMLCollection.
 
@@ -29,7 +28,7 @@
   console.log(elementsByTagName[0]?.textContent); // Output: Div 1
 
 // 4. document.querySelector()
-// --------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // Selects the first element that matches a CSS selector.
 // Returns null if no match is found.
 
@@ -37,7 +36,7 @@
   console.log(firstElement?.textContent); // Output: First
 
 // 5. document.querySelectorAll()
-// ------------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // Selects all elements that match a CSS selector.
 // Returns a NodeList (static collection of elements).
 
@@ -47,14 +46,14 @@
 // Output: Second
 
 // 6. document.forms
-// -----------------
+// ￣￣￣￣￣￣￣￣￣
 // Access forms by their name or index.
 
   const form = document.forms["myForm"];
   console.log(form?.username?.name); // Output: username
 
 // 7. Accessing head, body, and html
-// ----------------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // document.documentElement: Refers to the <html> element.
 // document.head: Refers to the <head> element.
 // document.body: Refers to the <body> element.
@@ -63,12 +62,22 @@
   console.log(document.documentElement); // Output: <html>...</html>
 
 // 8. document.children and document.childNodes
-// --------------------------------------------
+// ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 // document.children: Access child elements of the document (only elements).
 // document.childNodes: Access all nodes, including text and comment nodes.
   console.log(document.children); // Output: [html]
   console.log(document.childNodes); // Output: [<!DOCTYPE html>, html]
 
+// 9. Traversing nodes:
+// ￣￣￣￣￣￣￣￣￣￣￣
+// - Parent node: parentNode, parentElement
+// - Child nodes:
+//     childNodes (all nodes, including text and comment nodes)
+//     children (only element nodes)
+//     firstChild, lastChild, firstElementChild, lastElementChild
+// - Siblings: nextSibling, previousSibling, nextElementSibling, previousElementSibling
+
+  
 // Best Practices
 // --------------
 // Example of Best Practice:
@@ -77,3 +86,7 @@
   items.forEach((item) => {
     console.log(item.textContent);
   });
+
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  
