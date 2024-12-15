@@ -1,0 +1,31 @@
+<div id="app"></div>
+<script>
+  // Access parent element
+  const app = document.getElementById("app");
+
+  // Create new elements
+  const title = document.createElement("h1");
+  title.textContent = "Dynamic DOM Manipulation";
+
+  const list = document.createElement("ul");
+  ["Item 1", "Item 2", "Item 3"].forEach((text) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    list.appendChild(li);
+  });
+
+  // Append elements to the DOM
+  app.appendChild(title);
+  app.appendChild(list);
+
+  // Style elements
+  app.style.textAlign = "center";
+  title.style.color = "blue";
+
+  // Event listener to modify content
+  list.addEventListener("click", (event) => {
+    if (event.target.tagName === "LI") {
+      event.target.textContent += " (clicked)";
+    }
+  });
+</script>
