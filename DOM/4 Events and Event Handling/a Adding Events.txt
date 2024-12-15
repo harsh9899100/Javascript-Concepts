@@ -1,0 +1,49 @@
+1. Inline Event Handlers
+
+  - The event handler is defined directly in the HTML.
+  - Not recommended for modern development due to separation of concerns.
+
+     <button onclick="alert('Button clicked!')">Click Me</button>
+
+2. Using Event Properties
+
+ - Assign a function to an element’s event property like onclick.
+
+     <button id="myButton">Click Me</button>
+     <script>
+       const button = document.getElementById("myButton");
+       button.onclick = function () {
+         alert("Button clicked!");
+       };
+     </script>
+
+3. Using addEventListener
+
+  - The preferred method for adding events.
+  - Allows multiple event listeners on the same element for the same event.
+
+     <button id="myButton">Click Me</button>
+     <script>
+       const button = document.getElementById("myButton");
+       button.addEventListener("click", function () {
+         alert("Event listener triggered!");
+       });
+       button.addEventListener("click", function () {
+         console.log("Another event listener.");
+       });
+     });
+     </script>
+
+4. Removing Event Listeners
+
+  - Use removeEventListener to detach an event listener. The function must be named to remove it.
+
+     <button id="myButton">Click Me</button>
+     <script>
+       const button = document.getElementById("myButton");
+       function handleClick() {
+         alert("Event listener triggered!");
+       }
+       button.addEventListener("click", handleClick);
+       button.removeEventListener("click", handleClick); // Removes the event listener
+     </script>

@@ -1,0 +1,31 @@
+<div id="parent">
+    <button id="child">Click Me</button>
+</div>
+<script>
+    const parent = document.getElementById("parent");
+    const child = document.getElementById("child");
+
+    parent.addEventListener("click", function (event) {
+        console.log("Parent clicked!");
+    });
+
+    child.addEventListener("click", function (event) {
+        console.log("Child clicked!");
+        event.stopPropagation(); // Prevents parent event
+    });
+
+    child.addEventListener("mouseover", function () {
+        console.log("Mouse over child.");
+    });
+
+    // Prevent default example
+    const link = document.createElement("a");
+    link.href = "https://example.com";
+    link.textContent = "Click Me";
+    document.body.appendChild(link);
+
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("Default behavior prevented.");
+    });
+</script>

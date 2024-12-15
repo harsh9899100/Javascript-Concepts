@@ -1,0 +1,10 @@
+<!-- Use event.preventDefault() to stop the default behavior of an element. -->
+
+<a href="https://example.com" id="myLink">Go to Example</a>
+<script>
+  const link = document.getElementById("myLink");
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Default behavior prevented.");
+  });
+</script>

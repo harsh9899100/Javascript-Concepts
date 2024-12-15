@@ -1,0 +1,68 @@
+<!-- 
+
+-> Event propagation is a mechanism in JavaScript that determines how events bubble up 
+   or trickle down through the DOM tree when they occur on an element. It defines the order 
+   in which event handlers are triggered for nested elements.
+
+Types of Propagation:
+￣￣￣￣￣￣￣￣￣￣￣
+<1> Event Bubbling:
+  - The default behavior.
+  - When an event occurs on an element, it first triggers the event handler on that element.
+  - Then, the event bubbles up to its parent element, triggering its event handler, and so on, until it reaches the root element (document).
+
+<2> Event Capturing:
+  - The event is first captured by the root element and then trickles down to the target element.
+  - This is less commonly used and can be controlled using addEventListener() with the third argument set to true.
+-->
+
+<!-- 
+
+Controlling Event Propagation:
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  1) event.stopPropagation(): Prevents the event from bubbling up the DOM tree.
+  2) event.stopImmediatePropagation(): Prevents further event handlers on the same element from being triggered. 
+
+-->
+
+<!-- 1) event.stopPropagation(): -->
+
+     <div id="parent">
+       <button id="child">Click Me</button>
+     </div>
+     <script>
+       const parent = document.getElementById("parent");
+       const child = document.getElementById("child");
+     
+       parent.addEventListener("click", function () {
+         console.log("Parent clicked!");
+       });
+     
+       child.addEventListener("click", function (event) {
+         event.stopPropagation();
+         console.log("Child clicked!");
+       });
+     </script>
+
+
+<!-- 2) event.stopImmediatePropagation(): -->
+
+     <button id="myButton">Click Me</button>
+     <script>
+       const button = document.getElementById("myButton");
+     
+       button.addEventListener("click", function () {
+         console.log("First listener.");
+       });
+     
+       button.addEventListener("click", function (event) {
+         event.stopImmediatePropagation();
+         console.log("Second listener.");
+       });
+     
+       button.addEventListener("click", function () {
+         console.log("Third listener."); // This will not execute.
+       });
+     </script>
+
+
