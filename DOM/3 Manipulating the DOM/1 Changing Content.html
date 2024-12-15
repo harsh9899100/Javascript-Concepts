@@ -1,0 +1,22 @@
+<!-- Changing Content -->
+
+<!-- a. Using innerHTML -->
+
+<div id="myDiv">Original Content</div>
+<script>
+  // Changes the HTML content of an element.
+  const div = document.getElementById("myDiv");
+  div.innerHTML = "<strong>Updated Content</strong>";
+  console.log(div.innerHTML); // Output: <strong>Updated Content</strong>
+</script>
+
+
+<!-- b. Using textContent -->
+
+<div id="myDiv">Original Content</div>
+<script>
+  // Changes the text content (ignores HTML tags).
+  const div = document.getElementById("myDiv");
+  div.textContent = "<strong>Updated Content</strong>";
+  console.log(div.textContent); // Output: <strong>Updated Content</strong>
+</script>
