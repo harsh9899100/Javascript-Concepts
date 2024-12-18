@@ -1,0 +1,12 @@
+a. form.elements
+  - Access input elements using their name attribute.
+     
+     <form id="myForm">
+         <input type="text" name="username" value="JohnDoe">
+       </form>
+       <script>
+         const form = document.getElementById("myForm");
+         const usernameInput = form.elements["username"];
+         console.log(usernameInput.value); // Output: JohnDoe
+       </script>
+       

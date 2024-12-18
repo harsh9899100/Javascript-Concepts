@@ -1,0 +1,52 @@
+<!-- 
+a. value
+￣￣￣￣￣
+Retrieves or sets the value of an input element. -->
+
+<form id="myForm">
+    <input type="text" name="username" value="JohnDoe">
+  </form>
+  <script>
+    const form1 = document.getElementById("myForm");
+    const usernameInput = form1.elements["username"];
+    console.log(usernameInput.value); // Output: JohnDoe
+    usernameInput.value = "JaneDoe"; // Modify the value
+    console.log(usernameInput.value); // Output: JaneDoe
+  </script>
+
+<!-- 
+b. checked
+￣￣￣￣￣￣
+Used for checkboxes and radio buttons to check if they are selected. -->
+
+<form id="myForm">
+    <input type="checkbox" name="subscribe" checked> Subscribe to newsletter
+  </form>
+  <script>
+    const form2 = document.getElementById("myForm");
+    const subscribeCheckbox = form2.elements["subscribe"];
+    console.log(subscribeCheckbox.checked); // Output: true
+    subscribeCheckbox.checked = false; // Uncheck the box
+    console.log(subscribeCheckbox.checked); // Output: false
+  </script>
+
+<!-- 
+c. selectedIndex
+￣￣￣￣￣￣￣￣￣
+  - For <select> elements, it retrieves or sets the index of the selected option. -->
+
+    <form id="myForm">
+        <select name="colors">
+          <option value="red">Red</option>
+          <option value="blue" selected>Blue</option>
+          <option value="green">Green</option>
+        </select>
+      </form>
+      <script>
+        const form3 = document.getElementById("myForm");
+        const colorSelect = form3.elements["colors"];
+        console.log(colorSelect.selectedIndex); // Output: 1 (Blue)
+        colorSelect.selectedIndex = 2; // Change to Green
+        console.log(colorSelect.value); // Output: green
+      </script>
+      

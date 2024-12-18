@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form element Input and Update</title>
+</head>
+
+<body>
+
+    <form name="myForm" id="myForm">
+        <label>
+            Username:
+            <input type="text" name="username" value="JohnDoe">
+        </label>
+        <br>
+        <label>
+            Password:
+            <input type="password" name="password" value="12345">
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" name="subscribe" checked> Subscribe to newsletter
+        </label>
+        <br>
+        <label>
+            Favorite Color:
+            <select name="colors">
+                <option value="red">Red</option>
+                <option value="blue" selected>Blue</option>
+                <option value="green">Green</option>
+            </select>
+        </label>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const form = document.forms["myForm"];
+
+        // Access text input value
+        const username = form.elements["username"];
+        console.log("Username:", username.value); // Output: JohnDoe
+
+        // Access checkbox state
+        const subscribe = form.elements["subscribe"];
+        console.log("Subscribed:", subscribe.checked); // Output: true
+
+        // Access dropdown value and index
+        const colors = form.elements["colors"];
+        console.log("Selected Color:", colors.value); // Output: blue
+        console.log("Selected Index:", colors.selectedIndex); // Output: 1
+
+        // Update values
+        username.value = "JaneDoe"; // Change username
+        subscribe.checked = false; // Uncheck checkbox
+        colors.selectedIndex = 2; // Select Green
+    </script>
+
+</body>
+
+</html>

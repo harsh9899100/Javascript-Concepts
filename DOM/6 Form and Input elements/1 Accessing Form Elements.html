@@ -1,0 +1,13 @@
+a. document.forms
+￣￣￣￣￣￣￣￣￣
+  - Access a form using its name or id attribute.
+
+     <form name="myForm" id="myForm">
+         <input type="text" name="username" value="JohnDoe">
+         <input type="password" name="password" value="12345">
+       </form>
+       <script>
+         const form = document.forms["myForm"]; // Access using name
+         console.log(form); // Logs the entire <form> element
+       </script>
+       
