@@ -1,0 +1,18 @@
+
+Root Nodes:
+￣￣￣￣￣￣
+  - document.documentElement: The <html> element.
+  - document.body: The <body> element.
+  - document.head: The <head> element.
+
+Child Nodes:
+￣￣￣￣￣￣￣
+  - childNodes (all types) and children (elements only).
+
+Parent and Siblings:
+￣￣￣￣￣￣￣￣￣￣￣
+  - parentNode, previousSibling, nextSibling.
+
+First/Last Nodes:
+￣￣￣￣￣￣￣￣￣
+  - firstChild, firstElementChild, lastChild, lastElementChild.

@@ -1,0 +1,19 @@
+a. Recursive Traversal
+￣￣￣￣￣￣￣￣￣￣￣￣
+  - Traverse all nodes recursively using childNodes.
+
+     <body>
+       <div>First</div>
+         <div>
+           <p>Nested</p>
+         </div>
+     </body>
+     <script>
+       function traverse(node) {
+         console.log(node); // Logs the current node
+         node.childNodes.forEach(traverse); // Recursive call
+       }
+       traverse(document.body);
+     </script>
+
+

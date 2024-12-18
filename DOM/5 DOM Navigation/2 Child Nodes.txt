@@ -1,0 +1,57 @@
+a. Accessing Child Nodes
+￣￣￣￣￣￣￣￣￣￣￣￣￣
+  - Use childNodes to get all child nodes (includes elements, text, and comments).
+  - Use children to get only element nodes.
+     
+     <body>
+       <div>First Child</div>
+       <div>Second Child</div>
+     </body>
+     <script>
+       console.log(document.body.childNodes); // Logs all child nodes (elements and text).
+       console.log(document.body.children); // Logs only the <div> elements.
+     </script>
+
+
+b. Accessing the First and Last Child
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  - firstChild / firstElementChild: Access the first child node or element.
+  - lastChild / lastElementChild: Access the last child node or element.
+
+     <body>
+       <div>First</div>
+       <div>Last</div>
+     </body>
+     <script>
+       console.log(document.body.firstChild); // Logs the first child (may include text or whitespace).
+       console.log(document.body.firstElementChild); // Logs the first <div> element.
+       console.log(document.body.lastElementChild); // Logs the last <div> element.
+     </script>
+
+
+c. Accessing Parent Nodes
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  - Use parentNode to get the parent of a node.
+     
+     <div id="child">Child Element</div>
+     <script>
+       const child = document.getElementById("child");
+       console.log(child.parentNode); // Logs the <body> element.
+     </script>
+
+
+d. Accessing Sibling Nodes
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  - previousSibling / previousElementSibling: Access the previous sibling node or element.
+  - nextSibling / nextElementSibling: Access the next sibling node or element.
+
+     <body>
+       <div>First</div>
+       <div id="middle">Middle</div>
+       <div>Last</div>
+     </body>
+     <script>
+       const middle = document.getElementById("middle");
+       console.log(middle.previousElementSibling.textContent); // Output: First
+       console.log(middle.nextElementSibling.textContent); // Output: Last
+     </script>

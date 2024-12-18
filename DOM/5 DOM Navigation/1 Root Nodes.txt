@@ -1,0 +1,49 @@
+a. document.documentElement   
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  - Refers to the root <html> element of the document.
+     
+     <html>
+       <head>
+         <title>Document Navigation</title>
+       </head>
+       <body>
+         <h1>Hello World</h1>
+       </body>
+     </html>
+     <script>
+       console.log(document.documentElement); // Logs the entire <html> element.
+     </script>
+
+
+b. document.body
+￣￣￣￣￣￣￣￣￣
+  - Refers to the <body> element.
+     
+     <html>
+       <head>
+         <title>Document Navigation</title>
+       </head>
+       <body>
+         <h1>Body Content</h1>
+       </body>
+     </html>
+     <script>
+       console.log(document.body); // Logs the entire <body> element and its content.
+     </script>
+
+
+c. document.head
+￣￣￣￣￣￣￣￣￣
+  - Refers to the <head> element.
+     
+     <html>
+       <head>
+         <title>Document Navigation</title>
+       </head>
+       <body>
+         <h1>Body Content</h1>
+       </body>
+     </html>
+     <script>
+       console.log(document.head); // Logs the entire <head> element and its content.
+     </script>
