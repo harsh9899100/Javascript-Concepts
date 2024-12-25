@@ -1,0 +1,14 @@
+<div id="container">
+    <h2>Content Update</h2>
+    <p id="content">Original Content</p>
+</div>
+<button id="updateButton">Update Content</button>
+
+<script>
+    const content = document.getElementById("content");
+    const button = document.getElementById("updateButton");
+
+    button.addEventListener("click", function () {
+        content.textContent = "This content has been updated dynamically!";
+    });
+</script>

@@ -1,0 +1,19 @@
+<div id="container">
+  <p id="oldParagraph">This paragraph will be replaced.</p>
+</div>
+<button id="replaceButton">Replace Paragraph</button>
+
+<script>
+  const container = document.getElementById("container");
+  const button = document.getElementById("replaceButton");
+
+  button.addEventListener("click", function () {
+    const oldParagraph = document.getElementById("oldParagraph");
+
+    // Create a new paragraph
+    const newParagraph = document.createElement("p");
+    newParagraph.textContent = "This is the new paragraph.";
+
+    container.replaceChild(newParagraph, oldParagraph); // Replace old with new
+  });
+</script>

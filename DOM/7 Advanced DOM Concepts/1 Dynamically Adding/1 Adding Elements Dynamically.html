@@ -1,0 +1,16 @@
+<div id="container">
+    <h2>Dynamic Content</h2>
+</div>
+<button id="addButton">Add Paragraph</button>
+
+<script>
+    const container = document.getElementById("container");
+    const button = document.getElementById("addButton");
+
+    button.addEventListener("click", function () {
+        // Create a new paragraph element
+        const newParagraph = document.createElement("p");
+        newParagraph.textContent = "This paragraph was added dynamically!";
+        container.appendChild(newParagraph); // Add the paragraph to the container
+    });
+</script>

@@ -1,0 +1,41 @@
+<div id="container">
+    <h2>Manage Content</h2>
+    <button id="addButton">Add Item</button>
+    <button id="removeButton">Remove Last Item</button>
+    <button id="updateButton">Update All Items</button>
+    <ul id="list">
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </ul>
+  </div>
+  
+  <script>
+    const list = document.getElementById("list");
+    const addButton = document.getElementById("addButton");
+    const removeButton = document.getElementById("removeButton");
+    const updateButton = document.getElementById("updateButton");
+  
+    // Add new list item
+    addButton.addEventListener("click", function () {
+      const newItem = document.createElement("li");
+      newItem.textContent = `Item ${list.children.length + 1}`;
+      list.appendChild(newItem);
+    });
+  
+    // Remove the last list item
+    removeButton.addEventListener("click", function () {
+      if (list.lastElementChild) {
+        list.lastElementChild.remove();
+      } else {
+        alert("No more items to remove!");
+      }
+    });
+  
+    // Update all list items
+    updateButton.addEventListener("click", function () {
+      Array.from(list.children).forEach((item, index) => {
+        item.textContent = `Updated Item ${index + 1}`;
+      });
+    });
+  </script>
+  

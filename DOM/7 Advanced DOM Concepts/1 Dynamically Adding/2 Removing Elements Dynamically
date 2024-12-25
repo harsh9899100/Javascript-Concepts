@@ -1,0 +1,19 @@
+<div id="container">
+  <h2>Dynamic Content</h2>
+  <p id="dynamicPara">This paragraph can be removed.</p>
+</div>
+<button id="removeButton">Remove Paragraph</button>
+
+<script>
+  const container = document.getElementById("container");
+  const button = document.getElementById("removeButton");
+
+  button.addEventListener("click", function () {
+    const paragraph = document.getElementById("dynamicPara");
+    if (paragraph) {
+      paragraph.remove(); // Remove the paragraph
+    } else {
+      alert("Paragraph already removed!");
+    }
+  });
+</script>
