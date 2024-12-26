@@ -1,0 +1,46 @@
+<!-- Scenario: A parent <ul> contains several <li> items. Clicking on any <li> displays its text. -->
+
+<div id="app">
+    <ul id="list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <button id="addItem">Add Item</button>
+</div>
+
+<script>
+    const list = document.getElementById("list");
+    const addItemButton = document.getElementById("addItem");
+    let itemCount = 3;
+
+    // Attach an event listener to the parent element (ul)
+    list.addEventListener("click", function (event) {
+        if (event.target.tagName === "LI") {
+            alert(`You clicked on: ${event.target.textContent}`);
+        }
+    });
+
+    // Add new items dynamically
+    addItemButton.addEventListener("click", function () {
+        const newItem = document.createElement("li");
+        newItem.textContent = `Item ${++itemCount}`;
+        list.appendChild(newItem);
+    });
+</script>
+
+<!-- 
+
+How It Works:
+-------------
+     - The event listener is attached to the <ul> element (parent).
+     - When a <li> is clicked, the click event bubbles up to the <ul>.
+     - The event.target property identifies the <li> that triggered the event.
+     - You can dynamically add <li> items, and they will automatically be handled by the same event listener.
+
+Key Benefits of Event Delegation in This Example:
+-------------------------------------------------
+     - No need to add individual listeners for each <li>.
+     - The dynamically added <li> elements are automatically managed without extra code.
+        
+-->

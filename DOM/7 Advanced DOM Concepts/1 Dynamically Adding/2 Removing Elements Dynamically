@@ -1,3 +1,11 @@
+<!-- 
+2. Removing Elements Dynamically : To remove an element, use:
+----------------------------------
+
+                                   removeChild()
+                                   remove() 
+-->
+
 <div id="container">
   <h2>Dynamic Content</h2>
   <p id="dynamicPara">This paragraph can be removed.</p>
