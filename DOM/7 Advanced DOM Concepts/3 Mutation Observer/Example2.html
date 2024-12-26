@@ -1,0 +1,40 @@
+<!-- Example: Observing Attribute Changes -->
+
+<div id="box" style="width: 100px; height: 100px; background-color: blue;"></div>
+<button id="changeColor">Change Color</button>
+
+<script>
+    const box = document.getElementById("box");
+
+    // Define the callback function
+    const callback = function (mutationsList) {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === "attributes") {
+                console.log(`Attribute "${mutation.attributeName}" changed.`);
+            }
+        });
+    };
+
+    // Create an observer instance
+    const observer = new MutationObserver(callback);
+
+    // Observe attribute changes
+    observer.observe(box, { attributes: true });
+
+    // Button to trigger attribute changes
+    document.getElementById("changeColor").addEventListener("click", () => {
+        box.style.backgroundColor = "red"; // Modify the style attribute
+    });
+
+</script>
+
+<!-- 
+
+Stopping Observation
+--------------------
+     To stop observing changes, use the disconnect() method.
+         
+         observer.disconnect();
+         console.log("Observation stopped.");
+    
+-->

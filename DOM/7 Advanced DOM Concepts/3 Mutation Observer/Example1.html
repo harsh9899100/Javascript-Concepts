@@ -1,0 +1,64 @@
+<!-- Example: Observing DOM Changes -->
+
+<div id="app">
+    <p id="content">Original text.</p>
+    <button id="changeText">Change Text</button>
+    <button id="addNode">Add Node</button>
+</div>
+
+<script>
+    // Select the target node
+    const targetNode = document.getElementById("app");
+
+    // Define the callback function
+    const callback = function (mutationsList, observer) {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === "childList") {
+                console.log("A child node was added or removed.");
+            } else if (mutation.type === "attributes") {
+                console.log(`The ${mutation.attributeName} attribute was modified.`);
+            } else if (mutation.type === "characterData") {
+                console.log("The text content was changed.");
+            }
+        });
+    };
+
+    // Create an observer instance
+    const observer = new MutationObserver(callback);
+
+    // Define configuration options
+    const config = {
+        childList: true, // Detect added/removed child nodes
+        attributes: true, // Detect attribute changes
+        subtree: true, // Observe entire subtree
+        characterData: true, // Detect text content changes
+    };
+
+    // Start observing the target node
+    observer.observe(targetNode, config);
+
+    // Buttons to trigger DOM changes
+    document.getElementById("changeText").addEventListener("click", () => {
+        const content = document.getElementById("content");
+        content.textContent = "Text has been updated!";
+    });
+
+    document.getElementById("addNode").addEventListener("click", () => {
+        const newParagraph = document.createElement("p");
+        newParagraph.textContent = "This is a new paragraph.";
+        targetNode.appendChild(newParagraph);
+    });
+
+</script>
+
+<!-- 
+
+Explanation
+-----------
+    1) Target Node: The <div id="app"> element is the target for observing changes.
+    2) Callback Function: Logs the type of mutation when changes occur.
+    3) Triggering Changes:
+         Clicking the "Change Text" button modifies the text of <p id="content">.
+         Clicking the "Add Node" button appends a new <p> element to the <div>.
+
+-->
