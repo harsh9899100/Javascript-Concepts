@@ -1,0 +1,35 @@
+<!-- Creating and Using Shadow DOM -->
+
+<div id="shadow-host"></div>
+
+<script>
+    // Select the shadow host element
+    const host = document.getElementById("shadow-host");
+
+    // Create a shadow root
+    const shadowRoot = host.attachShadow({ mode: "open" });
+
+    // Add content to the shadow tree
+    shadowRoot.innerHTML = `
+  <style>
+    p {
+      color: blue;
+      font-weight: bold;
+    }
+  </style>
+  <p>This text is inside the Shadow DOM.</p>
+`;
+
+    // Outside the Shadow DOM
+    host.insertAdjacentHTML("beforeend", `<p>This text is in the regular DOM.</p>`);
+
+</script>
+
+<!-- 
+
+Output:
+-------
+     The <p> inside the Shadow DOM will appear in blue and bold, scoped only to the Shadow DOM.
+     The regular DOM <p> remains unaffected by the Shadow DOM styles.
+
+-->

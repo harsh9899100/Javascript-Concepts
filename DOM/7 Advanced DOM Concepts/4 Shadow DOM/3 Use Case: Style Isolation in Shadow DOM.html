@@ -1,0 +1,36 @@
+<div id="host1"></div>
+<div id="host2"></div>
+
+<script>
+    // Host 1 with shadow DOM
+    const host1 = document.getElementById("host1");
+    const shadowRoot1 = host1.attachShadow({ mode: "open" });
+    shadowRoot1.innerHTML = `
+  <style>
+    p { color: red; }
+  </style>
+  <p>This is red and scoped to host1.</p>
+`;
+
+    // Host 2 with shadow DOM
+    const host2 = document.getElementById("host2");
+    const shadowRoot2 = host2.attachShadow({ mode: "open" });
+    shadowRoot2.innerHTML = `
+  <style>
+    p { color: green; }
+  </style>
+  <p>This is green and scoped to host2.</p>
+`;
+
+</script>
+
+
+<!--
+
+Use Cases for Shadow DOM :
+--------------------------
+- Reusable UI Components: Buttons, modals, dropdowns, etc.
+- Complex Web Applications: Build isolated components for large-scale apps.
+- Style Isolation: Avoid CSS conflicts in large projects or third-party integrations.
+
+-->

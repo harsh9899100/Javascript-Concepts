@@ -83,9 +83,9 @@ user interactions or application state changes. This is a key aspect of creating
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
     - The MutationObserver API is a powerful tool for observing changes to the DOM. It provides a way to detect changes in the structure or attributes of DOM elements, such as:
 
-          -> Added or removed child nodes.
-          -> Changes to attributes or text content.
-          -> Modifications to the subtree.
+       - Added or removed child nodes.
+       - Changes to attributes or text content.
+       - Modifications to the subtree.
 
       How MutationObserver Works :
       ----------------------------
@@ -130,4 +130,60 @@ user interactions or application state changes. This is a key aspect of creating
           - Dynamic Content Management: Detect when new elements are added to or removed from a page.
           - Attribute Watching: Observe changes in styles, classes, or other attributes.
           - Single Page Applications (SPAs): Detect route or component changes.
-          - Accessibility Enhancements: Monitor and ensure accessibility features dynamically.    - 
+          - Accessibility Enhancements: Monitor and ensure accessibility features dynamically.    
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+🗝️ d. Shadow DOM : Encapsulation of a DOM subtree with styles and behavior, often used in Web Components.
+￣￣￣￣￣￣￣￣￣￣
+     - The Shadow DOM is a key feature of Web Components that allows developers to encapsulate a section of the DOM, 
+       including its styles and behavior, to avoid interference with the main document or other components. 
+       It provides encapsulation by creating a "shadow tree," a hidden DOM subtree attached to an element.
+
+      Why Use Shadow DOM?
+      -------------------
+         - Encapsulation: Keeps styles and scripts scoped to the component, preventing conflicts with the global DOM.
+         - Reusability: Enables the creation of self-contained, reusable components with isolated functionality.
+         - Custom Elements: Works seamlessly with custom elements to create Web Components.
+       
+      Key Concepts of Shadow DOM :
+      ----------------------------
+         - Shadow Host: The regular DOM element to which a shadow tree is attached.
+         - Shadow Root: The root of the shadow tree. Created using attachShadow.
+         - Shadow Tree: The hidden DOM subtree that exists within the shadow root.
+       
+      Modes in Shadow DOM :
+      ---------------------     
+         - Open Mode ({ mode: "open" }): The shadow root is accessible via element.shadowRoot.
+         - Closed Mode ({ mode: "closed" }): The shadow root is not accessible programmatically.
+
+           const openShadow = document.getElementById("shadow-host").attachShadow({ mode: "open" });
+           console.log(openShadow); // Accessible
+                                       ..........
+           const closedShadow = document.getElementById("shadow-host").attachShadow({ mode: "closed" });
+           console.log(closedShadow); // Throws an error
+                                         ...............       
+      
+      Light DOM vs. Shadow DOM : 
+      --------------------------
+         - Light DOM: Regular DOM that is accessible and styled by global stylesheets.
+         - Shadow DOM: Encapsulated DOM that only accepts styles defined within its shadow tree.
+
+      Accessing and Modifying Shadow DOM :
+      ------------------------------------
+         - When in open mode, the shadow root can be accessed programmatically:
+
+             const shadowRoot = document.querySelector("custom-button").shadowRoot;
+             console.log(shadowRoot); // Access the shadow tree
+      
+      Advantages of Shadow DOM :
+      --------------------------
+         - Style Encapsulation: Prevents style leakage between components.
+         - Reusability: Creates self-contained, portable components.
+         - Custom Elements: A foundation for building Web Components.
+      
+      Disadvantages of Shadow DOM :
+      -----------------------------
+         - Learning Curve: Slightly more complex than working with regular DOM.
+         - Browser Support: Fully supported in modern browsers, but older browsers (like IE) require polyfills.
+          

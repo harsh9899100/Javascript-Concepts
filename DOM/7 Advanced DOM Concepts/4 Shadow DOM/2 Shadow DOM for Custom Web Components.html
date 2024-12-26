@@ -1,0 +1,46 @@
+<!-- Shadow DOM for Custom Web Components -->
+
+<custom-button>Click Me!</custom-button>
+
+<script>
+    class CustomButton extends HTMLElement {
+        constructor() {
+            super();
+
+            // Attach a shadow root
+            const shadowRoot = this.attachShadow({ mode: "open" });
+
+            // Add content and styles to the shadow root
+            shadowRoot.innerHTML = `
+      <style>
+        button {
+          background-color: teal;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+        button:hover {
+          background-color: darkcyan;
+        }
+      </style>
+      <button><slot></slot></button>
+    `;
+        }
+    }
+
+    // Define the custom element
+    customElements.define("custom-button", CustomButton);
+
+</script>
+
+<!-- 
+
+Output:
+-------
+     A <custom-button> element with its internal <button> styled and encapsulated within the Shadow DOM.
+     The slot element allows passing content (e.g., "Click Me!") into the Shadow DOM.
+
+-->
