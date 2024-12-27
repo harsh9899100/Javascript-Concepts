@@ -1,0 +1,140 @@
+1️⃣ Array Basics :
+￣￣￣￣￣￣￣￣￣￣
+Definition and Syntax: What is an array and how to declare it.
+Creating Arrays:
+Using [] (array literal).
+Using new Array().
+Accessing Elements:
+By index: array[index].
+First element: array[0].
+Last element: array[array.length - 1].
+
+
+2️⃣ Array Properties and Methods :
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+Properties:
+
+length: Number of elements in the array.
+
+Core Methods:
+
+Adding/Removing Elements:
+push(): Add elements to the end.
+pop(): Remove the last element.
+unshift(): Add elements to the beginning.
+shift(): Remove the first element.
+splice(): Add/remove elements at specific indexes.
+concat(): Combine arrays.
+
+Iteration and Access:
+forEach(): Loop through the array.
+map(): Create a new array with transformed elements.
+filter(): Create a new array with elements that meet a condition.
+reduce(): Accumulate array elements into a single value.
+find(): Find the first element that meets a condition.
+findIndex(): Find the index of the first element that meets a condition.
+some(): Check if at least one element meets a condition.
+every(): Check if all elements meet a condition.
+
+Sorting and Searching:
+sort(): Sort elements (alphabetically or numerically with custom logic).
+reverse(): Reverse the array.
+includes(): Check if an element exists in the array.
+indexOf(): Find the first index of an element.
+lastIndexOf(): Find the last index of an element.
+
+Joining and Slicing:
+join(): Convert an array to a string with a specified delimiter.
+slice(): Extract a section of the array into a new array.
+
+
+3️⃣ Advanced Topics :
+￣￣￣￣￣￣￣￣￣￣￣
+Multidimensional Arrays:
+Nested arrays: Accessing and working with arrays of arrays.
+
+Array-Like Objects:
+arguments object, NodeList, etc.
+Converting to arrays using Array.from() or spread operator [...arrayLikeObject].
+
+Typed Arrays:
+Working with Int8Array, Uint8Array, etc., for binary data.
+
+Immutable Array Operations:
+Creating new arrays without modifying the original using map, filter, concat, etc.
+
+Destructuring:
+Extracting values into variables using array destructuring: [a, b] = array.
+
+
+4️⃣ Performance and Best Practices :
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+Big-O Complexity:
+Understanding performance of array operations.
+
+Avoiding Sparse Arrays:
+Arrays with "holes" (missing indexes).
+
+Shallow Copy vs. Deep Copy:
+Using slice(), spread operator ([...array]), or structuredClone().
+
+
+5️⃣ Array Iteration Techniques :
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+Loops:
+for loop.
+for...of loop.
+forEach().
+
+Functional Methods:
+map(), filter(), reduce(), etc.
+
+
+6️⃣ ES6+ Features :
+￣￣￣￣￣￣￣￣￣￣
+Spread Operator (...):
+Combining arrays: [...array1, ...array2].
+
+Cloning arrays: [...array].
+Rest Parameters:
+Collecting multiple arguments into an array.
+
+Array.from():
+Creating arrays from array-like objects or iterables.
+
+Array.of():
+Creating arrays with a specific set of elements.
+
+
+7️⃣ Special Use Cases :
+￣￣￣￣￣￣￣￣￣￣￣￣
+Flattening Arrays:
+Using flat() to convert nested arrays into single-level arrays.
+
+Removing Duplicates:
+Using Set or filtering logic: [...new Set(array)].
+
+Mapping and Filtering Together:
+Combining filter() and map() for efficiency.
+
+
+8️⃣ Error Handling with Arrays :
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+Handling out-of-bounds indexes.
+Avoiding mutations in functional programming.
+
+
+9️⃣ Array Applications :
+￣￣￣￣￣￣￣￣￣￣￣￣￣
+Data Structures:
+Stack implementation using push() and pop().
+Queue implementation using push() and shift().
+
+Algorithms:
+Searching and sorting techniques.
+Partitioning and merging.
+
+🔟 Examples and Practice Problems :
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+Manipulating arrays in real-world scenarios.
+Common interview questions involving arrays.
