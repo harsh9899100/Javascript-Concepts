@@ -18,7 +18,7 @@
     // console.log(property, ":", person[property]);
   }
 
-// ⭐ 2)Iterating over Object Properties -------------------
+// ⭐ 2) Iterating over Object Properties -------------------
   function Car(make, model, year) {
     this.make = make;
     this.model = model;

@@ -24,7 +24,7 @@ user interactions or application state changes. This is a key aspect of creating
      ----------------------------------------
 
   ________________________________________________________________________
- | Method	       | Description                                          |
+ | Method	         | Description                                          |
  |￣￣￣￣￣￣￣￣￣|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣|
  | createElement() | Creates a new element.                               |
  | appendChild()   | Appends a child element.                             |
@@ -32,8 +32,8 @@ user interactions or application state changes. This is a key aspect of creating
  | removeChild()   | Removes a child element.                             |
  | remove()	       | Removes the element itself.                          |
  | replaceChild()  | Replaces one child element with another.             |
- | innerHTML	    | Modifies the HTML content inside an element.         |
- | textContent	    | Updates or retrieves text content (excluding HTML).  |
+ | innerHTML	     | Modifies the HTML content inside an element.         |
+ | textContent	   | Updates or retrieves text content (excluding HTML).  |
   ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,10 +59,10 @@ user interactions or application state changes. This is a key aspect of creating
  _________________________________________________________________________________
 | Method/Property	    | Description                                               |
 |￣￣￣￣￣￣￣￣￣￣￣|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣|
-| event.target	       | The element that triggered the event.                     |
+| event.target	      | The element that triggered the event.                     |
 | event.currentTarget | The element to which the event listener is attached.      |
 | contains(className) | Check if the element has a specific class.                | 
-| tagName	          | Retrieves the tag name of the clicked element (e.g., LI). |
+| tagName	            | Retrieves the tag name of the clicked element (e.g., LI). |
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 
      Advantages of Delegation
@@ -113,17 +113,16 @@ user interactions or application state changes. This is a key aspect of creating
       ---------------------
       Each mutation detected is represented by a MutationRecord object with properties:
            _______________________________________________________________________________________
-          | Property	     | Description                                                          |
+          | Property	    | Description                                                          |
           |￣￣￣￣￣￣￣￣|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣ |
           | type	        | Type of mutation: "childList", "attributes", or "characterData".     |
-          | target	     | The node where the mutation occurred.                                |
+          | target	      | The node where the mutation occurred.                                |
           | addedNodes	  | A NodeList of added nodes (for childList mutations).                 |
           | removedNodes  | A NodeList of removed nodes (for childList mutations).               |
           | attributeName | Name of the modified attribute (for attributes mutations).           |
-          | oldValue	     | The previous value of the attribute or text (if configured).         |
+          | oldValue	    | The previous value of the attribute or text (if configured).         |
           ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
-
-
+          
       Use Cases of MutationObserver :
       -------------------------------
           - Real-Time DOM Monitoring: Track and respond to dynamic DOM updates.
