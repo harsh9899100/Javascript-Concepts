@@ -1,51 +1,58 @@
 1️⃣ Array Basics :
 ￣￣￣￣￣￣￣￣￣￣
 Definition and Syntax: What is an array and how to declare it.
+
 Creating Arrays:
-Using [] (array literal).
-Using new Array().
+     Using [] (array literal).
+     Using new Array().
 Accessing Elements:
-By index: array[index].
-First element: array[0].
-Last element: array[array.length - 1].
+     By index: array[index].
+     First element: array[0].
+     Last element: array[array.length - 1].
 
 
 2️⃣ Array Properties and Methods :
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 Properties:
 
-length: Number of elements in the array.
+    length: Number of elements in the array.
+    -------
 
-Core Methods:
+Methods:
 
-Adding/Removing Elements:
-push(): Add elements to the end.
-pop(): Remove the last element.
-unshift(): Add elements to the beginning.
-shift(): Remove the first element.
-splice(): Add/remove elements at specific indexes.
-concat(): Combine arrays.
+    Adding/Removing Elements:
+    -------------------------
+         push()    :  Add elements to the end.
+         pop()     :  Remove the last element.
+         unshift() :  Add elements to the beginning.
+         shift()   :  Remove the first element.
+         splice()  :  Add/remove elements at specific indexes.
+         concat()  :  Combine arrays.
 
-Iteration and Access:
-forEach(): Loop through the array.
-map(): Create a new array with transformed elements.
-filter(): Create a new array with elements that meet a condition.
-reduce(): Accumulate array elements into a single value.
-find(): Find the first element that meets a condition.
-findIndex(): Find the index of the first element that meets a condition.
-some(): Check if at least one element meets a condition.
-every(): Check if all elements meet a condition.
+    Iteration and Access:
+    ---------------------
+         forEach()     :  Executes a function for each element in the array.
+         map()         :  Creates a new array with the results of calling a provided function on every element in the array.
+         filter()      :  Creates a new array with all elements that pass the test implemented by the provided function.
+         reduce()      :  Applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+         reduceRight() :  Same as reduce(), but processes the array from right to left.
+         find()        :  Returns the first element that satisfies the provided testing function.
+         findIndex()   :  Returns the index of the first element that satisfies the provided testing function.
+         some()        :  Checks if at least one element in the array satisfies the provided function.
+         every()       :  Checks if all elements in the array satisfy the provided function.
+         indexOf()     :  Returns the first index at which a given element can be found in the array, or -1 if not found.
+         lastIndexOf() :  Returns the last index at which a given element can be found in the array, or -1 if not found.
+         includes()    :  Checks if the array contains a certain element.
 
-Sorting and Searching:
-sort(): Sort elements (alphabetically or numerically with custom logic).
-reverse(): Reverse the array.
-includes(): Check if an element exists in the array.
-indexOf(): Find the first index of an element.
-lastIndexOf(): Find the last index of an element.
-
-Joining and Slicing:
-join(): Convert an array to a string with a specified delimiter.
-slice(): Extract a section of the array into a new array.
+    Sorting and Searching:
+    ----------------------
+         sort(): Sort elements (alphabetically or numerically with custom logic).
+         reverse(): Reverse the array.
+    
+    Joining and Slicing:
+    --------------------
+         join(): Convert an array to a string with a specified delimiter.
+         slice(): Extract a section of the array into a new array.
 
 
 3️⃣ Advanced Topics :
