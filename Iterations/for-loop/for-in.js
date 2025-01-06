@@ -15,7 +15,12 @@
   };
   
   for (const property in person) {
-    // console.log(property, ":", person[property]);
+    console.log(property, ":", person[property]);
+
+       // output :
+           // firstName : Alice
+           // lastName : Smith
+           // age : 30
   }
 
 // ⭐ 2) Iterating over Object Properties -------------------
@@ -29,6 +34,11 @@
   
   for (const property in myCar) {
     console.log(property, ":", myCar[property]);
+
+       // output:
+           // make : Toyota
+           // model : Camry
+           // year : 2023
   }
   
 // -----------------------------------------------------------------------

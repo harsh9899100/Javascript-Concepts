@@ -13,6 +13,13 @@ const numbers = [1, 2, 3, 4, 5];
 
 for (const number of numbers) {
   console.log(number);
+  
+     // output:
+         // 1
+         // 2
+         // 3
+         // 4
+         // 5
 }
 
 // ⭐ 2) Iterating over Strings -------------------
@@ -21,6 +28,21 @@ const greeting = "Hello, world!";
 
 for (const char of greeting) {
   console.log(char);
+
+    // output:
+       // H
+       // e
+       // l
+       // l
+       // o
+       // ,
+       //  
+       // w
+       // o
+       // r
+       // l
+       // d
+       // !
 }
 
 // ⭐ 3) Iterating over Maps ----------------------
@@ -31,6 +53,10 @@ myMap.set('key2', 'value2');
 
 for (const [key, value] of myMap) {
   console.log(key, ":", value);
+
+     // output:
+         // key1 : value1
+         // key2 : value2
 }
 
 // ⭐ 4) Iterating over Sets ----------------------

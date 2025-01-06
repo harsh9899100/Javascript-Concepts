@@ -5,7 +5,7 @@
      Creating Strings:
          Using "" or '' (string literal).
          Using new String().
-     
+
      Accessing Characters:
          By index: string[index].
          First character: string[0].
@@ -17,7 +17,7 @@
     Properties:
     -----------
         length: Number of characters in the string.
-     
+
     Core Methods:
     -------------
         Manipulating Strings:
@@ -41,7 +41,7 @@
         Splitting and Joining:
              split(): Split the string into an array of substrings.
              join(): Join an array of substrings into a single string.
-     
+
 
 3️⃣ Advanced Topics:
 ￣￣￣￣￣￣￣￣￣￣￣
@@ -49,10 +49,10 @@
      Escaping Characters: Using backslashes (\) to escape special characters within strings.
      String Immutability: Strings cannot be changed after they are created (they are immutable).
      String Encoding and Decoding: Working with UTF-8, Base64, and other encodings.
-     
+
 
 4️⃣ Performance and Best Practices: 
-￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 
      Avoiding Unnecessary String Concatenation: Using array.join() method for efficient concatenation.
      Minimizing String Re-Allocation: Using template literals to avoid excessive memory usage.
@@ -64,7 +64,7 @@
          for loop.
          for...of loop.
          forEach() (for arrays of characters).
-     
+
 6️⃣ ES6+ Features: 
 ￣￣￣￣￣￣￣￣￣￣
      Template Literals: String interpolation with ${} syntax.
