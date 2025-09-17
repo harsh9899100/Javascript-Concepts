@@ -1,0 +1,5572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPLETE JAVASCRIPT MASTERY COURSE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" id="dark-theme">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" id="light-theme">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --text-primary: #333333;
+            --text-secondary: #666666; --border-color: #e1e5e9; --accent-color: #6366f1;
+            --code-bg: #f8f9fa; --sidebar-bg: #ffffff; --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0d1117; --bg-secondary: #161b22; --text-primary: #e6edf3;
+            --text-secondary: #7d8590; --border-color: #30363d; --accent-color: #58a6ff;
+            --code-bg: #161b22; --sidebar-bg: #0d1117; --shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6; 
+            background-color: var(--bg-primary); 
+            color: var(--text-primary); 
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        .container { 
+            display: flex; 
+            min-height: 100vh;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        .sidebar { 
+            width: 280px; 
+            background-color: var(--sidebar-bg); 
+            border-right: 1px solid var(--border-color); 
+            position: fixed; 
+            height: 100vh; 
+            overflow-y: auto; 
+            box-shadow: var(--shadow); 
+            transition: transform 0.3s ease; 
+            z-index: 200;
+        }
+        
+        .main-content { 
+            flex: 1; 
+            margin-left: 280px; 
+            transition: margin-left 0.3s ease;
+            width: calc(100% - 280px);
+            max-width: calc(100vw - 280px);
+            overflow-x: hidden;
+        }
+        
+        .header { 
+            background-color: var(--sidebar-bg); 
+            border-bottom: 1px solid var(--border-color); 
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: var(--shadow);
+        }
+        
+        .theme-toggle { 
+            background: none; 
+            border: 2px solid var(--border-color); 
+            padding: 0.5rem 1rem; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            color: var(--text-primary); 
+            font-size: 0.9rem; 
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .theme-toggle:hover { background-color: var(--bg-secondary); }
+        
+        .mobile-menu-btn { 
+            display: none; 
+            background: none; 
+            border: 2px solid var(--border-color); 
+            padding: 0.5rem; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            color: var(--text-primary); 
+            font-size: 1.2rem; 
+            transition: all 0.2s ease;
+        }
+        .mobile-menu-btn:hover { background-color: var(--bg-secondary); }
+        
+        .mobile-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: 150; 
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .mobile-overlay.active { 
+            opacity: 1; 
+            pointer-events: auto;
+        }
+        
+        .content { 
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        h1 { 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
+            margin-bottom: 1rem; 
+            color: var(--text-primary); 
+            border-bottom: 3px solid var(--accent-color); 
+            padding-bottom: 0.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        h2 { 
+            font-size: clamp(1.4rem, 3vw, 2rem); 
+            margin: 2rem 0 1rem 0; 
+            color: var(--text-primary); 
+            border-bottom: 2px solid var(--border-color); 
+            padding-bottom: 0.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        h3 { 
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem); 
+            margin: 1.5rem 0 1rem 0; 
+            color: var(--accent-color);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        p { 
+            margin-bottom: 1rem; 
+            color: var(--text-secondary);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .code-container { 
+            position: relative; 
+            margin: 1.5rem 0; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: var(--shadow);
+            max-width: 100%;
+        }
+        
+        .code-header { 
+            background-color: var(--bg-secondary); 
+            padding: 0.75rem 1rem; 
+            border-bottom: 1px solid var(--border-color); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .copy-btn { 
+            background: var(--accent-color); 
+            color: white; 
+            border: none; 
+            padding: 0.4rem 0.8rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .copy-btn:hover { opacity: 0.9; }
+        
+        pre[class*="language-"] { 
+            margin: 0 !important; 
+            padding: 1rem !important;
+            background: var(--code-bg) !important;
+            border: none !important;
+            border-radius: 0 !important;
+            font-size: clamp(0.75rem, 2vw, 0.9rem) !important;
+            line-height: 1.5 !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            white-space: pre !important;
+            word-wrap: normal !important;
+            max-width: 100% !important;
+            -webkit-overflow-scrolling: touch !important;
+            scrollbar-width: thin !important;
+            scrollbar-color: var(--accent-color) transparent !important;
+        }
+        
+        pre[class*="language-"]::-webkit-scrollbar {
+            height: 12px !important;
+        }
+        
+        pre[class*="language-"]::-webkit-scrollbar-track {
+            background: var(--bg-secondary) !important;
+            border-radius: 6px !important;
+        }
+        
+        pre[class*="language-"]::-webkit-scrollbar-thumb {
+            background: var(--accent-color) !important;
+            border-radius: 6px !important;
+        }
+        
+        pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary) !important;
+        }
+        
+        code[class*="language-"] { 
+            background: transparent !important;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+            font-size: inherit !important;
+            color: inherit !important;
+            white-space: pre !important;
+            word-wrap: normal !important;
+            display: inline-block !important;
+            min-width: max-content !important;
+            width: auto !important;
+        }
+        
+        [data-theme="dark"] .token.comment, [data-theme="dark"] .token.prolog, [data-theme="dark"] .token.doctype, [data-theme="dark"] .token.cdata { color: #7d8590 !important; font-style: italic !important; }
+        [data-theme="dark"] .token.punctuation { color: #e6edf3 !important; }
+        [data-theme="dark"] .token.property, [data-theme="dark"] .token.tag, [data-theme="dark"] .token.boolean, [data-theme="dark"] .token.number, [data-theme="dark"] .token.constant, .token.symbol, .token.deleted { color: #ff7b72 !important; }
+        [data-theme="dark"] .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #a5d6ff !important; }
+        [data-theme="dark"] .token.operator, [data-theme="dark"] .token.entity, [data-theme="dark"] .token.url, .language-css .token.string, .style .token.string { color: #79c0ff !important; }
+        [data-theme="dark"] .token.atrule, [data-theme="dark"] .token.attr-value, [data-theme="dark"] .token.keyword { color: #ff7b72 !important; }
+        [data-theme="dark"] .token.function, [data-theme="dark"] .token.class-name { color: #d2a8ff !important; }
+        [data-theme="dark"] .token.regex, [data-theme="dark"] .token.important, [data-theme="dark"] .token.variable { color: #ffa657 !important; }
+        
+        [data-theme="light"] .token.comment, [data-theme="light"] .token.prolog, [data-theme="light"] .token.doctype, [data-theme="light"] .token.cdata { color: #6a737d !important; }
+        [data-theme="light"] .token.punctuation { color: #24292e !important; }
+        [data-theme="light"] .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: #d73a49 !important; }
+        [data-theme="light"] .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #032f62 !important; }
+        [data-theme="light"] .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: #24292e !important; }
+        [data-theme="light"] .token.atrule, .token.attr-value, .token.keyword { color: #d73a49 !important; }
+        [data-theme="light"] .token.function, .token.class-name { color: #6f42c1 !important; }
+        [data-theme="light"] .token.regex, [data-theme="light"] .token.important, [data-theme="light"] .token.variable { color: #e36209 !important; }
+        
+        .toc { padding: 1rem; }
+        .toc ul { list-style: none; }
+        .toc li { margin: 0.5rem 0; }
+        .toc a { 
+            color: var(--text-secondary); 
+            text-decoration: none; 
+            display: block; 
+            padding: 0.5rem; 
+            border-radius: 6px; 
+            transition: all 0.2s ease; 
+            font-size: 0.9rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .toc a:hover { background-color: var(--bg-secondary); color: var(--accent-color); }
+        
+        @media (max-width: 767px) { 
+            .sidebar { 
+                transform: translateX(-100%);
+                width: 85vw;
+                max-width: 320px;
+            }
+            .sidebar.mobile-open { transform: translateX(0); }
+            .main-content { 
+                margin-left: 0;
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: auto;
+            }
+            .mobile-menu-btn { display: block; }
+            .mobile-overlay { display: block; }
+            .header { 
+                padding: 0.75rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .content { 
+                padding: 1rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .theme-toggle {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .code-header {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+            .copy-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+            pre[class*="language-"] {
+                padding: 0.75rem !important;
+                font-size: 0.75rem !important;
+            }
+            pre[class*="language-"]::-webkit-scrollbar {
+                height: 10px !important;
+            }
+            .toc {
+                padding: 0.75rem;
+            }
+            .toc a {
+                font-size: 0.8rem;
+                padding: 0.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.3rem; }
+            h3 { font-size: 1.1rem; }
+            .content { padding: 0.75rem; }
+            .header { padding: 0.5rem; }
+            .sidebar { width: 90vw; }
+            pre[class*="language-"] {
+                font-size: 0.7rem !important;
+                padding: 0.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <div class="toc">
+                <h3 style="padding: 0.5rem; color: var(--text-primary);">Table of Contents</h3>
+                <ul id="toc-list"></ul>
+            </div>
+        </nav>
+        <main class="main-content">
+            <header class="header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+                    <h2 style="margin: 0; color: var(--text-primary);">Documentation</h2>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">🌙 Dark Mode</button>
+            </header>
+            <div class="content" id="content">
+<h1 id="-complete-javascript-mastery-course-">COMPLETE JAVASCRIPT MASTERY COURSE</h1>
+
+<h2 id="-1-javascript-fundamentals-">1. JAVASCRIPT FUNDAMENTALS</h2>
+
+<h3 id="-1-1-language-foundation-">1.1 Language Foundation</h3>
+
+<p>⭐ <strong>1.1.1 JavaScript Engine Architecture</strong></p>
+
+<p>- <strong>1.1.1.1 V8 Engine Internals</strong></p>
+
+<p>- <strong>1.1.1.1.1</strong> Ignition Interpreter</p>
+<p>- <strong>1.1.1.1.2</strong> TurboFan Compiler</p>
+<p>- <strong>1.1.1.1.3</strong> Hidden Classes</p>
+<p>- <strong>1.1.1.1.4</strong> Inline Caching</p>
+<p>- <strong>1.1.1.1.5</strong> Garbage Collection Algorithms</p>
+
+
+
+<p>- <strong>1.1.1.2 SpiderMonkey Architecture</strong></p>
+<p>- <strong>1.1.1.3 JavaScriptCore (Safari)</strong></p>
+<p>- <strong>1.1.1.4 Chakra Engine</strong></p>
+
+
+<p>⭐ <strong>1.1.2 ECMAScript Specifications</strong></p>
+
+<p>- <strong>1.1.2.1 TC39 Process</strong></p>
+
+<p>- <strong>1.1.2.1.1</strong> Stage 0: Strawperson</p>
+<p>- <strong>1.1.2.1.2</strong> Stage 1: Proposal</p>
+<p>- <strong>1.1.2.1.3</strong> Stage 2: Draft</p>
+<p>- <strong>1.1.2.1.4</strong> Stage 3: Candidate</p>
+<p>- <strong>1.1.2.1.5</strong> Stage 4: Finished</p>
+
+
+
+<p>- <strong>1.1.2.2 ECMAScript Versions Deep Dive</strong></p>
+
+<p>- <strong>1.1.2.2.1</strong> ES3 to ES5 Evolution</p>
+<p>- <strong>1.1.2.2.2</strong> ES6/ES2015 Revolution</p>
+<p>- <strong>1.1.2.2.3</strong> ES2016-ES2023 Features</p>
+<p>- <strong>1.1.2.2.4</strong> Future Proposals Analysis</p>
+
+
+
+
+
+<p>⭐ <strong>1.1.3 Lexical Analysis & Parsing</strong></p>
+
+<p>- <strong>1.1.3.1 Tokenization Process</strong></p>
+<p>- <strong>1.1.3.2 Abstract Syntax Tree (AST)</strong></p>
+
+<p>- <strong>1.1.3.2.1</strong> AST Node Types</p>
+<p>- <strong>1.1.3.2.2</strong> AST Manipulation</p>
+<p>- <strong>1.1.3.2.3</strong> Babel AST Transformations</p>
+
+
+
+<p>- <strong>1.1.3.3 Syntax vs Semantic Analysis</strong></p>
+
+
+<h3 id="-1-2-memory-model-execution-context-">1.2 Memory Model & Execution Context</h3>
+
+<p>⭐ <strong>1.2.1 JavaScript Memory Architecture</strong></p>
+
+<p>- <strong>1.2.1.1 Stack Memory</strong></p>
+
+<p>- <strong>1.2.1.1.1</strong> Primitive Value Storage</p>
+<p>- <strong>1.2.1.1.2</strong> Function Call Stack</p>
+<p>- <strong>1.2.1.1.3</strong> Stack Overflow Scenarios</p>
+
+
+
+<p>- <strong>1.2.1.2 Heap Memory</strong></p>
+
+<p>- <strong>1.2.1.2.1</strong> Object Allocation</p>
+<p>- <strong>1.2.1.2.2</strong> Reference Management</p>
+<p>- <strong>1.2.1.2.3</strong> Memory Fragmentation</p>
+
+
+
+<p>- <strong>1.2.1.3 Memory Lifecycle</strong></p>
+
+<p>- <strong>1.2.1.3.1</strong> Allocation Strategies</p>
+<p>- <strong>1.2.1.3.2</strong> Usage Patterns</p>
+<p>- <strong>1.2.1.3.3</strong> Deallocation Mechanisms</p>
+
+
+
+
+
+<p>⭐ <strong>1.2.2 Execution Context Deep Dive</strong></p>
+
+<p>- <strong>1.2.2.1 Global Execution Context</strong></p>
+
+<p>- <strong>1.2.2.1.1</strong> Global Object Creation</p>
+<p>- <strong>1.2.2.1.2</strong> this Binding in Global Context</p>
+<p>- <strong>1.2.2.1.3</strong> Global Variable Environment</p>
+
+
+
+<p>- <strong>1.2.2.2 Function Execution Context</strong></p>
+
+<p>- <strong>1.2.2.2.1</strong> Activation Object</p>
+<p>- <strong>1.2.2.2.2</strong> Arguments Object</p>
+<p>- <strong>1.2.2.2.3</strong> Variable Environment vs Lexical Environment</p>
+
+
+
+<p>- <strong>1.2.2.3 Eval Execution Context</strong></p>
+<p>- <strong>1.2.2.4 Module Execution Context</strong></p>
+
+
+<p>⭐ <strong>1.2.3 Hoisting Mechanisms</strong></p>
+
+<p>- <strong>1.2.3.1 Variable Hoisting</strong></p>
+
+<p>- <strong>1.2.3.1.1</strong> var Hoisting Behavior</p>
+<p>- <strong>1.2.3.1.2</strong> let/const Temporal Dead Zone</p>
+<p>- <strong>1.2.3.1.3</strong> Block Scoping Rules</p>
+
+
+
+<p>- <strong>1.2.3.2 Function Hoisting</strong></p>
+
+<p>- <strong>1.2.3.2.1</strong> Function Declaration Hoisting</p>
+<p>- <strong>1.2.3.2.2</strong> Function Expression Hoisting</p>
+<p>- <strong>1.2.3.2.3</strong> Arrow Function Hoisting</p>
+
+
+
+<p>- <strong>1.2.3.3 Class Hoisting</strong></p>
+
+
+<h2 id="-2-advanced-data-types-structures-">2. ADVANCED DATA TYPES & STRUCTURES</h2>
+
+<h3 id="-2-1-primitive-types-mastery-">2.1 Primitive Types Mastery</h3>
+
+<p>⭐ <strong>2.1.1 Number System</strong></p>
+
+<p>- <strong>2.1.1.1 IEEE 754 Double Precision</strong></p>
+
+<p>- <strong>2.1.1.1.1</strong> Sign Bit</p>
+<p>- <strong>2.1.1.1.2</strong> Exponent Bits</p>
+<p>- <strong>2.1.1.1.3</strong> Mantissa/Significand</p>
+<p>- <strong>2.1.1.1.4</strong> Floating Point Precision Issues</p>
+<p>- <strong>2.1.1.1.5</strong> Subnormal Numbers</p>
+
+
+
+<p>- <strong>2.1.1.2 Number Methods & Properties</strong></p>
+
+<p>- <strong>2.1.1.2.1</strong> Number.isInteger()</p>
+<p>- <strong>2.1.1.2.2</strong> Number.isSafeInteger()</p>
+<p>- <strong>2.1.1.2.3</strong> Number.parseFloat()</p>
+<p>- <strong>2.1.1.2.4</strong> Number.parseInt()</p>
+<p>- <strong>2.1.1.2.5</strong> Number.isNaN() vs isNaN()</p>
+
+
+
+<p>- <strong>2.1.1.3 BigInt Deep Dive</strong></p>
+
+<p>- <strong>2.1.1.3.1</strong> BigInt Creation Methods</p>
+<p>- <strong>2.1.1.3.2</strong> BigInt Operations</p>
+<p>- <strong>2.1.1.3.3</strong> BigInt vs Number Coercion</p>
+<p>- <strong>2.1.1.3.4</strong> BigInt Performance Implications</p>
+
+
+
+
+
+<p>⭐ <strong>2.1.2 String Internals</strong></p>
+
+<p>- <strong>2.1.2.1 String Encoding</strong></p>
+
+<p>- <strong>2.1.2.1.1</strong> UTF-16 Encoding</p>
+<p>- <strong>2.1.2.1.2</strong> Surrogate Pairs</p>
+<p>- <strong>2.1.2.1.3</strong> Unicode Normalization</p>
+<p>- <strong>2.1.2.1.4</strong> String Interning</p>
+
+
+
+<p>- <strong>2.1.2.2 String Methods Mastery</strong></p>
+
+<p>- <strong>2.1.2.2.1</strong> String.prototype.localeCompare()</p>
+<p>- <strong>2.1.2.2.2</strong> String.prototype.normalize()</p>
+<p>- <strong>2.1.2.2.3</strong> String.prototype.codePointAt()</p>
+<p>- <strong>2.1.2.2.4</strong> String.fromCodePoint()</p>
+
+
+
+<p>- <strong>2.1.2.3 Template Literals Advanced</strong></p>
+
+<p>- <strong>2.1.2.3.1</strong> Tagged Template Literals</p>
+<p>- <strong>2.1.2.3.2</strong> Raw Strings</p>
+<p>- <strong>2.1.2.3.3</strong> Template Literal Performance</p>
+
+
+
+
+
+<p>⭐ <strong>2.1.3 Symbol Deep Dive</strong></p>
+
+<p>- <strong>2.1.3.1 Symbol Creation & Properties</strong></p>
+
+<p>- <strong>2.1.3.1.1</strong> Symbol() vs Symbol.for()</p>
+<p>- <strong>2.1.3.1.2</strong> Symbol.keyFor()</p>
+<p>- <strong>2.1.3.1.3</strong> Symbol Description</p>
+
+
+
+<p>- <strong>2.1.3.2 Well-Known Symbols</strong></p>
+
+<p>- <strong>2.1.3.2.1</strong> Symbol.iterator Implementation</p>
+<p>- <strong>2.1.3.2.2</strong> Symbol.asyncIterator</p>
+<p>- <strong>2.1.3.2.3</strong> Symbol.toPrimitive</p>
+<p>- <strong>2.1.3.2.4</strong> Symbol.toStringTag</p>
+<p>- <strong>2.1.3.2.5</strong> Symbol.hasInstance</p>
+<p>- <strong>2.1.3.2.6</strong> Symbol.species</p>
+<p>- <strong>2.1.3.2.7</strong> Symbol.match/replace/search/split</p>
+
+
+
+<p>- <strong>2.1.3.3 Symbol Use Cases</strong></p>
+
+<p>- <strong>2.1.3.3.1</strong> Private Object Properties</p>
+<p>- <strong>2.1.3.3.2</strong> Protocol Implementation</p>
+<p>- <strong>2.1.3.3.3</strong> Metaprogramming Applications</p>
+
+
+
+
+
+<h3 id="-2-2-object-architecture-">2.2 Object Architecture</h3>
+
+<p>⭐ <strong>2.2.1 Object Internal Structure</strong></p>
+
+<p>- <strong>2.2.1.1 Property Descriptors</strong></p>
+
+<p>- <strong>2.2.1.1.1</strong> Data Descriptors</p>
+
+<p>- <strong>2.2.1.1.1.1</strong> value Property</p>
+<p>- <strong>2.2.1.1.1.2</strong> writable Property</p>
+<p>- <strong>2.2.1.1.1.3</strong> enumerable Property</p>
+<p>- <strong>2.2.1.1.1.4</strong> configurable Property</p>
+
+
+
+<p>- <strong>2.2.1.1.2</strong> Accessor Descriptors</p>
+
+<p>- <strong>2.2.1.1.2.1</strong> get Function</p>
+<p>- <strong>2.2.1.1.2.2</strong> set Function</p>
+<p>- <strong>2.2.1.1.2.3</strong> enumerable Property</p>
+<p>- <strong>2.2.1.1.2.4</strong> configurable Property</p>
+
+
+
+
+
+
+<p>- <strong>2.2.1.2 Object Internal Slots</strong></p>
+
+<p>- <strong>2.2.1.2.1</strong> [[Prototype]] Slot</p>
+<p>- <strong>2.2.1.2.2</strong> [[Extensible]] Slot</p>
+<p>- <strong>2.2.1.2.3</strong> [[PrivateElements]] Slot</p>
+
+
+
+<p>- <strong>2.2.1.3 Property Access Mechanisms</strong></p>
+
+<p>- <strong>2.2.1.3.1</strong> Get Operation Algorithm</p>
+<p>- <strong>2.2.1.3.2</strong> Set Operation Algorithm</p>
+<p>- <strong>2.2.1.3.3</strong> Has Operation Algorithm</p>
+<p>- <strong>2.2.1.3.4</strong> Delete Operation Algorithm</p>
+
+
+
+
+
+<p>⭐ <strong>2.2.2 Prototype Chain Mastery</strong></p>
+
+<p>- <strong>2.2.2.1 Prototype Mechanics</strong></p>
+
+<p>- <strong>2.2.2.1.1</strong> Object.getPrototypeOf()</p>
+<p>- <strong>2.2.2.1.2</strong> Object.setPrototypeOf()</p>
+<p>- <strong>2.2.2.1.3</strong> Object.create() Deep Dive</p>
+<p>- <strong>2.2.2.1.4</strong> <strong>proto</strong> vs prototype</p>
+
+
+
+<p>- <strong>2.2.2.2 Prototype Chain Traversal</strong></p>
+
+<p>- <strong>2.2.2.2.1</strong> Property Resolution Algorithm</p>
+<p>- <strong>2.2.2.2.2</strong> Method Resolution Order</p>
+<p>- <strong>2.2.2.2.3</strong> Prototype Chain Performance</p>
+
+
+
+<p>- <strong>2.2.2.3 Prototype Pollution</strong></p>
+
+<p>- <strong>2.2.2.3.1</strong> Attack Vectors</p>
+<p>- <strong>2.2.2.3.2</strong> Prevention Strategies</p>
+<p>- <strong>2.2.2.3.3</strong> Object.freeze() vs Object.seal()</p>
+
+
+
+
+
+<p>⭐ <strong>2.2.3 Object Creation Patterns</strong></p>
+
+<p>- <strong>2.2.3.1 Factory Functions</strong></p>
+
+<p>- <strong>2.2.3.1.1</strong> Simple Factory Pattern</p>
+<p>- <strong>2.2.3.1.2</strong> Factory with Closures</p>
+<p>- <strong>2.2.3.1.3</strong> Factory with Mixins</p>
+
+
+
+<p>- <strong>2.2.3.2 Constructor Functions</strong></p>
+
+<p>- <strong>2.2.3.2.1</strong> Constructor Function Mechanics</p>
+<p>- <strong>2.2.3.2.2</strong> new Operator Algorithm</p>
+<p>- <strong>2.2.3.2.3</strong> Constructor Return Values</p>
+
+
+
+<p>- <strong>2.2.3.3 Object.create() Patterns</strong></p>
+
+<p>- <strong>2.2.3.3.1</strong> Null Prototype Objects</p>
+<p>- <strong>2.2.3.3.2</strong> Property Descriptor Objects</p>
+<p>- <strong>2.2.3.3.3</strong> Prototype Chain Setup</p>
+
+
+
+
+
+<h3 id="-2-3-array-advanced-concepts-">2.3 Array Advanced Concepts</h3>
+
+<p>⭐ <strong>2.3.1 Array Internals</strong></p>
+
+<p>- <strong>2.3.1.1 Array Storage Mechanisms</strong></p>
+
+<p>- <strong>2.3.1.1.1</strong> Dense Arrays</p>
+<p>- <strong>2.3.1.1.2</strong> Sparse Arrays</p>
+<p>- <strong>2.3.1.1.3</strong> Holey Arrays</p>
+<p>- <strong>2.3.1.1.4</strong> Array Element Kinds</p>
+
+
+
+<p>- <strong>2.3.1.2 Array-like Objects</strong></p>
+
+<p>- <strong>2.3.1.2.1</strong> Arguments Object</p>
+<p>- <strong>2.3.1.2.2</strong> NodeList Objects</p>
+<p>- <strong>2.3.1.2.3</strong> String Objects</p>
+<p>- <strong>2.3.1.2.4</strong> TypedArrays</p>
+
+
+
+<p>- <strong>2.3.1.3 Array Performance</strong></p>
+
+<p>- <strong>2.3.1.3.1</strong> V8 Array Optimizations</p>
+<p>- <strong>2.3.1.3.2</strong> Array Method Performance</p>
+<p>- <strong>2.3.1.3.3</strong> Memory Usage Patterns</p>
+
+
+
+
+
+<p>⭐ <strong>2.3.2 Functional Array Methods</strong></p>
+
+<p>- <strong>2.3.2.1 Higher-Order Functions</strong></p>
+
+<p>- <strong>2.3.2.1.1</strong> map() Implementation</p>
+<p>- <strong>2.3.2.1.2</strong> filter() Implementation</p>
+<p>- <strong>2.3.2.1.3</strong> reduce() Implementation</p>
+<p>- <strong>2.3.2.1.4</strong> forEach() vs for loops</p>
+
+
+
+<p>- <strong>2.3.2.2 Advanced Array Methods</strong></p>
+
+<p>- <strong>2.3.2.2.1</strong> flatMap() Deep Dive</p>
+<p>- <strong>2.3.2.2.2</strong> reduceRight() Use Cases</p>
+<p>- <strong>2.3.2.2.3</strong> Array.from() Advanced Usage</p>
+<p>- <strong>2.3.2.2.4</strong> Array.of() vs Array Constructor</p>
+
+
+
+<p>- <strong>2.3.2.3 Method Chaining Patterns</strong></p>
+
+<p>- <strong>2.3.2.3.1</strong> Fluent Interface Design</p>
+<p>- <strong>2.3.2.3.2</strong> Performance Implications</p>
+<p>- <strong>2.3.2.3.3</strong> Lazy Evaluation Techniques</p>
+
+
+
+
+
+<h2 id="-3-function-mastery-closures-">3. FUNCTION MASTERY & CLOSURES</h2>
+
+<h3 id="-3-1-function-architecture-">3.1 Function Architecture</h3>
+
+<p>⭐ <strong>3.1.1 Function Types & Creation</strong></p>
+
+<p>- <strong>3.1.1.1 Function Declarations</strong></p>
+
+<p>- <strong>3.1.1.1.1</strong> Function Declaration Hoisting</p>
+<p>- <strong>3.1.1.1.2</strong> Block-Scoped Functions</p>
+<p>- <strong>3.1.1.1.3</strong> Function Name Property</p>
+
+
+
+<p>- <strong>3.1.1.2 Function Expressions</strong></p>
+
+<p>- <strong>3.1.1.2.1</strong> Anonymous Function Expressions</p>
+<p>- <strong>3.1.1.2.2</strong> Named Function Expressions</p>
+<p>- <strong>3.1.1.2.3</strong> Immediately Invoked Function Expressions</p>
+
+
+
+<p>- <strong>3.1.1.3 Arrow Functions</strong></p>
+
+<p>- <strong>3.1.1.3.1</strong> Lexical this Binding</p>
+<p>- <strong>3.1.1.3.2</strong> Arguments Object Absence</p>
+<p>- <strong>3.1.1.3.3</strong> Constructor Restrictions</p>
+<p>- <strong>3.1.1.3.4</strong> Implicit Return Rules</p>
+
+
+
+
+
+<p>⭐ <strong>3.1.2 Function Properties & Methods</strong></p>
+
+<p>- <strong>3.1.2.1 Function.prototype Methods</strong></p>
+
+<p>- <strong>3.1.2.1.1</strong> call() Method Deep Dive</p>
+
+<p>- <strong>3.1.2.1.1.1</strong> this Binding Mechanism</p>
+<p>- <strong>3.1.2.1.1.2</strong> Argument Passing</p>
+<p>- <strong>3.1.2.1.1.3</strong> Performance Characteristics</p>
+
+
+
+<p>- <strong>3.1.2.1.2</strong> apply() Method Deep Dive</p>
+
+<p>- <strong>3.1.2.1.2.1</strong> Array-like Arguments</p>
+<p>- <strong>3.1.2.1.2.2</strong> Spread Operator Alternative</p>
+<p>- <strong>3.1.2.1.2.3</strong> Use Case Scenarios</p>
+
+
+
+<p>- <strong>3.1.2.1.3</strong> bind() Method Deep Dive</p>
+
+<p>- <strong>3.1.2.1.3.1</strong> Partial Application</p>
+<p>- <strong>3.1.2.1.3.2</strong> Currying Implementation</p>
+<p>- <strong>3.1.2.1.3.3</strong> Event Handler Binding</p>
+
+
+
+
+
+
+<p>- <strong>3.1.2.2 Function Properties</strong></p>
+
+<p>- <strong>3.1.2.2.1</strong> length Property</p>
+<p>- <strong>3.1.2.2.2</strong> name Property</p>
+<p>- <strong>3.1.2.2.3</strong> prototype Property</p>
+<p>- <strong>3.1.2.2.4</strong> caller Property (Deprecated)</p>
+
+
+
+
+
+<p>⭐ <strong>3.1.3 Advanced Function Patterns</strong></p>
+
+<p>- <strong>3.1.3.1 Higher-Order Functions</strong></p>
+
+<p>- <strong>3.1.3.1.1</strong> Functions as Arguments</p>
+<p>- <strong>3.1.3.1.2</strong> Functions as Return Values</p>
+<p>- <strong>3.1.3.1.3</strong> Function Composition</p>
+<p>- <strong>3.1.3.1.4</strong> Function Pipeline</p>
+
+
+
+<p>- <strong>3.1.3.2 Currying & Partial Application</strong></p>
+
+<p>- <strong>3.1.3.2.1</strong> Manual Currying Implementation</p>
+<p>- <strong>3.1.3.2.2</strong> Automatic Currying</p>
+<p>- <strong>3.1.3.2.3</strong> Partial Application Patterns</p>
+<p>- <strong>3.1.3.2.4</strong> Ramda-style Functional Programming</p>
+
+
+
+<p>- <strong>3.1.3.3 Function Decorators</strong></p>
+
+<p>- <strong>3.1.3.3.1</strong> Method Decorators</p>
+<p>- <strong>3.1.3.3.2</strong> Class Decorators</p>
+<p>- <strong>3.1.3.3.3</strong> Property Decorators</p>
+<p>- <strong>3.1.3.3.4</strong> Parameter Decorators</p>
+
+
+
+
+
+<h3 id="-3-2-closure-deep-dive-">3.2 Closure Deep Dive</h3>
+
+<p>⭐ <strong>3.2.1 Closure Mechanics</strong></p>
+
+<p>- <strong>3.2.1.1 Lexical Environment</strong></p>
+
+<p>- <strong>3.2.1.1.1</strong> Environment Record</p>
+<p>- <strong>3.2.1.1.2</strong> Outer Environment Reference</p>
+<p>- <strong>3.2.1.1.3</strong> Variable Resolution Process</p>
+
+
+
+<p>- <strong>3.2.1.2 Closure Creation</strong></p>
+
+<p>- <strong>3.2.1.2.1</strong> Function Definition Time</p>
+<p>- <strong>3.2.1.2.2</strong> Variable Capture Mechanism</p>
+<p>- <strong>3.2.1.2.3</strong> Scope Chain Formation</p>
+
+
+
+<p>- <strong>3.2.1.3 Closure Memory Model</strong></p>
+
+<p>- <strong>3.2.1.3.1</strong> Variable Retention</p>
+<p>- <strong>3.2.1.3.2</strong> Memory Leak Prevention</p>
+<p>- <strong>3.2.1.3.3</strong> Garbage Collection Impact</p>
+
+
+
+
+
+<p>⭐ <strong>3.2.2 Closure Patterns</strong></p>
+
+<p>- <strong>3.2.2.1 Module Pattern</strong></p>
+
+<p>- <strong>3.2.2.1.1</strong> Revealing Module Pattern</p>
+<p>- <strong>3.2.2.1.2</strong> Namespace Pattern</p>
+<p>- <strong>3.2.2.1.3</strong> Singleton Pattern with Closures</p>
+
+
+
+<p>- <strong>3.2.2.2 Factory Functions with Closures</strong></p>
+
+<p>- <strong>3.2.2.2.1</strong> Private Variables</p>
+<p>- <strong>3.2.2.2.2</strong> Private Methods</p>
+<p>- <strong>3.2.2.2.3</strong> Privileged Methods</p>
+
+
+
+<p>- <strong>3.2.2.3 Callback Patterns</strong></p>
+
+<p>- <strong>3.2.2.3.1</strong> Event Handler Closures</p>
+<p>- <strong>3.2.2.3.2</strong> Timer Function Closures</p>
+<p>- <strong>3.2.2.3.3</strong> Async Callback Closures</p>
+
+
+
+
+
+<p>⭐ <strong>3.2.3 Advanced Closure Applications</strong></p>
+
+<p>- <strong>3.2.3.1 Memoization</strong></p>
+
+<p>- <strong>3.2.3.1.1</strong> Simple Memoization</p>
+<p>- <strong>3.2.3.1.2</strong> LRU Cache Implementation</p>
+<p>- <strong>3.2.3.1.3</strong> Fibonacci Memoization</p>
+
+
+
+<p>- <strong>3.2.3.2 Throttling & Debouncing</strong></p>
+
+<p>- <strong>3.2.3.2.1</strong> Throttle Implementation</p>
+<p>- <strong>3.2.3.2.2</strong> Debounce Implementation</p>
+<p>- <strong>3.2.3.2.3</strong> Leading/Trailing Edge Options</p>
+
+
+
+<p>- <strong>3.2.3.3 State Machines</strong></p>
+
+<p>- <strong>3.2.3.3.1</strong> Finite State Machine</p>
+<p>- <strong>3.2.3.3.2</strong> State Transition Logic</p>
+<p>- <strong>3.2.3.3.3</strong> Event-Driven State Changes</p>
+
+
+
+
+
+<h3 id="-3-3-this-binding-mastery-">3.3 this Binding Mastery</h3>
+
+<p>⭐ <strong>3.3.1 this Binding Rules</strong></p>
+
+<p>- <strong>3.3.1.1 Default Binding</strong></p>
+
+<p>- <strong>3.3.1.1.1</strong> Global Object Binding</p>
+<p>- <strong>3.3.1.1.2</strong> Strict Mode Behavior</p>
+<p>- <strong>3.3.1.1.3</strong> undefined Binding</p>
+
+
+
+<p>- <strong>3.3.1.2 Implicit Binding</strong></p>
+
+<p>- <strong>3.3.1.2.1</strong> Object Method Calls</p>
+<p>- <strong>3.3.1.2.2</strong> Binding Loss Scenarios</p>
+<p>- <strong>3.3.1.2.3</strong> Nested Object Binding</p>
+
+
+
+<p>- <strong>3.3.1.3 Explicit Binding</strong></p>
+
+<p>- <strong>3.3.1.3.1</strong> call() Binding</p>
+<p>- <strong>3.3.1.3.2</strong> apply() Binding</p>
+<p>- <strong>3.3.1.3.3</strong> bind() Binding</p>
+
+
+
+<p>- <strong>3.3.1.4 new Binding</strong></p>
+
+<p>- <strong>3.3.1.4.1</strong> Constructor Function Binding</p>
+<p>- <strong>3.3.1.4.2</strong> Object Creation Process</p>
+<p>- <strong>3.3.1.4.3</strong> Return Value Override</p>
+
+
+
+
+
+<p>⭐ <strong>3.3.2 Arrow Function this Behavior</strong></p>
+
+<p>- <strong>3.3.2.1 Lexical this Binding</strong></p>
+
+<p>- <strong>3.3.2.1.1</strong> Enclosing Scope Inheritance</p>
+<p>- <strong>3.3.2.1.2</strong> No Dynamic this Binding</p>
+<p>- <strong>3.3.2.1.3</strong> call/apply/bind Immunity</p>
+
+
+
+<p>- <strong>3.3.2.2 Arrow Function Use Cases</strong></p>
+
+<p>- <strong>3.3.2.2.1</strong> Event Handlers</p>
+<p>- <strong>3.3.2.2.2</strong> Array Methods</p>
+<p>- <strong>3.3.2.2.3</strong> Promise Chains</p>
+
+
+
+<p>- <strong>3.3.2.3 Arrow Function Limitations</strong></p>
+
+<p>- <strong>3.3.2.3.1</strong> Constructor Usage</p>
+<p>- <strong>3.3.2.3.2</strong> Method Definitions</p>
+<p>- <strong>3.3.2.3.3</strong> Dynamic Context Requirements</p>
+
+
+
+
+
+<h2 id="-4-asynchronous-programming-mastery-">4. ASYNCHRONOUS PROGRAMMING MASTERY</h2>
+
+<h3 id="-4-1-event-loop-architecture-">4.1 Event Loop Architecture</h3>
+
+<p>⭐ <strong>4.1.1 Event Loop Mechanics</strong></p>
+
+<p>- <strong>4.1.1.1 Call Stack</strong></p>
+
+<p>- <strong>4.1.1.1.1</strong> Execution Context Stack</p>
+<p>- <strong>4.1.1.1.2</strong> Stack Frame Structure</p>
+<p>- <strong>4.1.1.1.3</strong> Stack Overflow Conditions</p>
+
+
+
+<p>- <strong>4.1.1.2 Task Queue (Macrotask Queue)</strong></p>
+
+<p>- <strong>4.1.1.2.1</strong> setTimeout/setInterval Tasks</p>
+<p>- <strong>4.1.1.2.2</strong> I/O Operations</p>
+<p>- <strong>4.1.1.2.3</strong> UI Events</p>
+
+
+
+<p>- <strong>4.1.1.3 Microtask Queue</strong></p>
+
+<p>- <strong>4.1.1.3.1</strong> Promise Resolution</p>
+<p>- <strong>4.1.1.3.2</strong> queueMicrotask()</p>
+<p>- <strong>4.1.1.3.3</strong> MutationObserver</p>
+
+
+
+<p>- <strong>4.1.1.4 Event Loop Phases</strong></p>
+
+<p>- <strong>4.1.1.4.1</strong> Timer Phase</p>
+<p>- <strong>4.1.1.4.2</strong> Pending Callbacks Phase</p>
+<p>- <strong>4.1.1.4.3</strong> Poll Phase</p>
+<p>- <strong>4.1.1.4.4</strong> Check Phase</p>
+<p>- <strong>4.1.1.4.5</strong> Close Callbacks Phase</p>
+
+
+
+
+
+<p>⭐ <strong>4.1.2 Browser vs Node.js Event Loop</strong></p>
+
+<p>- <strong>4.1.2.1 Browser Event Loop</strong></p>
+
+<p>- <strong>4.1.2.1.1</strong> Rendering Pipeline Integration</p>
+<p>- <strong>4.1.2.1.2</strong> RequestAnimationFrame</p>
+<p>- <strong>4.1.2.1.3</strong> Idle Callbacks</p>
+
+
+
+<p>- <strong>4.1.2.2 Node.js Event Loop</strong></p>
+
+<p>- <strong>4.1.2.2.1</strong> libuv Integration</p>
+<p>- <strong>4.1.2.2.2</strong> Process.nextTick()</p>
+<p>- <strong>4.1.2.2.3</strong> setImmediate()</p>
+
+
+
+<p>- <strong>4.1.2.3 Performance Implications</strong></p>
+
+<p>- <strong>4.1.2.3.1</strong> Task Scheduling Strategies</p>
+<p>- <strong>4.1.2.3.2</strong> Blocking Operations</p>
+<p>- <strong>4.1.2.3.3</strong> Optimization Techniques</p>
+
+
+
+
+
+<h3 id="-4-2-promise-architecture-">4.2 Promise Architecture</h3>
+
+<p>⭐ <strong>4.2.1 Promise Internals</strong></p>
+
+<p>- <strong>4.2.1.1 Promise States</strong></p>
+
+<p>- <strong>4.2.1.1.1</strong> Pending State</p>
+<p>- <strong>4.2.1.1.2</strong> Fulfilled State</p>
+<p>- <strong>4.2.1.1.3</strong> Rejected State</p>
+<p>- <strong>4.2.1.1.4</strong> State Transition Rules</p>
+
+
+
+<p>- <strong>4.2.1.2 Promise Constructor</strong></p>
+
+<p>- <strong>4.2.1.2.1</strong> Executor Function</p>
+<p>- <strong>4.2.1.2.2</strong> resolve/reject Functions</p>
+<p>- <strong>4.2.1.2.3</strong> Synchronous Execution</p>
+
+
+
+<p>- <strong>4.2.1.3 Promise Resolution</strong></p>
+
+<p>- <strong>4.2.1.3.1</strong> Value Resolution</p>
+<p>- <strong>4.2.1.3.2</strong> Thenable Resolution</p>
+<p>- <strong>4.2.1.3.3</strong> Promise Resolution</p>
+
+
+
+
+
+<p>⭐ <strong>4.2.2 Promise Methods Deep Dive</strong></p>
+
+<p>- <strong>4.2.2.1 Instance Methods</strong></p>
+
+<p>- <strong>4.2.2.1.1</strong> then() Method</p>
+
+<p>- <strong>4.2.2.1.1.1</strong> Fulfillment Handler</p>
+<p>- <strong>4.2.2.1.1.2</strong> Rejection Handler</p>
+<p>- <strong>4.2.2.1.1.3</strong> Return Value Handling</p>
+<p>- <strong>4.2.2.1.1.4</strong> Chaining Mechanism</p>
+
+
+
+<p>- <strong>4.2.2.1.2</strong> catch() Method</p>
+
+<p>- <strong>4.2.2.1.2.1</strong> Error Handling</p>
+<p>- <strong>4.2.2.1.2.2</strong> Error Propagation</p>
+<p>- <strong>4.2.2.1.2.3</strong> Recovery Patterns</p>
+
+
+
+<p>- <strong>4.2.2.1.3</strong> finally() Method</p>
+
+<p>- <strong>4.2.2.1.3.1</strong> Cleanup Operations</p>
+<p>- <strong>4.2.2.1.3.2</strong> Value Passthrough</p>
+<p>- <strong>4.2.2.1.3.3</strong> Error Passthrough</p>
+
+
+
+
+
+
+<p>- <strong>4.2.2.2 Static Methods</strong></p>
+
+<p>- <strong>4.2.2.2.1</strong> Promise.resolve()</p>
+<p>- <strong>4.2.2.2.2</strong> Promise.reject()</p>
+<p>- <strong>4.2.2.2.3</strong> Promise.all()</p>
+
+<p>- <strong>4.2.2.2.3.1</strong> Parallel Execution</p>
+<p>- <strong>4.2.2.2.3.2</strong> Fail-Fast Behavior</p>
+<p>- <strong>4.2.2.2.3.3</strong> Result Ordering</p>
+
+
+
+<p>- <strong>4.2.2.2.4</strong> Promise.allSettled()</p>
+
+<p>- <strong>4.2.2.2.4.1</strong> Result Structure</p>
+<p>- <strong>4.2.2.2.4.2</strong> Error Handling</p>
+
+
+
+<p>- <strong>4.2.2.2.5</strong> Promise.race()</p>
+
+<p>- <strong>4.2.2.2.5.1</strong> First Settlement</p>
+<p>- <strong>4.2.2.2.5.2</strong> Timeout Implementation</p>
+
+
+
+<p>- <strong>4.2.2.2.6</strong> Promise.any()</p>
+
+<p>- <strong>4.2.2.2.6.1</strong> First Fulfillment</p>
+<p>- <strong>4.2.2.2.6.2</strong> AggregateError</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>4.2.3 Advanced Promise Patterns</strong></p>
+
+<p>- <strong>4.2.3.1 Promise Combinators</strong></p>
+
+<p>- <strong>4.2.3.1.1</strong> Custom Combinator Implementation</p>
+<p>- <strong>4.2.3.1.2</strong> Conditional Promise Execution</p>
+<p>- <strong>4.2.3.1.3</strong> Promise Retry Logic</p>
+
+
+
+<p>- <strong>4.2.3.2 Promise Cancellation</strong></p>
+
+<p>- <strong>4.2.3.2.1</strong> AbortController Integration</p>
+<p>- <strong>4.2.3.2.2</strong> Cancellation Token Pattern</p>
+<p>- <strong>4.2.3.2.3</strong> Cleanup Mechanisms</p>
+
+
+
+<p>- <strong>4.2.3.3 Promise Pools</strong></p>
+
+<p>- <strong>4.2.3.3.1</strong> Concurrency Limiting</p>
+<p>- <strong>4.2.3.3.2</strong> Resource Management</p>
+<p>- <strong>4.2.3.3.3</strong> Backpressure Handling</p>
+
+
+
+
+
+<h3 id="-4-3-async-await-mastery-">4.3 Async/Await Mastery</h3>
+
+<p>⭐ <strong>4.3.1 Async Function Mechanics</strong></p>
+
+<p>- <strong>4.3.1.1 Async Function Declaration</strong></p>
+
+<p>- <strong>4.3.1.1.1</strong> Return Value Wrapping</p>
+<p>- <strong>4.3.1.1.2</strong> Promise Resolution</p>
+<p>- <strong>4.3.1.1.3</strong> Error Handling</p>
+
+
+
+<p>- <strong>4.3.1.2 Await Expression</strong></p>
+
+<p>- <strong>4.3.1.2.1</strong> Promise Unwrapping</p>
+<p>- <strong>4.3.1.2.2</strong> Execution Suspension</p>
+<p>- <strong>4.3.1.2.3</strong> Value Resolution</p>
+
+
+
+<p>- <strong>4.3.1.3 Error Handling</strong></p>
+
+<p>- <strong>4.3.1.3.1</strong> try/catch Blocks</p>
+<p>- <strong>4.3.1.3.2</strong> Unhandled Promise Rejections</p>
+<p>- <strong>4.3.1.3.3</strong> Error Propagation</p>
+
+
+
+
+
+<p>⭐ <strong>4.3.2 Advanced Async Patterns</strong></p>
+
+<p>- <strong>4.3.2.1 Parallel vs Sequential Execution</strong></p>
+
+<p>- <strong>4.3.2.1.1</strong> Promise.all() with Async/Await</p>
+<p>- <strong>4.3.2.1.2</strong> Sequential Processing</p>
+<p>- <strong>4.3.2.1.3</strong> Mixed Execution Patterns</p>
+
+
+
+<p>- <strong>4.3.2.2 Async Iteration</strong></p>
+
+<p>- <strong>4.3.2.2.1</strong> for-await-of Loop</p>
+<p>- <strong>4.3.2.2.2</strong> Async Generators</p>
+<p>- <strong>4.3.2.2.3</strong> Async Iterator Protocol</p>
+
+
+
+<p>- <strong>4.3.2.3 Error Handling Strategies</strong></p>
+
+<p>- <strong>4.3.2.3.1</strong> Granular Error Handling</p>
+<p>- <strong>4.3.2.3.2</strong> Error Recovery</p>
+<p>- <strong>4.3.2.3.3</strong> Fallback Mechanisms</p>
+
+
+
+
+
+<h3 id="-4-4-generators-iterators-">4.4 Generators & Iterators</h3>
+
+<p>⭐ <strong>4.4.1 Iterator Protocol</strong></p>
+
+<p>- <strong>4.4.1.1 Iterator Interface</strong></p>
+
+<p>- <strong>4.4.1.1.1</strong> next() Method</p>
+<p>- <strong>4.4.1.1.2</strong> IteratorResult Object</p>
+<p>- <strong>4.4.1.1.3</strong> done Property</p>
+<p>- <strong>4.4.1.1.4</strong> value Property</p>
+
+
+
+<p>- <strong>4.4.1.2 Iterable Protocol</strong></p>
+
+<p>- <strong>4.4.1.2.1</strong> Symbol.iterator Method</p>
+<p>- <strong>4.4.1.2.2</strong> Built-in Iterables</p>
+<p>- <strong>4.4.1.2.3</strong> Custom Iterable Implementation</p>
+
+
+
+<p>- <strong>4.4.1.3 Iterator Consumption</strong></p>
+
+<p>- <strong>4.4.1.3.1</strong> for-of Loop</p>
+<p>- <strong>4.4.1.3.2</strong> Spread Operator</p>
+<p>- <strong>4.4.1.3.3</strong> Array.from()</p>
+<p>- <strong>4.4.1.3.4</strong> Destructuring Assignment</p>
+
+
+
+
+
+<p>⭐ <strong>4.4.2 Generator Functions</strong></p>
+
+<p>- <strong>4.4.2.1 Generator Syntax</strong></p>
+
+<p>- <strong>4.4.2.1.1</strong> function* Declaration</p>
+<p>- <strong>4.4.2.1.2</strong> yield Expression</p>
+<p>- <strong>4.4.2.1.3</strong> yield* Delegation</p>
+
+
+
+<p>- <strong>4.4.2.2 Generator Object</strong></p>
+
+<p>- <strong>4.4.2.2.1</strong> next() Method</p>
+<p>- <strong>4.4.2.2.2</strong> return() Method</p>
+<p>- <strong>4.4.2.2.3</strong> throw() Method</p>
+
+
+
+<p>- <strong>4.4.2.3 Generator Patterns</strong></p>
+
+<p>- <strong>4.4.2.3.1</strong> Infinite Sequences</p>
+<p>- <strong>4.4.2.3.2</strong> State Machines</p>
+<p>- <strong>4.4.2.3.3</strong> Cooperative Multitasking</p>
+
+
+
+
+
+<p>⭐ <strong>4.4.3 Async Generators</strong></p>
+
+<p>- <strong>4.4.3.1 Async Generator Syntax</strong></p>
+
+<p>- <strong>4.4.3.1.1</strong> async function* Declaration</p>
+<p>- <strong>4.4.3.1.2</strong> await in Generators</p>
+<p>- <strong>4.4.3.1.3</strong> yield await Pattern</p>
+
+
+
+<p>- <strong>4.4.3.2 Async Iterator Protocol</strong></p>
+
+<p>- <strong>4.4.3.2.1</strong> Symbol.asyncIterator</p>
+<p>- <strong>4.4.3.2.2</strong> Async Iterator Interface</p>
+<p>- <strong>4.4.3.2.3</strong> for-await-of Loop</p>
+
+
+
+<p>- <strong>4.4.3.3 Async Generator Applications</strong></p>
+
+<p>- <strong>4.4.3.3.1</strong> Stream Processing</p>
+<p>- <strong>4.4.3.3.2</strong> Data Pipeline</p>
+<p>- <strong>4.4.3.3.3</strong> Real-time Data Handling</p>
+
+
+
+
+
+<h2 id="-5-object-oriented-programming-advanced-">5. OBJECT-ORIENTED PROGRAMMING ADVANCED</h2>
+
+<h3 id="-5-1-class-system-deep-dive-">5.1 Class System Deep Dive</h3>
+
+<p>⭐ <strong>5.1.1 Class Declaration & Expression</strong></p>
+
+<p>- <strong>5.1.1.1 Class Declaration</strong></p>
+
+<p>- <strong>5.1.1.1.1</strong> Class Hoisting Behavior</p>
+<p>- <strong>5.1.1.1.2</strong> Strict Mode Enforcement</p>
+<p>- <strong>5.1.1.1.3</strong> Constructor Method</p>
+
+
+
+<p>- <strong>5.1.1.2 Class Expression</strong></p>
+
+<p>- <strong>5.1.1.2.1</strong> Named Class Expressions</p>
+<p>- <strong>5.1.1.2.2</strong> Anonymous Class Expressions</p>
+<p>- <strong>5.1.1.2.3</strong> Class as First-Class Citizens</p>
+
+
+
+<p>- <strong>5.1.1.3 Class Body</strong></p>
+
+<p>- <strong>5.1.1.3.1</strong> Method Definitions</p>
+<p>- <strong>5.1.1.3.2</strong> Property Definitions</p>
+<p>- <strong>5.1.1.3.3</strong> Static Members</p>
+
+
+
+
+
+<p>⭐ <strong>5.1.2 Class Fields & Methods</strong></p>
+
+<p>- <strong>5.1.2.1 Instance Fields</strong></p>
+
+<p>- <strong>5.1.2.1.1</strong> Public Instance Fields</p>
+<p>- <strong>5.1.2.1.2</strong> Private Instance Fields</p>
+<p>- <strong>5.1.2.1.3</strong> Field Initialization</p>
+
+
+
+<p>- <strong>5.1.2.2 Instance Methods</strong></p>
+
+<p>- <strong>5.1.2.2.1</strong> Method Definition Syntax</p>
+<p>- <strong>5.1.2.2.2</strong> Method Binding</p>
+<p>- <strong>5.1.2.2.3</strong> Arrow Function Methods</p>
+
+
+
+<p>- <strong>5.1.2.3 Static Members</strong></p>
+
+<p>- <strong>5.1.2.3.1</strong> Static Fields</p>
+<p>- <strong>5.1.2.3.2</strong> Static Methods</p>
+<p>- <strong>5.1.2.3.3</strong> Static Initialization Blocks</p>
+
+
+
+<p>- <strong>5.1.2.4 Private Members</strong></p>
+
+<p>- <strong>5.1.2.4.1</strong> Private Fields (#field)</p>
+<p>- <strong>5.1.2.4.2</strong> Private Methods (#method)</p>
+<p>- <strong>5.1.2.4.3</strong> Private Static Members</p>
+<p>- <strong>5.1.2.4.4</strong> Private Member Access</p>
+
+
+
+
+
+<p>⭐ <strong>5.1.3 Class Inheritance</strong></p>
+
+<p>- <strong>5.1.3.1 extends Keyword</strong></p>
+
+<p>- <strong>5.1.3.1.1</strong> Prototype Chain Setup</p>
+<p>- <strong>5.1.3.1.2</strong> Constructor Inheritance</p>
+<p>- <strong>5.1.3.1.3</strong> Method Inheritance</p>
+
+
+
+<p>- <strong>5.1.3.2 super Keyword</strong></p>
+
+<p>- <strong>5.1.3.2.1</strong> super() Constructor Call</p>
+<p>- <strong>5.1.3.2.2</strong> super.method() Calls</p>
+<p>- <strong>5.1.3.2.3</strong> super Property Access</p>
+
+
+
+<p>- <strong>5.1.3.3 Method Override</strong></p>
+
+<p>- <strong>5.1.3.3.1</strong> Method Shadowing</p>
+<p>- <strong>5.1.3.3.2</strong> Super Method Calls</p>
+<p>- <strong>5.1.3.3.3</strong> Polymorphism Implementation</p>
+
+
+
+
+
+<h3 id="-5-2-advanced-oop-patterns-">5.2 Advanced OOP Patterns</h3>
+
+<p>⭐ <strong>5.2.1 Design Patterns Implementation</strong></p>
+
+<p>- <strong>5.2.1.1 Creational Patterns</strong></p>
+
+<p>- <strong>5.2.1.1.1</strong> Singleton Pattern</p>
+
+<p>- <strong>5.2.1.1.1.1</strong> Class-based Singleton</p>
+<p>- <strong>5.2.1.1.1.2</strong> Module Singleton</p>
+<p>- <strong>5.2.1.1.1.3</strong> Lazy Initialization</p>
+
+
+
+<p>- <strong>5.2.1.1.2</strong> Factory Pattern</p>
+
+<p>- <strong>5.2.1.1.2.1</strong> Simple Factory</p>
+<p>- <strong>5.2.1.1.2.2</strong> Factory Method</p>
+<p>- <strong>5.2.1.1.2.3</strong> Abstract Factory</p>
+
+
+
+<p>- <strong>5.2.1.1.3</strong> Builder Pattern</p>
+
+<p>- <strong>5.2.1.1.3.1</strong> Fluent Interface</p>
+<p>- <strong>5.2.1.1.3.2</strong> Method Chaining</p>
+<p>- <strong>5.2.1.1.3.3</strong> Complex Object Construction</p>
+
+
+
+<p>- <strong>5.2.1.1.4</strong> Prototype Pattern</p>
+
+<p>- <strong>5.2.1.1.4.1</strong> Object Cloning</p>
+<p>- <strong>5.2.1.1.4.2</strong> Deep vs Shallow Copy</p>
+<p>- <strong>5.2.1.1.4.3</strong> Clone Method Implementation</p>
+
+
+
+
+
+
+<p>- <strong>5.2.1.2 Structural Patterns</strong></p>
+
+<p>- <strong>5.2.1.2.1</strong> Adapter Pattern</p>
+
+<p>- <strong>5.2.1.2.1.1</strong> Interface Adaptation</p>
+<p>- <strong>5.2.1.2.1.2</strong> Legacy Code Integration</p>
+<p>- <strong>5.2.1.2.1.3</strong> Third-party Library Wrapping</p>
+
+
+
+<p>- <strong>5.2.1.2.2</strong> Decorator Pattern</p>
+
+<p>- <strong>5.2.1.2.2.1</strong> Object Enhancement</p>
+<p>- <strong>5.2.1.2.2.2</strong> Behavior Addition</p>
+<p>- <strong>5.2.1.2.2.3</strong> Composition over Inheritance</p>
+
+
+
+<p>- <strong>5.2.1.2.3</strong> Facade Pattern</p>
+
+<p>- <strong>5.2.1.2.3.1</strong> Simplified Interface</p>
+<p>- <strong>5.2.1.2.3.2</strong> Subsystem Hiding</p>
+<p>- <strong>5.2.1.2.3.3</strong> API Simplification</p>
+
+
+
+<p>- <strong>5.2.1.2.4</strong> Proxy Pattern</p>
+
+<p>- <strong>5.2.1.2.4.1</strong> Access Control</p>
+<p>- <strong>5.2.1.2.4.2</strong> Lazy Loading</p>
+<p>- <strong>5.2.1.2.4.3</strong> Caching Proxy</p>
+
+
+
+
+
+
+<p>- <strong>5.2.1.3 Behavioral Patterns</strong></p>
+
+<p>- <strong>5.2.1.3.1</strong> Observer Pattern</p>
+
+<p>- <strong>5.2.1.3.1.1</strong> Subject-Observer Relationship</p>
+<p>- <strong>5.2.1.3.1.2</strong> Event System Implementation</p>
+<p>- <strong>5.2.1.3.1.3</strong> Publish-Subscribe Pattern</p>
+
+
+
+<p>- <strong>5.2.1.3.2</strong> Strategy Pattern</p>
+
+<p>- <strong>5.2.1.3.2.1</strong> Algorithm Encapsulation</p>
+<p>- <strong>5.2.1.3.2.2</strong> Runtime Algorithm Selection</p>
+<p>- <strong>5.2.1.3.2.3</strong> Context-Strategy Interaction</p>
+
+
+
+<p>- <strong>5.2.1.3.3</strong> Command Pattern</p>
+
+<p>- <strong>5.2.1.3.3.1</strong> Action Encapsulation</p>
+<p>- <strong>5.2.1.3.3.2</strong> Undo/Redo Implementation</p>
+<p>- <strong>5.2.1.3.3.3</strong> Macro Commands</p>
+
+
+
+<p>- <strong>5.2.1.3.4</strong> State Pattern</p>
+
+<p>- <strong>5.2.1.3.4.1</strong> State Machine Implementation</p>
+<p>- <strong>5.2.1.3.4.2</strong> State Transitions</p>
+<p>- <strong>5.2.1.3.4.3</strong> Context-State Interaction</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>5.2.2 Mixin Patterns</strong></p>
+
+<p>- <strong>5.2.2.1 Object Mixins</strong></p>
+
+<p>- <strong>5.2.2.1.1</strong> Object.assign() Mixins</p>
+<p>- <strong>5.2.2.1.2</strong> Spread Operator Mixins</p>
+<p>- <strong>5.2.2.1.3</strong> Property Copying</p>
+
+
+
+<p>- <strong>5.2.2.2 Function Mixins</strong></p>
+
+<p>- <strong>5.2.2.2.1</strong> Factory Function Mixins</p>
+<p>- <strong>5.2.2.2.2</strong> Functional Mixins</p>
+<p>- <strong>5.2.2.2.3</strong> Behavior Composition</p>
+
+
+
+<p>- <strong>5.2.2.3 Class Mixins</strong></p>
+
+<p>- <strong>5.2.2.3.1</strong> Subclass Factory Pattern</p>
+<p>- <strong>5.2.2.3.2</strong> Multiple Inheritance Simulation</p>
+<p>- <strong>5.2.2.3.3</strong> Trait-based Programming</p>
+
+
+
+
+
+<p>⭐ <strong>5.2.3 Composition Patterns</strong></p>
+
+<p>- <strong>5.2.3.1 Object Composition</strong></p>
+
+<p>- <strong>5.2.3.1.1</strong> Has-a Relationships</p>
+<p>- <strong>5.2.3.1.2</strong> Aggregation vs Composition</p>
+<p>- <strong>5.2.3.1.3</strong> Dependency Injection</p>
+
+
+
+<p>- <strong>5.2.3.2 Functional Composition</strong></p>
+
+<p>- <strong>5.2.3.2.1</strong> Function Composition</p>
+<p>- <strong>5.2.3.2.2</strong> Pipe Operations</p>
+<p>- <strong>5.2.3.2.3</strong> Behavior Composition</p>
+
+
+
+<p>- <strong>5.2.3.3 Module Composition</strong></p>
+
+<p>- <strong>5.2.3.3.1</strong> Module Aggregation</p>
+<p>- <strong>5.2.3.3.2</strong> Plugin Architecture</p>
+<p>- <strong>5.2.3.3.3</strong> Microservice Patterns</p>
+
+
+
+
+
+<h2 id="-6-metaprogramming-reflection-">6. METAPROGRAMMING & REFLECTION</h2>
+
+<h3 id="-6-1-proxy-deep-dive-">6.1 Proxy Deep Dive</h3>
+
+<p>⭐ <strong>6.1.1 Proxy Fundamentals</strong></p>
+
+<p>- <strong>6.1.1.1 Proxy Constructor</strong></p>
+
+<p>- <strong>6.1.1.1.1</strong> Target Object</p>
+<p>- <strong>6.1.1.1.2</strong> Handler Object</p>
+<p>- <strong>6.1.1.1.3</strong> Proxy Creation Process</p>
+
+
+
+<p>- <strong>6.1.1.2 Proxy Invariants</strong></p>
+
+<p>- <strong>6.1.1.2.1</strong> Non-configurable Properties</p>
+<p>- <strong>6.1.1.2.2</strong> Non-extensible Objects</p>
+<p>- <strong>6.1.1.2.3</strong> Prototype Invariants</p>
+
+
+
+<p>- <strong>6.1.1.3 Revocable Proxies</strong></p>
+
+<p>- <strong>6.1.1.3.1</strong> Proxy.revocable()</p>
+<p>- <strong>6.1.1.3.2</strong> Revocation Mechanism</p>
+<p>- <strong>6.1.1.3.3</strong> Security Applications</p>
+
+
+
+
+
+<p>⭐ <strong>6.1.2 Proxy Traps (Handler Methods)</strong></p>
+
+<p>- <strong>6.1.2.1 Property Access Traps</strong></p>
+
+<p>- <strong>6.1.2.1.1</strong> get Trap</p>
+
+<p>- <strong>6.1.2.1.1.1</strong> Property Interception</p>
+<p>- <strong>6.1.2.1.1.2</strong> Default Behavior</p>
+<p>- <strong>6.1.2.1.1.3</strong> Return Value Validation</p>
+
+
+
+<p>- <strong>6.1.2.1.2</strong> set Trap</p>
+
+<p>- <strong>6.1.2.1.2.1</strong> Property Assignment</p>
+<p>- <strong>6.1.2.1.2.2</strong> Validation Logic</p>
+<p>- <strong>6.1.2.1.2.3</strong> Success Indication</p>
+
+
+
+<p>- <strong>6.1.2.1.3</strong> has Trap</p>
+
+<p>- <strong>6.1.2.1.3.1</strong> in Operator Interception</p>
+<p>- <strong>6.1.2.1.3.2</strong> Property Existence Check</p>
+
+
+
+<p>- <strong>6.1.2.1.4</strong> deleteProperty Trap</p>
+
+<p>- <strong>6.1.2.1.4.1</strong> delete Operator Interception</p>
+<p>- <strong>6.1.2.1.4.2</strong> Deletion Prevention</p>
+
+
+
+
+
+
+<p>- <strong>6.1.2.2 Property Descriptor Traps</strong></p>
+
+<p>- <strong>6.1.2.2.1</strong> getOwnPropertyDescriptor Trap</p>
+<p>- <strong>6.1.2.2.2</strong> defineProperty Trap</p>
+<p>- <strong>6.1.2.2.3</strong> getPrototypeOf Trap</p>
+<p>- <strong>6.1.2.2.4</strong> setPrototypeOf Trap</p>
+
+
+
+<p>- <strong>6.1.2.3 Object Introspection Traps</strong></p>
+
+<p>- <strong>6.1.2.3.1</strong> ownKeys Trap</p>
+<p>- <strong>6.1.2.3.2</strong> isExtensible Trap</p>
+<p>- <strong>6.1.2.3.3</strong> preventExtensions Trap</p>
+
+
+
+<p>- <strong>6.1.2.4 Function Call Traps</strong></p>
+
+<p>- <strong>6.1.2.4.1</strong> apply Trap</p>
+<p>- <strong>6.1.2.4.2</strong> construct Trap</p>
+
+
+
+
+
+<p>⭐ <strong>6.1.3 Proxy Applications</strong></p>
+
+<p>- <strong>6.1.3.1 Data Validation</strong></p>
+
+<p>- <strong>6.1.3.1.1</strong> Type Checking</p>
+<p>- <strong>6.1.3.1.2</strong> Range Validation</p>
+<p>- <strong>6.1.3.1.3</strong> Format Validation</p>
+
+
+
+<p>- <strong>6.1.3.2 Property Access Control</strong></p>
+
+<p>- <strong>6.1.3.2.1</strong> Read-only Properties</p>
+<p>- <strong>6.1.3.2.2</strong> Private Property Simulation</p>
+<p>- <strong>6.1.3.2.3</strong> Access Logging</p>
+
+
+
+<p>- <strong>6.1.3.3 API Enhancement</strong></p>
+
+<p>- <strong>6.1.3.3.1</strong> Method Chaining</p>
+<p>- <strong>6.1.3.3.2</strong> Fluent Interfaces</p>
+<p>- <strong>6.1.3.3.3</strong> Dynamic Method Creation</p>
+
+
+
+<p>- <strong>6.1.3.4 Framework Implementation</strong></p>
+
+<p>- <strong>6.1.3.4.1</strong> Reactive Systems</p>
+<p>- <strong>6.1.3.4.2</strong> ORM Implementation</p>
+<p>- <strong>6.1.3.4.3</strong> Mock Object Creation</p>
+
+
+
+
+
+<h3 id="-6-2-reflect-api-">6.2 Reflect API</h3>
+
+<p>⭐ <strong>6.2.1 Reflect Methods</strong></p>
+
+<p>- <strong>6.2.1.1 Property Operations</strong></p>
+
+<p>- <strong>6.2.1.1.1</strong> Reflect.get()</p>
+<p>- <strong>6.2.1.1.2</strong> Reflect.set()</p>
+<p>- <strong>6.2.1.1.3</strong> Reflect.has()</p>
+<p>- <strong>6.2.1.1.4</strong> Reflect.deleteProperty()</p>
+
+
+
+<p>- <strong>6.2.1.2 Property Descriptor Operations</strong></p>
+
+<p>- <strong>6.2.1.2.1</strong> Reflect.getOwnPropertyDescriptor()</p>
+<p>- <strong>6.2.1.2.2</strong> Reflect.defineProperty()</p>
+<p>- <strong>6.2.1.2.3</strong> Reflect.getPrototypeOf()</p>
+<p>- <strong>6.2.1.2.4</strong> Reflect.setPrototypeOf()</p>
+
+
+
+<p>- <strong>6.2.1.3 Object Introspection</strong></p>
+
+<p>- <strong>6.2.1.3.1</strong> Reflect.ownKeys()</p>
+<p>- <strong>6.2.1.3.2</strong> Reflect.isExtensible()</p>
+<p>- <strong>6.2.1.3.3</strong> Reflect.preventExtensions()</p>
+
+
+
+<p>- <strong>6.2.1.4 Function Operations</strong></p>
+
+<p>- <strong>6.2.1.4.1</strong> Reflect.apply()</p>
+<p>- <strong>6.2.1.4.2</strong> Reflect.construct()</p>
+
+
+
+
+
+<p>⭐ <strong>6.2.2 Reflect vs Object Methods</strong></p>
+
+<p>- <strong>6.2.2.1 Method Comparison</strong></p>
+
+<p>- <strong>6.2.2.1.1</strong> Return Value Differences</p>
+<p>- <strong>6.2.2.1.2</strong> Error Handling</p>
+<p>- <strong>6.2.2.1.3</strong> Consistency Improvements</p>
+
+
+
+<p>- <strong>6.2.2.2 Proxy Handler Implementation</strong></p>
+
+<p>- <strong>6.2.2.2.1</strong> Default Behavior Delegation</p>
+<p>- <strong>6.2.2.2.2</strong> Trap Implementation Patterns</p>
+<p>- <strong>6.2.2.2.3</strong> Invariant Enforcement</p>
+
+
+
+
+
+<h3 id="-6-3-dynamic-programming-techniques-">6.3 Dynamic Programming Techniques</h3>
+
+<p>⭐ <strong>6.3.1 Runtime Code Generation</strong></p>
+
+<p>- <strong>6.3.1.1 Function Constructor</strong></p>
+
+<p>- <strong>6.3.1.1.1</strong> Dynamic Function Creation</p>
+<p>- <strong>6.3.1.1.2</strong> Code String Compilation</p>
+<p>- <strong>6.3.1.1.3</strong> Security Considerations</p>
+
+
+
+<p>- <strong>6.3.1.2 eval() Function</strong></p>
+
+<p>- <strong>6.3.1.2.1</strong> Code Evaluation</p>
+<p>- <strong>6.3.1.2.2</strong> Scope Considerations</p>
+<p>- <strong>6.3.1.2.3</strong> Security Risks</p>
+
+
+
+<p>- <strong>6.3.1.3 Template-based Generation</strong></p>
+
+<p>- <strong>6.3.1.3.1</strong> Code Templates</p>
+<p>- <strong>6.3.1.3.2</strong> Parameter Substitution</p>
+<p>- <strong>6.3.1.3.3</strong> Safe Code Generation</p>
+
+
+
+
+
+<p>⭐ <strong>6.3.2 Property Manipulation</strong></p>
+
+<p>- <strong>6.3.2.1 Dynamic Property Access</strong></p>
+
+<p>- <strong>6.3.2.1.1</strong> Bracket Notation</p>
+<p>- <strong>6.3.2.1.2</strong> Computed Property Names</p>
+<p>- <strong>6.3.2.1.3</strong> Property Path Navigation</p>
+
+
+
+<p>- <strong>6.3.2.2 Property Enumeration</strong></p>
+
+<p>- <strong>6.3.2.2.1</strong> for...in Loop</p>
+<p>- <strong>6.3.2.2.2</strong> Object.keys()</p>
+<p>- <strong>6.3.2.2.3</strong> Object.getOwnPropertyNames()</p>
+
+
+
+<p>- <strong>6.3.2.3 Property Descriptor Manipulation</strong></p>
+
+<p>- <strong>6.3.2.3.1</strong> Dynamic Getter/Setter Creation</p>
+<p>- <strong>6.3.2.3.2</strong> Property Attribute Modification</p>
+<p>- <strong>6.3.2.3.3</strong> Property Migration</p>
+
+
+
+
+
+<p>⭐ <strong>6.3.3 Method Interception</strong></p>
+
+<p>- <strong>6.3.3.1 Method Wrapping</strong></p>
+
+<p>- <strong>6.3.3.1.1</strong> Before/After Hooks</p>
+<p>- <strong>6.3.3.1.2</strong> Method Decoration</p>
+<p>- <strong>6.3.3.1.3</strong> Aspect-Oriented Programming</p>
+
+
+
+<p>- <strong>6.3.3.2 Method Replacement</strong></p>
+
+<p>- <strong>6.3.3.2.1</strong> Monkey Patching</p>
+<p>- <strong>6.3.3.2.2</strong> Method Swizzling</p>
+<p>- <strong>6.3.3.2.3</strong> Hot Swapping</p>
+
+
+
+<p>- <strong>6.3.3.3 Method Composition</strong></p>
+
+<p>- <strong>6.3.3.3.1</strong> Method Chaining</p>
+<p>- <strong>6.3.3.3.2</strong> Pipeline Creation</p>
+<p>- <strong>6.3.3.3.3</strong> Middleware Patterns</p>
+
+
+
+
+
+<h2 id="-7-performance-optimization-">7. PERFORMANCE OPTIMIZATION</h2>
+
+<h3 id="-7-1-memory-management-mastery-">7.1 Memory Management Mastery</h3>
+
+<p>⭐ <strong>7.1.1 Garbage Collection Deep Dive</strong></p>
+
+<p>- <strong>7.1.1.1 Garbage Collection Algorithms</strong></p>
+
+<p>- <strong>7.1.1.1.1</strong> Mark and Sweep</p>
+
+<p>- <strong>7.1.1.1.1.1</strong> Marking Phase</p>
+<p>- <strong>7.1.1.1.1.2</strong> Sweeping Phase</p>
+<p>- <strong>7.1.1.1.1.3</strong> Compaction Phase</p>
+
+
+
+<p>- <strong>7.1.1.1.2</strong> Generational Collection</p>
+
+<p>- <strong>7.1.1.1.2.1</strong> Young Generation</p>
+<p>- <strong>7.1.1.1.2.2</strong> Old Generation</p>
+<p>- <strong>7.1.1.1.2.3</strong> Promotion Process</p>
+
+
+
+<p>- <strong>7.1.1.1.3</strong> Incremental Collection</p>
+
+<p>- <strong>7.1.1.1.3.1</strong> Tri-color Marking</p>
+<p>- <strong>7.1.1.1.3.2</strong> Write Barriers</p>
+<p>- <strong>7.1.1.1.3.3</strong> Concurrent Collection</p>
+
+
+
+
+
+
+<p>- <strong>7.1.1.2 Memory Leak Patterns</strong></p>
+
+<p>- <strong>7.1.1.2.1</strong> Closure Leaks</p>
+<p>- <strong>7.1.1.2.2</strong> Event Listener Leaks</p>
+<p>- <strong>7.1.1.2.3</strong> Timer Leaks</p>
+<p>- <strong>7.1.1.2.4</strong> DOM Reference Leaks</p>
+
+
+
+<p>- <strong>7.1.1.3 Memory Profiling</strong></p>
+
+<p>- <strong>7.1.1.3.1</strong> Heap Snapshots</p>
+<p>- <strong>7.1.1.3.2</strong> Allocation Timeline</p>
+<p>- <strong>7.1.1.3.3</strong> Memory Usage Analysis</p>
+
+
+
+
+
+<p>⭐ <strong>7.1.2 WeakMap & WeakSet</strong></p>
+
+<p>- <strong>7.1.2.1 WeakMap Implementation</strong></p>
+
+<p>- <strong>7.1.2.1.1</strong> Weak References</p>
+<p>- <strong>7.1.2.1.2</strong> Garbage Collection Integration</p>
+<p>- <strong>7.1.2.1.3</strong> Use Case Scenarios</p>
+
+
+
+<p>- <strong>7.1.2.2 WeakSet Implementation</strong></p>
+
+<p>- <strong>7.1.2.2.1</strong> Object Tracking</p>
+<p>- <strong>7.1.2.2.2</strong> Memory Efficiency</p>
+<p>- <strong>7.1.2.2.3</strong> Practical Applications</p>
+
+
+
+<p>- <strong>7.1.2.3 WeakRef & FinalizationRegistry</strong></p>
+
+<p>- <strong>7.1.2.3.1</strong> WeakRef Usage</p>
+<p>- <strong>7.1.2.3.2</strong> Cleanup Callbacks</p>
+<p>- <strong>7.1.2.3.3</strong> Resource Management</p>
+
+
+
+
+
+<p>⭐ <strong>7.1.3 Memory Optimization Techniques</strong></p>
+
+<p>- <strong>7.1.3.1 Object Pooling</strong></p>
+
+<p>- <strong>7.1.3.1.1</strong> Pool Implementation</p>
+<p>- <strong>7.1.3.1.2</strong> Object Reuse Strategies</p>
+<p>- <strong>7.1.3.1.3</strong> Pool Size Management</p>
+
+
+
+<p>- <strong>7.1.3.2 Lazy Loading</strong></p>
+
+<p>- <strong>7.1.3.2.1</strong> Deferred Initialization</p>
+<p>- <strong>7.1.3.2.2</strong> On-demand Loading</p>
+<p>- <strong>7.1.3.2.3</strong> Memory Footprint Reduction</p>
+
+
+
+<p>- <strong>7.1.3.3 Data Structure Optimization</strong></p>
+
+<p>- <strong>7.1.3.3.1</strong> Array vs Object Performance</p>
+<p>- <strong>7.1.3.3.2</strong> Map vs Object Comparison</p>
+<p>- <strong>7.1.3.3.3</strong> Set vs Array Comparison</p>
+
+
+
+
+
+<h3 id="-7-2-execution-performance-">7.2 Execution Performance</h3>
+
+<p>⭐ <strong>7.2.1 V8 Optimization</strong></p>
+
+<p>- <strong>7.2.1.1 Hidden Classes</strong></p>
+
+<p>- <strong>7.2.1.1.1</strong> Shape Optimization</p>
+<p>- <strong>7.2.1.1.2</strong> Property Addition Order</p>
+<p>- <strong>7.2.1.1.3</strong> Monomorphic Operations</p>
+
+
+
+<p>- <strong>7.2.1.2 Inline Caching</strong></p>
+
+<p>- <strong>7.2.1.2.1</strong> Monomorphic IC</p>
+<p>- <strong>7.2.1.2.2</strong> Polymorphic IC</p>
+<p>- <strong>7.2.1.2.3</strong> Megamorphic IC</p>
+
+
+
+<p>- <strong>7.2.1.3 TurboFan Optimizations</strong></p>
+
+<p>- <strong>7.2.1.3.1</strong> Type Feedback</p>
+<p>- <strong>7.2.1.3.2</strong> Speculative Optimization</p>
+<p>- <strong>7.2.1.3.3</strong> Deoptimization</p>
+
+
+
+
+
+<p>⭐ <strong>7.2.2 Code Optimization Patterns</strong></p>
+
+<p>- <strong>7.2.2.1 Loop Optimization</strong></p>
+
+<p>- <strong>7.2.2.1.1</strong> Loop Invariant Code Motion</p>
+<p>- <strong>7.2.2.1.2</strong> Loop Unrolling</p>
+<p>- <strong>7.2.2.1.3</strong> Strength Reduction</p>
+
+
+
+<p>- <strong>7.2.2.2 Function Optimization</strong></p>
+
+<p>- <strong>7.2.2.2.1</strong> Inlining Opportunities</p>
+<p>- <strong>7.2.2.2.2</strong> Tail Call Optimization</p>
+<p>- <strong>7.2.2.2.3</strong> Function Specialization</p>
+
+
+
+<p>- <strong>7.2.2.3 Data Access Optimization</strong></p>
+
+<p>- <strong>7.2.2.3.1</strong> Cache-friendly Patterns</p>
+<p>- <strong>7.2.2.3.2</strong> Memory Layout Optimization</p>
+<p>- <strong>7.2.2.3.3</strong> Prefetching Strategies</p>
+
+
+
+
+
+<p>⭐ <strong>7.2.3 Performance Measurement</strong></p>
+
+<p>- <strong>7.2.3.1 Timing APIs</strong></p>
+
+<p>- <strong>7.2.3.1.1</strong> performance.now()</p>
+<p>- <strong>7.2.3.1.2</strong> console.time()</p>
+<p>- <strong>7.2.3.1.3</strong> User Timing API</p>
+
+
+
+<p>- <strong>7.2.3.2 Profiling Tools</strong></p>
+
+<p>- <strong>7.2.3.2.1</strong> Chrome DevTools Profiler</p>
+<p>- <strong>7.2.3.2.2</strong> Node.js Profiling</p>
+<p>- <strong>7.2.3.2.3</strong> Third-party Profilers</p>
+
+
+
+<p>- <strong>7.2.3.3 Benchmarking</strong></p>
+
+<p>- <strong>7.2.3.3.1</strong> Microbenchmarks</p>
+<p>- <strong>7.2.3.3.2</strong> Macrobenchmarks</p>
+<p>- <strong>7.2.3.3.3</strong> Statistical Analysis</p>
+
+
+
+
+
+<h3 id="-7-3-algorithmic-optimization-">7.3 Algorithmic Optimization</h3>
+
+<p>⭐ <strong>7.3.1 Time Complexity Analysis</strong></p>
+
+<p>- <strong>7.3.1.1 Big O Notation</strong></p>
+
+<p>- <strong>7.3.1.1.1</strong> Constant Time O(1)</p>
+<p>- <strong>7.3.1.1.2</strong> Linear Time O(n)</p>
+<p>- <strong>7.3.1.1.3</strong> Logarithmic Time O(log n)</p>
+<p>- <strong>7.3.1.1.4</strong> Quadratic Time O(n²)</p>
+<p>- <strong>7.3.1.1.5</strong> Exponential Time O(2^n)</p>
+
+
+
+<p>- <strong>7.3.1.2 Algorithm Analysis</strong></p>
+
+<p>- <strong>7.3.1.2.1</strong> Best Case Analysis</p>
+<p>- <strong>7.3.1.2.2</strong> Average Case Analysis</p>
+<p>- <strong>7.3.1.2.3</strong> Worst Case Analysis</p>
+
+
+
+<p>- <strong>7.3.1.3 Amortized Analysis</strong></p>
+
+<p>- <strong>7.3.1.3.1</strong> Aggregate Method</p>
+<p>- <strong>7.3.1.3.2</strong> Accounting Method</p>
+<p>- <strong>7.3.1.3.3</strong> Potential Method</p>
+
+
+
+
+
+<p>⭐ <strong>7.3.2 Space Complexity Optimization</strong></p>
+
+<p>- <strong>7.3.2.1 Memory Usage Patterns</strong></p>
+
+<p>- <strong>7.3.2.1.1</strong> In-place Algorithms</p>
+<p>- <strong>7.3.2.1.2</strong> Auxiliary Space Usage</p>
+<p>- <strong>7.3.2.1.3</strong> Space-Time Tradeoffs</p>
+
+
+
+<p>- <strong>7.3.2.2 Data Structure Selection</strong></p>
+
+<p>- <strong>7.3.2.2.1</strong> Array vs Linked List</p>
+<p>- <strong>7.3.2.2.2</strong> Hash Table vs Tree</p>
+<p>- <strong>7.3.2.2.3</strong> Stack vs Queue</p>
+
+
+
+<p>- <strong>7.3.2.3 Memory-Efficient Algorithms</strong></p>
+
+<p>- <strong>7.3.2.3.1</strong> Streaming Algorithms</p>
+<p>- <strong>7.3.2.3.2</strong> External Sorting</p>
+<p>- <strong>7.3.2.3.3</strong> Compression Techniques</p>
+
+
+
+
+
+<h2 id="-8-data-structures-algorithms-">8. DATA STRUCTURES & ALGORITHMS</h2>
+
+<h3 id="-8-1-linear-data-structures-">8.1 Linear Data Structures</h3>
+
+<p>⭐ <strong>8.1.1 Array Algorithms</strong></p>
+
+<p>- <strong>8.1.1.1 Searching Algorithms</strong></p>
+
+<p>- <strong>8.1.1.1.1</strong> Linear Search</p>
+
+<p>- <strong>8.1.1.1.1.1</strong> Implementation</p>
+<p>- <strong>8.1.1.1.1.2</strong> Time Complexity</p>
+<p>- <strong>8.1.1.1.1.3</strong> Optimization Techniques</p>
+
+
+
+<p>- <strong>8.1.1.1.2</strong> Binary Search</p>
+
+<p>- <strong>8.1.1.1.2.1</strong> Iterative Implementation</p>
+<p>- <strong>8.1.1.1.2.2</strong> Recursive Implementation</p>
+<p>- <strong>8.1.1.1.2.3</strong> Variants (First/Last Occurrence)</p>
+
+
+
+<p>- <strong>8.1.1.1.3</strong> Ternary Search</p>
+<p>- <strong>8.1.1.1.4</strong> Exponential Search</p>
+<p>- <strong>8.1.1.1.5</strong> Interpolation Search</p>
+
+
+
+<p>- <strong>8.1.1.2 Sorting Algorithms</strong></p>
+
+<p>- <strong>8.1.1.2.1</strong> Bubble Sort</p>
+
+<p>- <strong>8.1.1.2.1.1</strong> Basic Implementation</p>
+<p>- <strong>8.1.1.2.1.2</strong> Optimized Version</p>
+<p>- <strong>8.1.1.2.1.3</strong> Stability Analysis</p>
+
+
+
+<p>- <strong>8.1.1.2.2</strong> Selection Sort</p>
+
+<p>- <strong>8.1.1.2.2.1</strong> Implementation</p>
+<p>- <strong>8.1.1.2.2.2</strong> In-place Sorting</p>
+<p>- <strong>8.1.1.2.2.3</strong> Minimum/Maximum Finding</p>
+
+
+
+<p>- <strong>8.1.1.2.3</strong> Insertion Sort</p>
+
+<p>- <strong>8.1.1.2.3.1</strong> Basic Implementation</p>
+<p>- <strong>8.1.1.2.3.2</strong> Binary Insertion Sort</p>
+<p>- <strong>8.1.1.2.3.3</strong> Adaptive Behavior</p>
+
+
+
+<p>- <strong>8.1.1.2.4</strong> Merge Sort</p>
+
+<p>- <strong>8.1.1.2.4.1</strong> Divide and Conquer</p>
+<p>- <strong>8.1.1.2.4.2</strong> Merge Process</p>
+<p>- <strong>8.1.1.2.4.3</strong> Space Complexity</p>
+
+
+
+<p>- <strong>8.1.1.2.5</strong> Quick Sort</p>
+
+<p>- <strong>8.1.1.2.5.1</strong> Partitioning Schemes</p>
+<p>- <strong>8.1.1.2.5.2</strong> Pivot Selection</p>
+<p>- <strong>8.1.1.2.5.3</strong> Randomized Quick Sort</p>
+
+
+
+<p>- <strong>8.1.1.2.6</strong> Heap Sort</p>
+
+<p>- <strong>8.1.1.2.6.1</strong> Heapify Process</p>
+<p>- <strong>8.1.1.2.6.2</strong> Build Heap</p>
+<p>- <strong>8.1.1.2.6.3</strong> Extract Maximum</p>
+
+
+
+<p>- <strong>8.1.1.2.7</strong> Counting Sort</p>
+<p>- <strong>8.1.1.2.8</strong> Radix Sort</p>
+<p>- <strong>8.1.1.2.9</strong> Bucket Sort</p>
+
+
+
+<p>- <strong>8.1.1.3 Array Manipulation</strong></p>
+
+<p>- <strong>8.1.1.3.1</strong> Two Pointer Technique</p>
+<p>- <strong>8.1.1.3.2</strong> Sliding Window</p>
+<p>- <strong>8.1.1.3.3</strong> Kadane's Algorithm</p>
+<p>- <strong>8.1.1.3.4</strong> Dutch National Flag</p>
+<p>- <strong>8.1.1.3.5</strong> Array Rotation</p>
+
+
+
+
+
+<p>⭐ <strong>8.1.2 String Algorithms</strong></p>
+
+<p>- <strong>8.1.2.1 Pattern Matching</strong></p>
+
+<p>- <strong>8.1.2.1.1</strong> Naive Pattern Matching</p>
+<p>- <strong>8.1.2.1.2</strong> KMP Algorithm</p>
+
+<p>- <strong>8.1.2.1.2.1</strong> Failure Function</p>
+<p>- <strong>8.1.2.1.2.2</strong> Pattern Preprocessing</p>
+<p>- <strong>8.1.2.1.2.3</strong> Matching Process</p>
+
+
+
+<p>- <strong>8.1.2.1.3</strong> Rabin-Karp Algorithm</p>
+
+<p>- <strong>8.1.2.1.3.1</strong> Rolling Hash</p>
+<p>- <strong>8.1.2.1.3.2</strong> Hash Collision Handling</p>
+<p>- <strong>8.1.2.1.3.3</strong> Multiple Pattern Matching</p>
+
+
+
+<p>- <strong>8.1.2.1.4</strong> Boyer-Moore Algorithm</p>
+<p>- <strong>8.1.2.1.5</strong> Aho-Corasick Algorithm</p>
+
+
+
+<p>- <strong>8.1.2.2 String Processing</strong></p>
+
+<p>- <strong>8.1.2.2.1</strong> String Reversal</p>
+<p>- <strong>8.1.2.2.2</strong> Palindrome Detection</p>
+<p>- <strong>8.1.2.2.3</strong> Anagram Detection</p>
+<p>- <strong>8.1.2.2.4</strong> Longest Common Subsequence</p>
+<p>- <strong>8.1.2.2.5</strong> Edit Distance</p>
+
+
+
+<p>- <strong>8.1.2.3 Advanced String Algorithms</strong></p>
+
+<p>- <strong>8.1.2.3.1</strong> Suffix Arrays</p>
+<p>- <strong>8.1.2.3.2</strong> Suffix Trees</p>
+<p>- <strong>8.1.2.3.3</strong> Z Algorithm</p>
+<p>- <strong>8.1.2.3.4</strong> Manacher's Algorithm</p>
+
+
+
+
+
+<p>⭐ <strong>8.1.3 Linked List Algorithms</strong></p>
+
+<p>- <strong>8.1.3.1 Singly Linked List</strong></p>
+
+<p>- <strong>8.1.3.1.1</strong> Node Structure</p>
+<p>- <strong>8.1.3.1.2</strong> Insertion Operations</p>
+<p>- <strong>8.1.3.1.3</strong> Deletion Operations</p>
+<p>- <strong>8.1.3.1.4</strong> Traversal Algorithms</p>
+
+
+
+<p>- <strong>8.1.3.2 Doubly Linked List</strong></p>
+
+<p>- <strong>8.1.3.2.1</strong> Bidirectional Navigation</p>
+<p>- <strong>8.1.3.2.2</strong> Insertion/Deletion</p>
+<p>- <strong>8.1.3.2.3</strong> Memory Overhead</p>
+
+
+
+<p>- <strong>8.1.3.3 Circular Linked List</strong></p>
+
+<p>- <strong>8.1.3.3.1</strong> Cycle Detection</p>
+<p>- <strong>8.1.3.3.2</strong> Floyd's Algorithm</p>
+<p>- <strong>8.1.3.3.3</strong> Josephus Problem</p>
+
+
+
+<p>- <strong>8.1.3.4 Advanced Operations</strong></p>
+
+<p>- <strong>8.1.3.4.1</strong> List Reversal</p>
+<p>- <strong>8.1.3.4.2</strong> Merge Sorted Lists</p>
+<p>- <strong>8.1.3.4.3</strong> Intersection Detection</p>
+<p>- <strong>8.1.3.4.4</strong> Remove Duplicates</p>
+
+
+
+
+
+<h3 id="-8-2-non-linear-data-structures-">8.2 Non-Linear Data Structures</h3>
+
+<p>⭐ <strong>8.2.1 Tree Data Structures</strong></p>
+
+<p>- <strong>8.2.1.1 Binary Trees</strong></p>
+
+<p>- <strong>8.2.1.1.1</strong> Tree Traversals</p>
+
+<p>- <strong>8.2.1.1.1.1</strong> Inorder Traversal</p>
+<p>- <strong>8.2.1.1.1.2</strong> Preorder Traversal</p>
+<p>- <strong>8.2.1.1.1.3</strong> Postorder Traversal</p>
+<p>- <strong>8.2.1.1.1.4</strong> Level Order Traversal</p>
+
+
+
+<p>- <strong>8.2.1.1.2</strong> Tree Properties</p>
+
+<p>- <strong>8.2.1.1.2.1</strong> Height Calculation</p>
+<p>- <strong>8.2.1.1.2.2</strong> Diameter Calculation</p>
+<p>- <strong>8.2.1.1.2.3</strong> Balance Factor</p>
+
+
+
+<p>- <strong>8.2.1.1.3</strong> Tree Construction</p>
+
+<p>- <strong>8.2.1.1.3.1</strong> From Traversals</p>
+<p>- <strong>8.2.1.1.3.2</strong> From Array</p>
+<p>- <strong>8.2.1.1.3.3</strong> Balanced Construction</p>
+
+
+
+
+
+
+<p>- <strong>8.2.1.2 Binary Search Trees</strong></p>
+
+<p>- <strong>8.2.1.2.1</strong> BST Operations</p>
+
+<p>- <strong>8.2.1.2.1.1</strong> Search Operation</p>
+<p>- <strong>8.2.1.2.1.2</strong> Insertion Operation</p>
+<p>- <strong>8.2.1.2.1.3</strong> Deletion Operation</p>
+
+
+
+<p>- <strong>8.2.1.2.2</strong> BST Properties</p>
+
+<p>- <strong>8.2.1.2.2.1</strong> Inorder Successor</p>
+<p>- <strong>8.2.1.2.2.2</strong> Inorder Predecessor</p>
+<p>- <strong>8.2.1.2.2.3</strong> Validation</p>
+
+
+
+<p>- <strong>8.2.1.2.3</strong> BST Variants</p>
+
+<p>- <strong>8.2.1.2.3.1</strong> Threaded BST</p>
+<p>- <strong>8.2.1.2.3.2</strong> Self-Balancing BST</p>
+
+
+
+
+
+
+<p>- <strong>8.2.1.3 Balanced Trees</strong></p>
+
+<p>- <strong>8.2.1.3.1</strong> AVL Trees</p>
+
+<p>- <strong>8.2.1.3.1.1</strong> Rotation Operations</p>
+<p>- <strong>8.2.1.3.1.2</strong> Balance Maintenance</p>
+<p>- <strong>8.2.1.3.1.3</strong> Insertion/Deletion</p>
+
+
+
+<p>- <strong>8.2.1.3.2</strong> Red-Black Trees</p>
+
+<p>- <strong>8.2.1.3.2.1</strong> Color Properties</p>
+<p>- <strong>8.2.1.3.2.2</strong> Fixup Operations</p>
+<p>- <strong>8.2.1.3.2.3</strong> Practical Applications</p>
+
+
+
+<p>- <strong>8.2.1.3.3</strong> B-Trees</p>
+
+<p>- <strong>8.2.1.3.3.1</strong> Node Structure</p>
+<p>- <strong>8.2.1.3.3.2</strong> Split/Merge Operations</p>
+<p>- <strong>8.2.1.3.3.3</strong> Database Applications</p>
+
+
+
+
+
+
+<p>- <strong>8.2.1.4 Specialized Trees</strong></p>
+
+<p>- <strong>8.2.1.4.1</strong> Heap Trees</p>
+
+<p>- <strong>8.2.1.4.1.1</strong> Min/Max Heap</p>
+<p>- <strong>8.2.1.4.1.2</strong> Heap Operations</p>
+<p>- <strong>8.2.1.4.1.3</strong> Priority Queue Implementation</p>
+
+
+
+<p>- <strong>8.2.1.4.2</strong> Trie (Prefix Tree)</p>
+
+<p>- <strong>8.2.1.4.2.1</strong> Trie Construction</p>
+<p>- <strong>8.2.1.4.2.2</strong> Search Operations</p>
+<p>- <strong>8.2.1.4.2.3</strong> Auto-completion</p>
+
+
+
+<p>- <strong>8.2.1.4.3</strong> Segment Trees</p>
+
+<p>- <strong>8.2.1.4.3.1</strong> Range Queries</p>
+<p>- <strong>8.2.1.4.3.2</strong> Lazy Propagation</p>
+<p>- <strong>8.2.1.4.3.3</strong> Update Operations</p>
+
+
+
+<p>- <strong>8.2.1.4.4</strong> Fenwick Tree (BIT)</p>
+
+<p>- <strong>8.2.1.4.4.1</strong> Binary Indexing</p>
+<p>- <strong>8.2.1.4.4.2</strong> Prefix Sum Queries</p>
+<p>- <strong>8.2.1.4.4.3</strong> Update Operations</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>8.2.2 Graph Data Structures</strong></p>
+
+<p>- <strong>8.2.2.1 Graph Representation</strong></p>
+
+<p>- <strong>8.2.2.1.1</strong> Adjacency Matrix</p>
+
+<p>- <strong>8.2.2.1.1.1</strong> Space Complexity</p>
+<p>- <strong>8.2.2.1.1.2</strong> Time Complexity</p>
+<p>- <strong>8.2.2.1.1.3</strong> Dense Graph Suitability</p>
+
+
+
+<p>- <strong>8.2.2.1.2</strong> Adjacency List</p>
+
+<p>- <strong>8.2.2.1.2.1</strong> Space Efficiency</p>
+<p>- <strong>8.2.2.1.2.2</strong> Sparse Graph Suitability</p>
+<p>- <strong>8.2.2.1.2.3</strong> Dynamic Graph Support</p>
+
+
+
+<p>- <strong>8.2.2.1.3</strong> Edge List</p>
+
+<p>- <strong>8.2.2.1.3.1</strong> Simple Representation</p>
+<p>- <strong>8.2.2.1.3.2</strong> Sorting Applications</p>
+
+
+
+
+
+
+<p>- <strong>8.2.2.2 Graph Traversal</strong></p>
+
+<p>- <strong>8.2.2.2.1</strong> Depth-First Search (DFS)</p>
+
+<p>- <strong>8.2.2.2.1.1</strong> Recursive Implementation</p>
+<p>- <strong>8.2.2.2.1.2</strong> Iterative Implementation</p>
+<p>- <strong>8.2.2.2.1.3</strong> Applications</p>
+
+
+
+<p>- <strong>8.2.2.2.2</strong> Breadth-First Search (BFS)</p>
+
+<p>- <strong>8.2.2.2.2.1</strong> Queue-based Implementation</p>
+<p>- <strong>8.2.2.2.2.2</strong> Level-wise Traversal</p>
+<p>- <strong>8.2.2.2.2.3</strong> Shortest Path in Unweighted Graph</p>
+
+
+
+
+
+
+<p>- <strong>8.2.2.3 Shortest Path Algorithms</strong></p>
+
+<p>- <strong>8.2.2.3.1</strong> Dijkstra's Algorithm</p>
+
+<p>- <strong>8.2.2.3.1.1</strong> Priority Queue Implementation</p>
+<p>- <strong>8.2.2.3.1.2</strong> Relaxation Process</p>
+<p>- <strong>8.2.2.3.1.3</strong> Non-negative Weights</p>
+
+
+
+<p>- <strong>8.2.2.3.2</strong> Bellman-Ford Algorithm</p>
+
+<p>- <strong>8.2.2.3.2.1</strong> Negative Weight Handling</p>
+<p>- <strong>8.2.2.3.2.2</strong> Negative Cycle Detection</p>
+<p>- <strong>8.2.2.3.2.3</strong> Dynamic Programming Approach</p>
+
+
+
+<p>- <strong>8.2.2.3.3</strong> Floyd-Warshall Algorithm</p>
+
+<p>- <strong>8.2.2.3.3.1</strong> All-Pairs Shortest Path</p>
+<p>- <strong>8.2.2.3.3.2</strong> Transitive Closure</p>
+<p>- <strong>8.2.2.3.3.3</strong> Path Reconstruction</p>
+
+
+
+
+
+
+<p>- <strong>8.2.2.4 Minimum Spanning Tree</strong></p>
+
+<p>- <strong>8.2.2.4.1</strong> Kruskal's Algorithm</p>
+
+<p>- <strong>8.2.2.4.1.1</strong> Union-Find Data Structure</p>
+<p>- <strong>8.2.2.4.1.2</strong> Edge Sorting</p>
+<p>- <strong>8.2.2.4.1.3</strong> Cycle Detection</p>
+
+
+
+<p>- <strong>8.2.2.4.2</strong> Prim's Algorithm</p>
+
+<p>- <strong>8.2.2.4.2.1</strong> Greedy Approach</p>
+<p>- <strong>8.2.2.4.2.2</strong> Priority Queue Usage</p>
+<p>- <strong>8.2.2.4.2.3</strong> Cut Property</p>
+
+
+
+
+
+
+<p>- <strong>8.2.2.5 Advanced Graph Algorithms</strong></p>
+
+<p>- <strong>8.2.2.5.1</strong> Topological Sorting</p>
+
+<p>- <strong>8.2.2.5.1.1</strong> Kahn's Algorithm</p>
+<p>- <strong>8.2.2.5.1.2</strong> DFS-based Approach</p>
+<p>- <strong>8.2.2.5.1.3</strong> Cycle Detection in DAG</p>
+
+
+
+<p>- <strong>8.2.2.5.2</strong> Strongly Connected Components</p>
+
+<p>- <strong>8.2.2.5.2.1</strong> Kosaraju's Algorithm</p>
+<p>- <strong>8.2.2.5.2.2</strong> Tarjan's Algorithm</p>
+<p>- <strong>8.2.2.5.2.3</strong> Applications</p>
+
+
+
+<p>- <strong>8.2.2.5.3</strong> Maximum Flow</p>
+
+<p>- <strong>8.2.2.5.3.1</strong> Ford-Fulkerson Method</p>
+<p>- <strong>8.2.2.5.3.2</strong> Edmonds-Karp Algorithm</p>
+<p>- <strong>8.2.2.5.3.3</strong> Dinic's Algorithm</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>8.2.3 Hash-based Data Structures</strong></p>
+
+<p>- <strong>8.2.3.1 Hash Tables</strong></p>
+
+<p>- <strong>8.2.3.1.1</strong> Hash Functions</p>
+
+<p>- <strong>8.2.3.1.1.1</strong> Division Method</p>
+<p>- <strong>8.2.3.1.1.2</strong> Multiplication Method</p>
+<p>- <strong>8.2.3.1.1.3</strong> Universal Hashing</p>
+
+
+
+<p>- <strong>8.2.3.1.2</strong> Collision Resolution</p>
+
+<p>- <strong>8.2.3.1.2.1</strong> Chaining</p>
+<p>- <strong>8.2.3.1.2.2</strong> Open Addressing</p>
+<p>- <strong>8.2.3.1.2.3</strong> Linear Probing</p>
+<p>- <strong>8.2.3.1.2.4</strong> Quadratic Probing</p>
+<p>- <strong>8.2.3.1.2.5</strong> Double Hashing</p>
+
+
+
+<p>- <strong>8.2.3.1.3</strong> Dynamic Resizing</p>
+
+<p>- <strong>8.2.3.1.3.1</strong> Load Factor Management</p>
+<p>- <strong>8.2.3.1.3.2</strong> Rehashing Process</p>
+<p>- <strong>8.2.3.1.3.3</strong> Incremental Resizing</p>
+
+
+
+
+
+
+<p>- <strong>8.2.3.2 Bloom Filters</strong></p>
+
+<p>- <strong>8.2.3.2.1</strong> Probabilistic Data Structure</p>
+<p>- <strong>8.2.3.2.2</strong> False Positive Rate</p>
+<p>- <strong>8.2.3.2.3</strong> Optimal Parameters</p>
+
+
+
+<p>- <strong>8.2.3.3 Consistent Hashing</strong></p>
+
+<p>- <strong>8.2.3.3.1</strong> Hash Ring</p>
+<p>- <strong>8.2.3.3.2</strong> Virtual Nodes</p>
+<p>- <strong>8.2.3.3.3</strong> Distributed Systems</p>
+
+
+
+
+
+<h3 id="-8-3-advanced-algorithms-">8.3 Advanced Algorithms</h3>
+
+<p>⭐ <strong>8.3.1 Dynamic Programming</strong></p>
+
+<p>- <strong>8.3.1.1 DP Fundamentals</strong></p>
+
+<p>- <strong>8.3.1.1.1</strong> Optimal Substructure</p>
+<p>- <strong>8.3.1.1.2</strong> Overlapping Subproblems</p>
+<p>- <strong>8.3.1.1.3</strong> Memoization vs Tabulation</p>
+
+
+
+<p>- <strong>8.3.1.2 Classic DP Problems</strong></p>
+
+<p>- <strong>8.3.1.2.1</strong> Fibonacci Sequence</p>
+<p>- <strong>8.3.1.2.2</strong> Longest Common Subsequence</p>
+<p>- <strong>8.3.1.2.3</strong> Knapsack Problem</p>
+<p>- <strong>8.3.1.2.4</strong> Coin Change Problem</p>
+<p>- <strong>8.3.1.2.5</strong> Edit Distance</p>
+<p>- <strong>8.3.1.2.6</strong> Maximum Subarray Sum</p>
+
+
+
+<p>- <strong>8.3.1.3 Advanced DP Patterns</strong></p>
+
+<p>- <strong>8.3.1.3.1</strong> Interval DP</p>
+<p>- <strong>8.3.1.3.2</strong> Tree DP</p>
+<p>- <strong>8.3.1.3.3</strong> Digit DP</p>
+<p>- <strong>8.3.1.3.4</strong> Bitmask DP</p>
+<p>- <strong>8.3.1.3.5</strong> Probability DP</p>
+
+
+
+
+
+<p>⭐ <strong>8.3.2 Greedy Algorithms</strong></p>
+
+<p>- <strong>8.3.2.1 Greedy Strategy</strong></p>
+
+<p>- <strong>8.3.2.1.1</strong> Greedy Choice Property</p>
+<p>- <strong>8.3.2.1.2</strong> Optimal Substructure</p>
+<p>- <strong>8.3.2.1.3</strong> Proof Techniques</p>
+
+
+
+<p>- <strong>8.3.2.2 Classic Greedy Problems</strong></p>
+
+<p>- <strong>8.3.2.2.1</strong> Activity Selection</p>
+<p>- <strong>8.3.2.2.2</strong> Fractional Knapsack</p>
+<p>- <strong>8.3.2.2.3</strong> Huffman Coding</p>
+<p>- <strong>8.3.2.2.4</strong> Job Scheduling</p>
+
+
+
+<p>- <strong>8.3.2.3 Advanced Greedy Algorithms</strong></p>
+
+<p>- <strong>8.3.2.3.1</strong> Interval Scheduling</p>
+<p>- <strong>8.3.2.3.2</strong> Minimum Spanning Tree</p>
+<p>- <strong>8.3.2.3.3</strong> Shortest Path Algorithms</p>
+
+
+
+
+
+<p>⭐ <strong>8.3.3 Divide and Conquer</strong></p>
+
+<p>- <strong>8.3.3.1 D&C Strategy</strong></p>
+
+<p>- <strong>8.3.3.1.1</strong> Problem Decomposition</p>
+<p>- <strong>8.3.3.1.2</strong> Recursive Solution</p>
+<p>- <strong>8.3.3.1.3</strong> Result Combination</p>
+
+
+
+<p>- <strong>8.3.3.2 Classic D&C Problems</strong></p>
+
+<p>- <strong>8.3.3.2.1</strong> Merge Sort</p>
+<p>- <strong>8.3.3.2.2</strong> Quick Sort</p>
+<p>- <strong>8.3.3.2.3</strong> Binary Search</p>
+<p>- <strong>8.3.3.2.4</strong> Maximum Subarray</p>
+<p>- <strong>8.3.3.2.5</strong> Closest Pair of Points</p>
+
+
+
+<p>- <strong>8.3.3.3 Advanced D&C Algorithms</strong></p>
+
+<p>- <strong>8.3.3.3.1</strong> Fast Fourier Transform</p>
+<p>- <strong>8.3.3.3.2</strong> Strassen's Matrix Multiplication</p>
+<p>- <strong>8.3.3.3.3</strong> Convex Hull Algorithms</p>
+
+
+
+
+
+<h2 id="-9-modern-javascript-ecosystem-">9. MODERN JAVASCRIPT ECOSYSTEM</h2>
+
+<h3 id="-9-1-module-systems-">9.1 Module Systems</h3>
+
+<p>⭐ <strong>9.1.1 ES6 Modules</strong></p>
+
+<p>- <strong>9.1.1.1 Module Syntax</strong></p>
+
+<p>- <strong>9.1.1.1.1</strong> export Statement</p>
+
+<p>- <strong>9.1.1.1.1.1</strong> Named Exports</p>
+<p>- <strong>9.1.1.1.1.2</strong> Default Exports</p>
+<p>- <strong>9.1.1.1.1.3</strong> Re-exports</p>
+
+
+
+<p>- <strong>9.1.1.1.2</strong> import Statement</p>
+
+<p>- <strong>9.1.1.1.2.1</strong> Named Imports</p>
+<p>- <strong>9.1.1.1.2.2</strong> Default Imports</p>
+<p>- <strong>9.1.1.1.2.3</strong> Namespace Imports</p>
+<p>- <strong>9.1.1.1.2.4</strong> Side-effect Imports</p>
+
+
+
+
+
+
+<p>- <strong>9.1.1.2 Dynamic Imports</strong></p>
+
+<p>- <strong>9.1.1.2.1</strong> import() Function</p>
+<p>- <strong>9.1.1.2.2</strong> Code Splitting</p>
+<p>- <strong>9.1.1.2.3</strong> Conditional Loading</p>
+<p>- <strong>9.1.1.2.4</strong> Error Handling</p>
+
+
+
+<p>- <strong>9.1.1.3 Module Loading</strong></p>
+
+<p>- <strong>9.1.1.3.1</strong> Module Resolution</p>
+<p>- <strong>9.1.1.3.2</strong> Circular Dependencies</p>
+<p>- <strong>9.1.1.3.3</strong> Module Caching</p>
+<p>- <strong>9.1.1.3.4</strong> Top-level await</p>
+
+
+
+
+
+<p>⭐ <strong>9.1.2 CommonJS (Node.js)</strong></p>
+
+<p>- <strong>9.1.2.1 CommonJS Syntax</strong></p>
+
+<p>- <strong>9.1.2.1.1</strong> module.exports</p>
+<p>- <strong>9.1.2.1.2</strong> exports Object</p>
+<p>- <strong>9.1.2.1.3</strong> require() Function</p>
+
+
+
+<p>- <strong>9.1.2.2 Module System Internals</strong></p>
+
+<p>- <strong>9.1.2.2.1</strong> Module Wrapper Function</p>
+<p>- <strong>9.1.2.2.2</strong> Module Cache</p>
+<p>- <strong>9.1.2.2.3</strong> Module Resolution Algorithm</p>
+
+
+
+<p>- <strong>9.1.2.3 ES6 vs CommonJS</strong></p>
+
+<p>- <strong>9.1.2.3.1</strong> Syntax Differences</p>
+<p>- <strong>9.1.2.3.2</strong> Loading Behavior</p>
+<p>- <strong>9.1.2.3.3</strong> Interoperability</p>
+
+
+
+
+
+<p>⭐ <strong>9.1.3 Module Bundlers</strong></p>
+
+<p>- <strong>9.1.3.1 Webpack</strong></p>
+
+<p>- <strong>9.1.3.1.1</strong> Entry Points</p>
+<p>- <strong>9.1.3.1.2</strong> Loaders</p>
+<p>- <strong>9.1.3.1.3</strong> Plugins</p>
+<p>- <strong>9.1.3.1.4</strong> Code Splitting</p>
+
+
+
+<p>- <strong>9.1.3.2 Rollup</strong></p>
+
+<p>- <strong>9.1.3.2.1</strong> Tree Shaking</p>
+<p>- <strong>9.1.3.2.2</strong> ES6 Module Support</p>
+<p>- <strong>9.1.3.2.3</strong> Plugin System</p>
+
+
+
+<p>- <strong>9.1.3.3 Vite</strong></p>
+
+<p>- <strong>9.1.3.3.1</strong> Native ES Modules</p>
+<p>- <strong>9.1.3.3.2</strong> Hot Module Replacement</p>
+<p>- <strong>9.1.3.3.3</strong> Build Optimization</p>
+
+
+
+
+
+<h3 id="-9-2-build-tools-transpilation-">9.2 Build Tools & Transpilation</h3>
+
+<p>⭐ <strong>9.2.1 Babel</strong></p>
+
+<p>- <strong>9.2.1.1 Babel Architecture</strong></p>
+
+<p>- <strong>9.2.1.1.1</strong> Parser (@babel/parser)</p>
+<p>- <strong>9.2.1.1.2</strong> Transformer (@babel/traverse)</p>
+<p>- <strong>9.2.1.1.3</strong> Generator (@babel/generator)</p>
+
+
+
+<p>- <strong>9.2.1.2 Babel Plugins</strong></p>
+
+<p>- <strong>9.2.1.2.1</strong> Syntax Plugins</p>
+<p>- <strong>9.2.1.2.2</strong> Transform Plugins</p>
+<p>- <strong>9.2.1.2.3</strong> Custom Plugin Development</p>
+
+
+
+<p>- <strong>9.2.1.3 Babel Presets</strong></p>
+
+<p>- <strong>9.2.1.3.1</strong> @babel/preset-env</p>
+<p>- <strong>9.2.1.3.2</strong> @babel/preset-react</p>
+<p>- <strong>9.2.1.3.3</strong> @babel/preset-typescript</p>
+
+
+
+<p>- <strong>9.2.1.4 Polyfills</strong></p>
+
+<p>- <strong>9.2.1.4.1</strong> core-js Integration</p>
+<p>- <strong>9.2.1.4.2</strong> Polyfill Strategies</p>
+<p>- <strong>9.2.1.4.3</strong> Bundle Size Optimization</p>
+
+
+
+
+
+<p>⭐ <strong>9.2.2 TypeScript</strong></p>
+
+<p>- <strong>9.2.2.1 TypeScript Fundamentals</strong></p>
+
+<p>- <strong>9.2.2.1.1</strong> Type Annotations</p>
+<p>- <strong>9.2.2.1.2</strong> Type Inference</p>
+<p>- <strong>9.2.2.1.3</strong> Compilation Process</p>
+
+
+
+<p>- <strong>9.2.2.2 Advanced Types</strong></p>
+
+<p>- <strong>9.2.2.2.1</strong> Union Types</p>
+<p>- <strong>9.2.2.2.2</strong> Intersection Types</p>
+<p>- <strong>9.2.2.2.3</strong> Conditional Types</p>
+<p>- <strong>9.2.2.2.4</strong> Mapped Types</p>
+<p>- <strong>9.2.2.2.5</strong> Template Literal Types</p>
+
+
+
+<p>- <strong>9.2.2.3 TypeScript Configuration</strong></p>
+
+<p>- <strong>9.2.2.3.1</strong> tsconfig.json</p>
+<p>- <strong>9.2.2.3.2</strong> Compiler Options</p>
+<p>- <strong>9.2.2.3.3</strong> Project References</p>
+
+
+
+<p>- <strong>9.2.2.4 JavaScript Interoperability</strong></p>
+
+<p>- <strong>9.2.2.4.1</strong> Declaration Files (.d.ts)</p>
+<p>- <strong>9.2.2.4.2</strong> DefinitelyTyped</p>
+<p>- <strong>9.2.2.4.3</strong> Module Augmentation</p>
+
+
+
+
+
+<p>⭐ <strong>9.2.3 Task Runners</strong></p>
+
+<p>- <strong>9.2.3.1 npm Scripts</strong></p>
+
+<p>- <strong>9.2.3.1.1</strong> Script Definition</p>
+<p>- <strong>9.2.3.1.2</strong> Pre/Post Hooks</p>
+<p>- <strong>9.2.3.1.3</strong> Cross-platform Compatibility</p>
+
+
+
+<p>- <strong>9.2.3.2 Gulp</strong></p>
+
+<p>- <strong>9.2.3.2.1</strong> Stream-based Processing</p>
+<p>- <strong>9.2.3.2.2</strong> Plugin Ecosystem</p>
+<p>- <strong>9.2.3.2.3</strong> Task Composition</p>
+
+
+
+<p>- <strong>9.2.3.3 Modern Alternatives</strong></p>
+
+<p>- <strong>9.2.3.3.1</strong> Parcel</p>
+<p>- <strong>9.2.3.3.2</strong> esbuild</p>
+<p>- <strong>9.2.3.3.3</strong> SWC</p>
+
+
+
+
+
+<h3 id="-9-3-testing-frameworks-">9.3 Testing Frameworks</h3>
+
+<p>⭐ <strong>9.3.1 Unit Testing</strong></p>
+
+<p>- <strong>9.3.1.1 Jest</strong></p>
+
+<p>- <strong>9.3.1.1.1</strong> Test Suites and Cases</p>
+<p>- <strong>9.3.1.1.2</strong> Matchers</p>
+<p>- <strong>9.3.1.1.3</strong> Mocking</p>
+<p>- <strong>9.3.1.1.4</strong> Snapshot Testing</p>
+<p>- <strong>9.3.1.1.5</strong> Code Coverage</p>
+
+
+
+<p>- <strong>9.3.1.2 Mocha</strong></p>
+
+<p>- <strong>9.3.1.2.1</strong> Test Structure</p>
+<p>- <strong>9.3.1.2.2</strong> Assertion Libraries</p>
+<p>- <strong>9.3.1.2.3</strong> Hooks</p>
+<p>- <strong>9.3.1.2.4</strong> Reporters</p>
+
+
+
+<p>- <strong>9.3.1.3 Vitest</strong></p>
+
+<p>- <strong>9.3.1.3.1</strong> Vite Integration</p>
+<p>- <strong>9.3.1.3.2</strong> Fast Execution</p>
+<p>- <strong>9.3.1.3.3</strong> Jest Compatibility</p>
+
+
+
+
+
+<p>⭐ <strong>9.3.2 Integration Testing</strong></p>
+
+<p>- <strong>9.3.2.1 Testing Library</strong></p>
+
+<p>- <strong>9.3.2.1.1</strong> DOM Testing Utilities</p>
+<p>- <strong>9.3.2.1.2</strong> User Event Simulation</p>
+<p>- <strong>9.3.2.1.3</strong> Accessibility Testing</p>
+
+
+
+<p>- <strong>9.3.2.2 Cypress</strong></p>
+
+<p>- <strong>9.3.2.2.1</strong> End-to-End Testing</p>
+<p>- <strong>9.3.2.2.2</strong> Real Browser Testing</p>
+<p>- <strong>9.3.2.2.3</strong> Time Travel Debugging</p>
+
+
+
+<p>- <strong>9.3.2.3 Playwright</strong></p>
+
+<p>- <strong>9.3.2.3.1</strong> Cross-browser Testing</p>
+<p>- <strong>9.3.2.3.2</strong> Mobile Testing</p>
+<p>- <strong>9.3.2.3.3</strong> API Testing</p>
+
+
+
+
+
+<p>⭐ <strong>9.3.3 Testing Strategies</strong></p>
+
+<p>- <strong>9.3.3.1 Test-Driven Development</strong></p>
+
+<p>- <strong>9.3.3.1.1</strong> Red-Green-Refactor Cycle</p>
+<p>- <strong>9.3.3.1.2</strong> Test First Approach</p>
+<p>- <strong>9.3.3.1.3</strong> Design Benefits</p>
+
+
+
+<p>- <strong>9.3.3.2 Behavior-Driven Development</strong></p>
+
+<p>- <strong>9.3.3.2.1</strong> Given-When-Then Structure</p>
+<p>- <strong>9.3.3.2.2</strong> Cucumber Integration</p>
+<p>- <strong>9.3.3.2.3</strong> Stakeholder Communication</p>
+
+
+
+<p>- <strong>9.3.3.3 Testing Pyramid</strong></p>
+
+<p>- <strong>9.3.3.3.1</strong> Unit Tests (Base)</p>
+<p>- <strong>9.3.3.3.2</strong> Integration Tests (Middle)</p>
+<p>- <strong>9.3.3.3.3</strong> E2E Tests (Top)</p>
+
+
+
+
+
+<h3 id="-9-4-package-management-">9.4 Package Management</h3>
+
+<p>⭐ <strong>9.4.1 npm Ecosystem</strong></p>
+
+<p>- <strong>9.4.1.1 Package.json</strong></p>
+
+<p>- <strong>9.4.1.1.1</strong> Metadata Fields</p>
+<p>- <strong>9.4.1.1.2</strong> Dependencies vs DevDependencies</p>
+<p>- <strong>9.4.1.1.3</strong> Scripts Section</p>
+<p>- <strong>9.4.1.1.4</strong> Engines Field</p>
+
+
+
+<p>- <strong>9.4.1.2 npm Commands</strong></p>
+
+<p>- <strong>9.4.1.2.1</strong> Installation Commands</p>
+<p>- <strong>9.4.1.2.2</strong> Publishing Commands</p>
+<p>- <strong>9.4.1.2.3</strong> Version Management</p>
+<p>- <strong>9.4.1.2.4</strong> Security Auditing</p>
+
+
+
+<p>- <strong>9.4.1.3 npm Registry</strong></p>
+
+<p>- <strong>9.4.1.3.1</strong> Public Registry</p>
+<p>- <strong>9.4.1.3.2</strong> Private Registries</p>
+<p>- <strong>9.4.1.3.3</strong> Scoped Packages</p>
+
+
+
+
+
+<p>⭐ <strong>9.4.2 Alternative Package Managers</strong></p>
+
+<p>- <strong>9.4.2.1 Yarn</strong></p>
+
+<p>- <strong>9.4.2.1.1</strong> Yarn Classic vs Berry</p>
+<p>- <strong>9.4.2.1.2</strong> Workspaces</p>
+<p>- <strong>9.4.2.1.3</strong> Plug'n'Play</p>
+
+
+
+<p>- <strong>9.4.2.2 pnpm</strong></p>
+
+<p>- <strong>9.4.2.2.1</strong> Hard Link Strategy</p>
+<p>- <strong>9.4.2.2.2</strong> Disk Space Efficiency</p>
+<p>- <strong>9.4.2.2.3</strong> Strict Node Modules</p>
+
+
+
+
+
+<p>⭐ <strong>9.4.3 Monorepo Management</strong></p>
+
+<p>- <strong>9.4.3.1 Lerna</strong></p>
+
+<p>- <strong>9.4.3.1.1</strong> Multi-package Repositories</p>
+<p>- <strong>9.4.3.1.2</strong> Version Management</p>
+<p>- <strong>9.4.3.1.3</strong> Publishing Workflow</p>
+
+
+
+<p>- <strong>9.4.3.2 Nx</strong></p>
+
+<p>- <strong>9.4.3.2.1</strong> Build System</p>
+<p>- <strong>9.4.3.2.2</strong> Dependency Graph</p>
+<p>- <strong>9.4.3.2.3</strong> Code Generation</p>
+
+
+
+<p>- <strong>9.4.3.3 Rush</strong></p>
+
+<p>- <strong>9.4.3.3.1</strong> Incremental Builds</p>
+<p>- <strong>9.4.3.3.2</strong> Policy Enforcement</p>
+<p>- <strong>9.4.3.3.3</strong> Phantom Dependencies</p>
+
+
+
+
+
+<h2 id="-10-browser-apis-web-platform-">10. BROWSER APIs & WEB PLATFORM</h2>
+
+<h3 id="-10-1-dom-manipulation-mastery-">10.1 DOM Manipulation Mastery</h3>
+
+<p>⭐ <strong>10.1.1 DOM Architecture</strong></p>
+
+<p>- <strong>10.1.1.1 DOM Tree Structure</strong></p>
+
+<p>- <strong>10.1.1.1.1</strong> Node Types</p>
+
+<p>- <strong>10.1.1.1.1.1</strong> Element Nodes</p>
+<p>- <strong>10.1.1.1.1.2</strong> Text Nodes</p>
+<p>- <strong>10.1.1.1.1.3</strong> Attribute Nodes</p>
+<p>- <strong>10.1.1.1.1.4</strong> Comment Nodes</p>
+<p>- <strong>10.1.1.1.1.5</strong> Document Nodes</p>
+
+
+
+<p>- <strong>10.1.1.1.2</strong> Node Relationships</p>
+
+<p>- <strong>10.1.1.1.2.1</strong> Parent-Child Relationships</p>
+<p>- <strong>10.1.1.1.2.2</strong> Sibling Relationships</p>
+<p>- <strong>10.1.1.1.2.3</strong> Ancestor-Descendant</p>
+
+
+
+
+
+
+<p>- <strong>10.1.1.2 DOM Selection Methods</strong></p>
+
+<p>- <strong>10.1.1.2.1</strong> getElementById()</p>
+<p>- <strong>10.1.1.2.2</strong> getElementsByClassName()</p>
+<p>- <strong>10.1.1.2.3</strong> getElementsByTagName()</p>
+<p>- <strong>10.1.1.2.4</strong> querySelector()</p>
+<p>- <strong>10.1.1.2.5</strong> querySelectorAll()</p>
+<p>- <strong>10.1.1.2.6</strong> Performance Considerations</p>
+
+
+
+<p>- <strong>10.1.1.3 DOM Modification</strong></p>
+
+<p>- <strong>10.1.1.3.1</strong> Element Creation</p>
+
+<p>- <strong>10.1.1.3.1.1</strong> createElement()</p>
+<p>- <strong>10.1.1.3.1.2</strong> createTextNode()</p>
+<p>- <strong>10.1.1.3.1.3</strong> cloneNode()</p>
+
+
+
+<p>- <strong>10.1.1.3.2</strong> Element Insertion</p>
+
+<p>- <strong>10.1.1.3.2.1</strong> appendChild()</p>
+<p>- <strong>10.1.1.3.2.2</strong> insertBefore()</p>
+<p>- <strong>10.1.1.3.2.3</strong> insertAdjacentElement()</p>
+
+
+
+<p>- <strong>10.1.1.3.3</strong> Element Removal</p>
+
+<p>- <strong>10.1.1.3.3.1</strong> removeChild()</p>
+<p>- <strong>10.1.1.3.3.2</strong> remove()</p>
+
+
+
+<p>- <strong>10.1.1.3.4</strong> Element Replacement</p>
+
+<p>- <strong>10.1.1.3.4.1</strong> replaceChild()</p>
+<p>- <strong>10.1.1.3.4.2</strong> replaceWith()</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>10.1.2 Event System</strong></p>
+
+<p>- <strong>10.1.2.1 Event Fundamentals</strong></p>
+
+<p>- <strong>10.1.2.1.1</strong> Event Object</p>
+
+<p>- <strong>10.1.2.1.1.1</strong> Event Properties</p>
+<p>- <strong>10.1.2.1.1.2</strong> Event Methods</p>
+<p>- <strong>10.1.2.1.1.3</strong> Event Types</p>
+
+
+
+<p>- <strong>10.1.2.1.2</strong> Event Phases</p>
+
+<p>- <strong>10.1.2.1.2.1</strong> Capture Phase</p>
+<p>- <strong>10.1.2.1.2.2</strong> Target Phase</p>
+<p>- <strong>10.1.2.1.2.3</strong> Bubble Phase</p>
+
+
+
+<p>- <strong>10.1.2.1.3</strong> Event Propagation</p>
+
+<p>- <strong>10.1.2.1.3.1</strong> stopPropagation()</p>
+<p>- <strong>10.1.2.1.3.2</strong> stopImmediatePropagation()</p>
+<p>- <strong>10.1.2.1.3.3</strong> preventDefault()</p>
+
+
+
+
+
+
+<p>- <strong>10.1.2.2 Event Listeners</strong></p>
+
+<p>- <strong>10.1.2.2.1</strong> addEventListener()</p>
+
+<p>- <strong>10.1.2.2.1.1</strong> Event Type</p>
+<p>- <strong>10.1.2.2.1.2</strong> Listener Function</p>
+<p>- <strong>10.1.2.2.1.3</strong> Options Object</p>
+
+
+
+<p>- <strong>10.1.2.2.2</strong> removeEventListener()</p>
+<p>- <strong>10.1.2.2.3</strong> Event Delegation</p>
+
+<p>- <strong>10.1.2.2.3.1</strong> Performance Benefits</p>
+<p>- <strong>10.1.2.2.3.2</strong> Dynamic Content Handling</p>
+<p>- <strong>10.1.2.2.3.3</strong> Memory Efficiency</p>
+
+
+
+
+
+
+<p>- <strong>10.1.2.3 Custom Events</strong></p>
+
+<p>- <strong>10.1.2.3.1</strong> Event Constructor</p>
+<p>- <strong>10.1.2.3.2</strong> CustomEvent Constructor</p>
+<p>- <strong>10.1.2.3.3</strong> dispatchEvent()</p>
+<p>- <strong>10.1.2.3.4</strong> Event Communication Patterns</p>
+
+
+
+
+
+<p>⭐ <strong>10.1.3 Advanced DOM Techniques</strong></p>
+
+<p>- <strong>10.1.3.1 Virtual DOM Concepts</strong></p>
+
+<p>- <strong>10.1.3.1.1</strong> DOM Diffing Algorithms</p>
+<p>- <strong>10.1.3.1.2</strong> Reconciliation Process</p>
+<p>- <strong>10.1.3.1.3</strong> Performance Optimization</p>
+
+
+
+<p>- <strong>10.1.3.2 DOM Performance</strong></p>
+
+<p>- <strong>10.1.3.2.1</strong> Reflow and Repaint</p>
+<p>- <strong>10.1.3.2.2</strong> Layout Thrashing</p>
+<p>- <strong>10.1.3.2.3</strong> Batch DOM Operations</p>
+<p>- <strong>10.1.3.2.4</strong> DocumentFragment Usage</p>
+
+
+
+<p>- <strong>10.1.3.3 Shadow DOM</strong></p>
+
+<p>- <strong>10.1.3.3.1</strong> Encapsulation</p>
+<p>- <strong>10.1.3.3.2</strong> attachShadow()</p>
+<p>- <strong>10.1.3.3.3</strong> Slot Elements</p>
+<p>- <strong>10.1.3.3.4</strong> CSS Scoping</p>
+
+
+
+
+
+<h3 id="-10-2-web-apis-">10.2 Web APIs</h3>
+
+<p>⭐ <strong>10.2.1 Storage APIs</strong></p>
+
+<p>- <strong>10.2.1.1 Web Storage</strong></p>
+
+<p>- <strong>10.2.1.1.1</strong> localStorage</p>
+
+<p>- <strong>10.2.1.1.1.1</strong> Persistent Storage</p>
+<p>- <strong>10.2.1.1.1.2</strong> Storage Events</p>
+<p>- <strong>10.2.1.1.1.3</strong> Storage Limits</p>
+
+
+
+<p>- <strong>10.2.1.1.2</strong> sessionStorage</p>
+
+<p>- <strong>10.2.1.1.2.1</strong> Session-based Storage</p>
+<p>- <strong>10.2.1.1.2.2</strong> Tab Isolation</p>
+
+
+
+<p>- <strong>10.2.1.1.3</strong> Storage API Methods</p>
+
+<p>- <strong>10.2.1.1.3.1</strong> setItem()</p>
+<p>- <strong>10.2.1.1.3.2</strong> getItem()</p>
+<p>- <strong>10.2.1.1.3.3</strong> removeItem()</p>
+<p>- <strong>10.2.1.1.3.4</strong> clear()</p>
+
+
+
+
+
+
+<p>- <strong>10.2.1.2 IndexedDB</strong></p>
+
+<p>- <strong>10.2.1.2.1</strong> Database Operations</p>
+
+<p>- <strong>10.2.1.2.1.1</strong> Database Creation</p>
+<p>- <strong>10.2.1.2.1.2</strong> Version Management</p>
+<p>- <strong>10.2.1.2.1.3</strong> Object Stores</p>
+
+
+
+<p>- <strong>10.2.1.2.2</strong> Transaction Management</p>
+
+<p>- <strong>10.2.1.2.2.1</strong> Read Transactions</p>
+<p>- <strong>10.2.1.2.2.2</strong> Write Transactions</p>
+<p>- <strong>10.2.1.2.2.3</strong> ACID Properties</p>
+
+
+
+<p>- <strong>10.2.1.2.3</strong> Indexing and Querying</p>
+
+<p>- <strong>10.2.1.2.3.1</strong> Index Creation</p>
+<p>- <strong>10.2.1.2.3.2</strong> Key Ranges</p>
+<p>- <strong>10.2.1.2.3.3</strong> Cursor Operations</p>
+
+
+
+
+
+
+<p>- <strong>10.2.1.3 Cache API</strong></p>
+
+<p>- <strong>10.2.1.3.1</strong> Cache Storage</p>
+<p>- <strong>10.2.1.3.2</strong> Request/Response Caching</p>
+<p>- <strong>10.2.1.3.3</strong> Service Worker Integration</p>
+
+
+
+
+
+<p>⭐ <strong>10.2.2 Network APIs</strong></p>
+
+<p>- <strong>10.2.2.1 Fetch API</strong></p>
+
+<p>- <strong>10.2.2.1.1</strong> Request Configuration</p>
+
+<p>- <strong>10.2.2.1.1.1</strong> HTTP Methods</p>
+<p>- <strong>10.2.2.1.1.2</strong> Headers</p>
+<p>- <strong>10.2.2.1.1.3</strong> Body Content</p>
+<p>- <strong>10.2.2.1.1.4</strong> Request Options</p>
+
+
+
+<p>- <strong>10.2.2.1.2</strong> Response Handling</p>
+
+<p>- <strong>10.2.2.1.2.1</strong> Response Object</p>
+<p>- <strong>10.2.2.1.2.2</strong> Status Codes</p>
+<p>- <strong>10.2.2.1.2.3</strong> Response Methods</p>
+
+
+
+<p>- <strong>10.2.2.1.3</strong> Error Handling</p>
+
+<p>- <strong>10.2.2.1.3.1</strong> Network Errors</p>
+<p>- <strong>10.2.2.1.3.2</strong> HTTP Errors</p>
+<p>- <strong>10.2.2.1.3.3</strong> Timeout Handling</p>
+
+
+
+
+
+
+<p>- <strong>10.2.2.2 WebSocket API</strong></p>
+
+<p>- <strong>10.2.2.2.1</strong> Connection Management</p>
+
+<p>- <strong>10.2.2.2.1.1</strong> WebSocket Constructor</p>
+<p>- <strong>10.2.2.2.1.2</strong> Connection States</p>
+<p>- <strong>10.2.2.2.1.3</strong> Connection Events</p>
+
+
+
+<p>- <strong>10.2.2.2.2</strong> Message Handling</p>
+
+<p>- <strong>10.2.2.2.2.1</strong> send() Method</p>
+<p>- <strong>10.2.2.2.2.2</strong> Message Events</p>
+<p>- <strong>10.2.2.2.2.3</strong> Binary Data</p>
+
+
+
+<p>- <strong>10.2.2.2.3</strong> Error Handling</p>
+
+<p>- <strong>10.2.2.2.3.1</strong> Connection Errors</p>
+<p>- <strong>10.2.2.2.3.2</strong> Reconnection Strategies</p>
+
+
+
+
+
+
+<p>- <strong>10.2.2.3 Server-Sent Events</strong></p>
+
+<p>- <strong>10.2.2.3.1</strong> EventSource API</p>
+<p>- <strong>10.2.2.3.2</strong> Event Streams</p>
+<p>- <strong>10.2.2.3.3</strong> Automatic Reconnection</p>
+
+
+
+
+
+<p>⭐ <strong>10.2.2.4 XMLHttpRequest (Legacy)</strong></p>
+
+<p>- <strong>10.2.2.4.1</strong> XHR Object</p>
+<p>- <strong>10.2.2.4.2</strong> Request Configuration</p>
+<p>- <strong>10.2.2.4.3</strong> Response Handling</p>
+<p>- <strong>10.2.2.4.4</strong> Progress Events</p>
+
+
+<p>⭐ <strong>10.2.3 Media APIs</strong></p>
+
+<p>- <strong>10.2.3.1 Canvas API</strong></p>
+
+<p>- <strong>10.2.3.1.1</strong> 2D Rendering Context</p>
+
+<p>- <strong>10.2.3.1.1.1</strong> Drawing Shapes</p>
+<p>- <strong>10.2.3.1.1.2</strong> Paths and Curves</p>
+<p>- <strong>10.2.3.1.1.3</strong> Text Rendering</p>
+<p>- <strong>10.2.3.1.1.4</strong> Image Manipulation</p>
+
+
+
+<p>- <strong>10.2.3.1.2</strong> Canvas Transformations</p>
+
+<p>- <strong>10.2.3.1.2.1</strong> Translation</p>
+<p>- <strong>10.2.3.1.2.2</strong> Rotation</p>
+<p>- <strong>10.2.3.1.2.3</strong> Scaling</p>
+<p>- <strong>10.2.3.1.2.4</strong> Matrix Transformations</p>
+
+
+
+<p>- <strong>10.2.3.1.3</strong> Canvas Performance</p>
+
+<p>- <strong>10.2.3.1.3.1</strong> Optimization Techniques</p>
+<p>- <strong>10.2.3.1.3.2</strong> Off-screen Canvas</p>
+<p>- <strong>10.2.3.1.3.3</strong> Hardware Acceleration</p>
+
+
+
+
+
+
+<p>- <strong>10.2.3.2 WebGL API</strong></p>
+
+<p>- <strong>10.2.3.2.1</strong> 3D Graphics Context</p>
+<p>- <strong>10.2.3.2.2</strong> Shaders</p>
+<p>- <strong>10.2.3.2.3</strong> Buffers and Textures</p>
+<p>- <strong>10.2.3.2.4</strong> Rendering Pipeline</p>
+
+
+
+<p>- <strong>10.2.3.3 Web Audio API</strong></p>
+
+<p>- <strong>10.2.3.3.1</strong> Audio Context</p>
+<p>- <strong>10.2.3.3.2</strong> Audio Nodes</p>
+<p>- <strong>10.2.3.3.3</strong> Audio Processing</p>
+<p>- <strong>10.2.3.3.4</strong> Spatial Audio</p>
+
+
+
+<p>- <strong>10.2.3.4 Media Capture API</strong></p>
+
+<p>- <strong>10.2.3.4.1</strong> getUserMedia()</p>
+<p>- <strong>10.2.3.4.2</strong> MediaStream</p>
+<p>- <strong>10.2.3.4.3</strong> MediaRecorder</p>
+<p>- <strong>10.2.3.4.4</strong> Screen Capture</p>
+
+
+
+
+
+<h3 id="-10-3-progressive-web-apps-">10.3 Progressive Web Apps</h3>
+
+<p>⭐ <strong>10.3.1 Service Workers</strong></p>
+
+<p>- <strong>10.3.1.1 Service Worker Lifecycle</strong></p>
+
+<p>- <strong>10.3.1.1.1</strong> Registration</p>
+<p>- <strong>10.3.1.1.2</strong> Installation</p>
+<p>- <strong>10.3.1.1.3</strong> Activation</p>
+<p>- <strong>10.3.1.1.4</strong> Update Process</p>
+
+
+
+<p>- <strong>10.3.1.2 Service Worker Events</strong></p>
+
+<p>- <strong>10.3.1.2.1</strong> install Event</p>
+<p>- <strong>10.3.1.2.2</strong> activate Event</p>
+<p>- <strong>10.3.1.2.3</strong> fetch Event</p>
+<p>- <strong>10.3.1.2.4</strong> message Event</p>
+
+
+
+<p>- <strong>10.3.1.3 Caching Strategies</strong></p>
+
+<p>- <strong>10.3.1.3.1</strong> Cache First</p>
+<p>- <strong>10.3.1.3.2</strong> Network First</p>
+<p>- <strong>10.3.1.3.3</strong> Stale While Revalidate</p>
+<p>- <strong>10.3.1.3.4</strong> Network Only</p>
+<p>- <strong>10.3.1.3.5</strong> Cache Only</p>
+
+
+
+
+
+<p>⭐ <strong>10.3.2 Web App Manifest</strong></p>
+
+<p>- <strong>10.3.2.1 Manifest Properties</strong></p>
+
+<p>- <strong>10.3.2.1.1</strong> name and short_name</p>
+<p>- <strong>10.3.2.1.2</strong> icons</p>
+<p>- <strong>10.3.2.1.3</strong> start_url</p>
+<p>- <strong>10.3.2.1.4</strong> display</p>
+<p>- <strong>10.3.2.1.5</strong> theme_color</p>
+<p>- <strong>10.3.2.1.6</strong> background_color</p>
+
+
+
+<p>- <strong>10.3.2.2 Installation Criteria</strong></p>
+
+<p>- <strong>10.3.2.2.1</strong> HTTPS Requirement</p>
+<p>- <strong>10.3.2.2.2</strong> Service Worker</p>
+<p>- <strong>10.3.2.2.3</strong> Manifest Requirements</p>
+
+
+
+<p>- <strong>10.3.2.3 App-like Experience</strong></p>
+
+<p>- <strong>10.3.2.3.1</strong> Standalone Display</p>
+<p>- <strong>10.3.2.3.2</strong> Splash Screen</p>
+<p>- <strong>10.3.2.3.3</strong> App Icon</p>
+
+
+
+
+
+<p>⭐ <strong>10.3.3 Push Notifications</strong></p>
+
+<p>- <strong>10.3.3.1 Push API</strong></p>
+
+<p>- <strong>10.3.3.1.1</strong> Subscription Management</p>
+<p>- <strong>10.3.3.1.2</strong> Push Events</p>
+<p>- <strong>10.3.3.1.3</strong> Payload Handling</p>
+
+
+
+<p>- <strong>10.3.3.2 Notification API</strong></p>
+
+<p>- <strong>10.3.3.2.1</strong> Permission Requests</p>
+<p>- <strong>10.3.3.2.2</strong> Notification Options</p>
+<p>- <strong>10.3.3.2.3</strong> Notification Events</p>
+
+
+
+<p>- <strong>10.3.3.3 Push Server Integration</strong></p>
+
+<p>- <strong>10.3.3.3.1</strong> VAPID Keys</p>
+<p>- <strong>10.3.3.3.2</strong> Web Push Protocol</p>
+<p>- <strong>10.3.3.3.3</strong> Push Service Providers</p>
+
+
+
+
+
+<h3 id="-10-4-performance-apis-">10.4 Performance APIs</h3>
+
+<p>⭐ <strong>10.4.1 Performance Measurement</strong></p>
+
+<p>- <strong>10.4.1.1 Performance Timeline</strong></p>
+
+<p>- <strong>10.4.1.1.1</strong> Performance Entries</p>
+<p>- <strong>10.4.1.1.2</strong> Entry Types</p>
+<p>- <strong>10.4.1.1.3</strong> Performance Observers</p>
+
+
+
+<p>- <strong>10.4.1.2 Navigation Timing</strong></p>
+
+<p>- <strong>10.4.1.2.1</strong> Navigation Events</p>
+<p>- <strong>10.4.1.2.2</strong> Timing Metrics</p>
+<p>- <strong>10.4.1.2.3</strong> Performance Analysis</p>
+
+
+
+<p>- <strong>10.4.1.3 Resource Timing</strong></p>
+
+<p>- <strong>10.4.1.3.1</strong> Resource Load Times</p>
+<p>- <strong>10.4.1.3.2</strong> Network Timing</p>
+<p>- <strong>10.4.1.3.3</strong> Resource Size Metrics</p>
+
+
+
+<p>- <strong>10.4.1.4 User Timing</strong></p>
+
+<p>- <strong>10.4.1.4.1</strong> performance.mark()</p>
+<p>- <strong>10.4.1.4.2</strong> performance.measure()</p>
+<p>- <strong>10.4.1.4.3</strong> Custom Metrics</p>
+
+
+
+
+
+<p>⭐ <strong>10.4.2 Intersection Observer</strong></p>
+
+<p>- <strong>10.4.2.1 Observer Configuration</strong></p>
+
+<p>- <strong>10.4.2.1.1</strong> Root Element</p>
+<p>- <strong>10.4.2.1.2</strong> Root Margin</p>
+<p>- <strong>10.4.2.1.3</strong> Thresholds</p>
+
+
+
+<p>- <strong>10.4.2.2 Intersection Entries</strong></p>
+
+<p>- <strong>10.4.2.2.1</strong> Intersection Ratio</p>
+<p>- <strong>10.4.2.2.2</strong> Bounding Rectangles</p>
+<p>- <strong>10.4.2.2.3</strong> Visibility Detection</p>
+
+
+
+<p>- <strong>10.4.2.3 Use Cases</strong></p>
+
+<p>- <strong>10.4.2.3.1</strong> Lazy Loading</p>
+<p>- <strong>10.4.2.3.2</strong> Infinite Scrolling</p>
+<p>- <strong>10.4.2.3.3</strong> Ad Viewability</p>
+<p>- <strong>10.4.2.3.4</strong> Animation Triggers</p>
+
+
+
+
+
+<p>⭐ <strong>10.4.3 Resize Observer</strong></p>
+
+<p>- <strong>10.4.3.1 Element Size Monitoring</strong></p>
+<p>- <strong>10.4.3.2 Resize Entries</strong></p>
+<p>- 10.4.3.3 Responsive Design Applications</p>
+
+
+<h2 id="-11-security-best-practices-">11. SECURITY & BEST PRACTICES</h2>
+
+<h3 id="-11-1-web-security-">11.1 Web Security</h3>
+
+<p>⭐ <strong>11.1.1 Cross-Site Scripting (XSS)</strong></p>
+
+<p>- <strong>11.1.1.1 XSS Types</strong></p>
+
+<p>- <strong>11.1.1.1.1</strong> Stored XSS</p>
+
+<p>- <strong>11.1.1.1.1.1</strong> Database Injection</p>
+<p>- <strong>11.1.1.1.1.2</strong> Persistent Attacks</p>
+<p>- <strong>11.1.1.1.1.3</strong> Impact Assessment</p>
+
+
+
+<p>- <strong>11.1.1.1.2</strong> Reflected XSS</p>
+
+<p>- <strong>11.1.1.1.2.1</strong> URL Parameter Injection</p>
+<p>- <strong>11.1.1.1.2.2</strong> Social Engineering</p>
+<p>- <strong>11.1.1.1.2.3</strong> Phishing Attacks</p>
+
+
+
+<p>- <strong>11.1.1.1.3</strong> DOM-based XSS</p>
+
+<p>- <strong>11.1.1.1.3.1</strong> Client-side Injection</p>
+<p>- <strong>11.1.1.1.3.2</strong> JavaScript Vulnerabilities</p>
+<p>- <strong>11.1.1.1.3.3</strong> Dynamic Content Risks</p>
+
+
+
+
+
+
+<p>- <strong>11.1.1.2 XSS Prevention</strong></p>
+
+<p>- <strong>11.1.1.2.1</strong> Input Validation</p>
+
+<p>- <strong>11.1.1.2.1.1</strong> Whitelist Validation</p>
+<p>- <strong>11.1.1.2.1.2</strong> Blacklist Limitations</p>
+<p>- <strong>11.1.1.2.1.3</strong> Regular Expression Validation</p>
+
+
+
+<p>- <strong>11.1.1.2.2</strong> Output Encoding</p>
+
+<p>- <strong>11.1.1.2.2.1</strong> HTML Entity Encoding</p>
+<p>- <strong>11.1.1.2.2.2</strong> JavaScript Encoding</p>
+<p>- <strong>11.1.1.2.2.3</strong> URL Encoding</p>
+<p>- <strong>11.1.1.2.2.4</strong> CSS Encoding</p>
+
+
+
+<p>- <strong>11.1.1.2.3</strong> Content Security Policy</p>
+
+<p>- <strong>11.1.1.2.3.1</strong> CSP Directives</p>
+<p>- <strong>11.1.1.2.3.2</strong> Nonce Implementation</p>
+<p>- <strong>11.1.1.2.3.3</strong> Hash-based CSP</p>
+
+
+
+
+
+
+<p>- <strong>11.1.1.3 XSS Detection</strong></p>
+
+<p>- <strong>11.1.1.3.1</strong> Static Analysis Tools</p>
+<p>- <strong>11.1.1.3.2</strong> Dynamic Testing</p>
+<p>- <strong>11.1.1.3.3</strong> Browser Security Features</p>
+
+
+
+
+
+<p>⭐ <strong>11.1.2 Cross-Site Request Forgery (CSRF)</strong></p>
+
+<p>- <strong>11.1.2.1 CSRF Attack Vectors</strong></p>
+
+<p>- <strong>11.1.2.1.1</strong> GET Request Attacks</p>
+<p>- <strong>11.1.2.1.2</strong> POST Request Attacks</p>
+<p>- <strong>11.1.2.1.3</strong> JSON Hijacking</p>
+
+
+
+<p>- <strong>11.1.2.2 CSRF Prevention</strong></p>
+
+<p>- <strong>11.1.2.2.1</strong> CSRF Tokens</p>
+
+<p>- <strong>11.1.2.2.1.1</strong> Token Generation</p>
+<p>- <strong>11.1.2.2.1.2</strong> Token Validation</p>
+<p>- <strong>11.1.2.2.1.3</strong> Token Rotation</p>
+
+
+
+<p>- <strong>11.1.2.2.2</strong> SameSite Cookies</p>
+
+<p>- <strong>11.1.2.2.2.1</strong> Strict Mode</p>
+<p>- <strong>11.1.2.2.2.2</strong> Lax Mode</p>
+<p>- <strong>11.1.2.2.2.3</strong> None Mode</p>
+
+
+
+<p>- <strong>11.1.2.2.3</strong> Origin Validation</p>
+
+<p>- <strong>11.1.2.2.3.1</strong> Referer Header</p>
+<p>- <strong>11.1.2.2.3.2</strong> Origin Header</p>
+<p>- <strong>11.1.2.2.3.3</strong> Custom Headers</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>11.1.3 Code Injection</strong></p>
+
+<p>- <strong>11.1.3.1 JavaScript Injection</strong></p>
+
+<p>- <strong>11.1.3.1.1</strong> eval() Vulnerabilities</p>
+<p>- <strong>11.1.3.1.2</strong> Function Constructor Risks</p>
+<p>- <strong>11.1.3.1.3</strong> setTimeout/setInterval Strings</p>
+
+
+
+<p>- <strong>11.1.3.2 Injection Prevention</strong></p>
+
+<p>- <strong>11.1.3.2.1</strong> Avoid Dynamic Code Execution</p>
+<p>- <strong>11.1.3.2.2</strong> Input Sanitization</p>
+<p>- <strong>11.1.3.2.3</strong> Parameterized Queries</p>
+
+
+
+<p>- <strong>11.1.3.3 Template Injection</strong></p>
+
+<p>- <strong>11.1.3.3.1</strong> Server-side Template Injection</p>
+<p>- <strong>11.1.3.3.2</strong> Client-side Template Injection</p>
+<p>- <strong>11.1.3.3.3</strong> Template Security</p>
+
+
+
+
+
+<p>⭐ <strong>11.1.4 Prototype Pollution</strong></p>
+
+<p>- <strong>11.1.4.1 Attack Mechanism</strong></p>
+
+<p>- <strong>11.1.4.1.1</strong> Object.prototype Modification</p>
+<p>- <strong>11.1.4.1.2</strong> Constructor Pollution</p>
+<p>- <strong>11.1.4.1.3</strong> <strong>proto</strong> Manipulation</p>
+
+
+
+<p>- <strong>11.1.4.2 Prevention Strategies</strong></p>
+
+<p>- <strong>11.1.4.2.1</strong> Object.create(null)</p>
+<p>- <strong>11.1.4.2.2</strong> Map vs Object</p>
+<p>- <strong>11.1.4.2.3</strong> Input Validation</p>
+<p>- <strong>11.1.4.2.4</strong> Object.freeze()</p>
+
+
+
+<p>- <strong>11.1.4.3 Detection Methods</strong></p>
+
+<p>- <strong>11.1.4.3.1</strong> Static Analysis</p>
+<p>- <strong>11.1.4.3.2</strong> Runtime Detection</p>
+<p>- <strong>11.1.4.3.3</strong> Security Auditing</p>
+
+
+
+
+
+<h3 id="-11-2-secure-coding-practices-">11.2 Secure Coding Practices</h3>
+
+<p>⭐ <strong>11.2.1 Input Validation</strong></p>
+
+<p>- <strong>11.2.1.1 Validation Strategies</strong></p>
+
+<p>- <strong>11.2.1.1.1</strong> Client-side Validation</p>
+
+<p>- <strong>11.2.1.1.1.1</strong> User Experience</p>
+<p>- <strong>11.2.1.1.1.2</strong> Performance Benefits</p>
+<p>- <strong>11.2.1.1.1.3</strong> Security Limitations</p>
+
+
+
+<p>- <strong>11.2.1.1.2</strong> Server-side Validation</p>
+
+<p>- <strong>11.2.1.1.2.1</strong> Security Enforcement</p>
+<p>- <strong>11.2.1.1.2.2</strong> Data Integrity</p>
+<p>- <strong>11.2.1.1.2.3</strong> Business Logic Validation</p>
+
+
+
+<p>- <strong>11.2.1.1.3</strong> Hybrid Validation</p>
+
+<p>- <strong>11.2.1.1.3.1</strong> Redundant Validation</p>
+<p>- <strong>11.2.1.1.3.2</strong> Consistency Maintenance</p>
+
+
+
+
+
+
+<p>- <strong>11.2.1.2 Validation Techniques</strong></p>
+
+<p>- <strong>11.2.1.2.1</strong> Type Checking</p>
+<p>- <strong>11.2.1.2.2</strong> Range Validation</p>
+<p>- <strong>11.2.1.2.3</strong> Format Validation</p>
+<p>- <strong>11.2.1.2.4</strong> Length Validation</p>
+<p>- <strong>11.2.1.2.5</strong> Pattern Matching</p>
+
+
+
+<p>- <strong>11.2.1.3 Validation Libraries</strong></p>
+
+<p>- <strong>11.2.1.3.1</strong> Joi Validation</p>
+<p>- <strong>11.2.1.3.2</strong> Yup Schema Validation</p>
+<p>- <strong>11.2.1.3.3</strong> Ajv JSON Schema</p>
+
+
+
+
+
+<p>⭐ <strong>11.2.2 Error Handling</strong></p>
+
+<p>- <strong>11.2.2.1 Secure Error Messages</strong></p>
+
+<p>- <strong>11.2.2.1.1</strong> Information Disclosure Prevention</p>
+<p>- <strong>11.2.2.1.2</strong> Generic Error Messages</p>
+<p>- <strong>11.2.2.1.3</strong> Logging vs Display</p>
+
+
+
+<p>- <strong>11.2.2.2 Error Logging</strong></p>
+
+<p>- <strong>11.2.2.2.1</strong> Structured Logging</p>
+<p>- <strong>11.2.2.2.2</strong> Log Sanitization</p>
+<p>- <strong>11.2.2.2.3</strong> Security Event Logging</p>
+
+
+
+<p>- <strong>11.2.2.3 Global Error Handling</strong></p>
+
+<p>- <strong>11.2.2.3.1</strong> window.onerror</p>
+<p>- <strong>11.2.2.3.2</strong> unhandledrejection Event</p>
+<p>- <strong>11.2.2.3.3</strong> Error Boundaries (React)</p>
+
+
+
+
+
+<p>⭐ <strong>11.2.3 Authentication & Authorization</strong></p>
+
+<p>- <strong>11.2.3.1 Authentication Mechanisms</strong></p>
+
+<p>- <strong>11.2.3.1.1</strong> Password-based Authentication</p>
+
+<p>- <strong>11.2.3.1.1.1</strong> Password Hashing</p>
+<p>- <strong>11.2.3.1.1.2</strong> Salt Generation</p>
+<p>- <strong>11.2.3.1.1.3</strong> Password Policies</p>
+
+
+
+<p>- <strong>11.2.3.1.2</strong> Multi-factor Authentication</p>
+
+<p>- <strong>11.2.3.1.2.1</strong> TOTP Implementation</p>
+<p>- <strong>11.2.3.1.2.2</strong> SMS Verification</p>
+<p>- <strong>11.2.3.1.2.3</strong> Hardware Tokens</p>
+
+
+
+<p>- <strong>11.2.3.1.3</strong> OAuth 2.0</p>
+
+<p>- <strong>11.2.3.1.3.1</strong> Authorization Code Flow</p>
+<p>- <strong>11.2.3.1.3.2</strong> Implicit Flow</p>
+<p>- <strong>11.2.3.1.3.3</strong> PKCE Extension</p>
+
+
+
+
+
+
+<p>- <strong>11.2.3.2 Session Management</strong></p>
+
+<p>- <strong>11.2.3.2.1</strong> Session Token Generation</p>
+<p>- <strong>11.2.3.2.2</strong> Session Storage</p>
+<p>- <strong>11.2.3.2.3</strong> Session Expiration</p>
+<p>- <strong>11.2.3.2.4</strong> Session Fixation Prevention</p>
+
+
+
+<p>- <strong>11.2.3.3 JWT Security</strong></p>
+
+<p>- <strong>11.2.3.3.1</strong> Token Structure</p>
+<p>- <strong>11.2.3.3.2</strong> Signature Verification</p>
+<p>- <strong>11.2.3.3.3</strong> Token Expiration</p>
+<p>- <strong>11.2.3.3.4</strong> Refresh Token Strategy</p>
+
+
+
+
+
+<h3 id="-11-3-privacy-compliance-">11.3 Privacy & Compliance</h3>
+
+<p>⭐ <strong>11.3.1 Data Protection</strong></p>
+
+<p>- <strong>11.3.1.1 Personal Data Handling</strong></p>
+
+<p>- <strong>11.3.1.1.1</strong> Data Minimization</p>
+<p>- <strong>11.3.1.1.2</strong> Purpose Limitation</p>
+<p>- <strong>11.3.1.1.3</strong> Storage Limitation</p>
+
+
+
+<p>- <strong>11.3.1.2 Encryption</strong></p>
+
+<p>- <strong>11.3.1.2.1</strong> Data at Rest</p>
+<p>- <strong>11.3.1.2.2</strong> Data in Transit</p>
+<p>- <strong>11.3.1.2.3</strong> Client-side Encryption</p>
+
+
+
+<p>- <strong>11.3.1.3 Data Anonymization</strong></p>
+
+<p>- <strong>11.3.1.3.1</strong> Pseudonymization</p>
+<p>- <strong>11.3.1.3.2</strong> Data Masking</p>
+<p>- <strong>11.3.1.3.3</strong> Differential Privacy</p>
+
+
+
+
+
+<p>⭐ <strong>11.3.2 GDPR Compliance</strong></p>
+
+<p>- <strong>11.3.2.1 User Rights</strong></p>
+
+<p>- <strong>11.3.2.1.1</strong> Right to Access</p>
+<p>- <strong>11.3.2.1.2</strong> Right to Rectification</p>
+<p>- <strong>11.3.2.1.3</strong> Right to Erasure</p>
+<p>- <strong>11.3.2.1.4</strong> Right to Portability</p>
+
+
+
+<p>- <strong>11.3.2.2 Consent Management</strong></p>
+
+<p>- <strong>11.3.2.2.1</strong> Explicit Consent</p>
+<p>- <strong>11.3.2.2.2</strong> Consent Withdrawal</p>
+<p>- <strong>11.3.2.2.3</strong> Cookie Consent</p>
+
+
+
+<p>- <strong>11.3.2.3 Privacy by Design</strong></p>
+
+<p>- <strong>11.3.2.3.1</strong> Default Privacy Settings</p>
+<p>- <strong>11.3.2.3.2</strong> Privacy Impact Assessment</p>
+<p>- <strong>11.3.2.3.3</strong> Data Protection Officer</p>
+
+
+
+
+
+<p>⭐ <strong>11.3.3 Browser Security Features</strong></p>
+
+<p>- <strong>11.3.3.1 Same-Origin Policy</strong></p>
+
+<p>- <strong>11.3.3.1.1</strong> Origin Definition</p>
+<p>- <strong>11.3.3.1.2</strong> Cross-Origin Restrictions</p>
+<p>- <strong>11.3.3.1.3</strong> CORS Implementation</p>
+
+
+
+<p>- <strong>11.3.3.2 Security Headers</strong></p>
+
+<p>- <strong>11.3.3.2.1</strong> Content-Security-Policy</p>
+<p>- <strong>11.3.3.2.2</strong> X-Frame-Options</p>
+<p>- <strong>11.3.3.2.3</strong> X-Content-Type-Options</p>
+<p>- <strong>11.3.3.2.4</strong> Strict-Transport-Security</p>
+
+
+
+<p>- <strong>11.3.3.3 Secure Contexts</strong></p>
+
+<p>- <strong>11.3.3.3.1</strong> HTTPS Requirements</p>
+<p>- <strong>11.3.3.3.2</strong> Localhost Exceptions</p>
+<p>- <strong>11.3.3.3.3</strong> API Restrictions</p>
+
+
+
+
+
+<h2 id="-12-advanced-problem-solving-">12. ADVANCED PROBLEM SOLVING</h2>
+
+<h3 id="-12-1-algorithmic-problem-solving-">12.1 Algorithmic Problem Solving</h3>
+
+<p>⭐ <strong>12.1.1 Problem Analysis</strong></p>
+
+<p>- <strong>12.1.1.1 Problem Understanding</strong></p>
+
+<p>- <strong>12.1.1.1.1</strong> Requirement Analysis</p>
+<p>- <strong>12.1.1.1.2</strong> Constraint Identification</p>
+<p>- <strong>12.1.1.1.3</strong> Edge Case Discovery</p>
+<p>- <strong>12.1.1.1.4</strong> Input/Output Specification</p>
+
+
+
+<p>- <strong>12.1.1.2 Solution Design</strong></p>
+
+<p>- <strong>12.1.1.2.1</strong> Algorithm Selection</p>
+<p>- <strong>12.1.1.2.2</strong> Data Structure Choice</p>
+<p>- <strong>12.1.1.2.3</strong> Complexity Analysis</p>
+<p>- <strong>12.1.1.2.4</strong> Trade-off Evaluation</p>
+
+
+
+<p>- <strong>12.1.1.3 Implementation Strategy</strong></p>
+
+<p>- <strong>12.1.1.3.1</strong> Pseudocode Development</p>
+<p>- <strong>12.1.1.3.2</strong> Modular Design</p>
+<p>- <strong>12.1.1.3.3</strong> Test Case Design</p>
+<p>- <strong>12.1.1.3.4</strong> Debugging Strategy</p>
+
+
+
+
+
+<p>⭐ <strong>12.1.2 Advanced Problem Patterns</strong></p>
+
+<p>- <strong>12.1.2.1 Two Pointers</strong></p>
+
+<p>- <strong>12.1.2.1.1</strong> Opposite Direction</p>
+<p>- <strong>12.1.2.1.2</strong> Same Direction</p>
+<p>- <strong>12.1.2.1.3</strong> Fast/Slow Pointers</p>
+
+
+
+<p>- <strong>12.1.2.2 Sliding Window</strong></p>
+
+<p>- <strong>12.1.2.2.1</strong> Fixed Size Window</p>
+<p>- <strong>12.1.2.2.2</strong> Variable Size Window</p>
+<p>- <strong>12.1.2.2.3</strong> Maximum/Minimum Window</p>
+
+
+
+<p>- <strong>12.1.2.3 Divide and Conquer</strong></p>
+
+<p>- <strong>12.1.2.3.1</strong> Problem Decomposition</p>
+<p>- <strong>12.1.2.3.2</strong> Recursive Solutions</p>
+<p>- <strong>12.1.2.3.3</strong> Merge Strategies</p>
+
+
+
+<p>- <strong>12.1.2.4 Backtracking</strong></p>
+
+<p>- <strong>12.1.2.4.1</strong> State Space Search</p>
+<p>- <strong>12.1.2.4.2</strong> Constraint Satisfaction</p>
+<p>- <strong>12.1.2.4.3</strong> Pruning Techniques</p>
+
+
+
+<p>- <strong>12.1.2.5 Dynamic Programming Patterns</strong></p>
+
+<p>- <strong>12.1.2.5.1</strong> Linear DP</p>
+<p>- <strong>12.1.2.5.2</strong> 2D DP</p>
+<p>- <strong>12.1.2.5.3</strong> Interval DP</p>
+<p>- <strong>12.1.2.5.4</strong> Tree DP</p>
+<p>- <strong>12.1.2.5.5</strong> Bitmask DP</p>
+
+
+
+
+
+<p>⭐ <strong>12.1.3 Competitive Programming</strong></p>
+
+<p>- <strong>12.1.3.1 Contest Strategies</strong></p>
+
+<p>- <strong>12.1.3.1.1</strong> Time Management</p>
+<p>- <strong>12.1.3.1.2</strong> Problem Prioritization</p>
+<p>- <strong>12.1.3.1.3</strong> Implementation Speed</p>
+
+
+
+<p>- <strong>12.1.3.2 Advanced Algorithms</strong></p>
+
+<p>- <strong>12.1.3.2.1</strong> Number Theory</p>
+
+<p>- <strong>12.1.3.2.1.1</strong> Prime Numbers</p>
+<p>- <strong>12.1.3.2.1.2</strong> GCD/LCM</p>
+<p>- <strong>12.1.3.2.1.3</strong> Modular Arithmetic</p>
+
+
+
+<p>- <strong>12.1.3.2.2</strong> Graph Algorithms</p>
+
+<p>- <strong>12.1.3.2.2.1</strong> Network Flow</p>
+<p>- <strong>12.1.3.2.2.2</strong> Bipartite Matching</p>
+<p>- <strong>12.1.3.2.2.3</strong> Articulation Points</p>
+
+
+
+<p>- <strong>12.1.3.2.3</strong> String Algorithms</p>
+
+<p>- <strong>12.1.3.2.3.1</strong> Suffix Arrays</p>
+<p>- <strong>12.1.3.2.3.2</strong> String Hashing</p>
+<p>- <strong>12.1.3.2.3.3</strong> Palindrome Algorithms</p>
+
+
+
+
+
+
+<p>- <strong>12.1.3.3 Optimization Techniques</strong></p>
+
+<p>- <strong>12.1.3.3.1</strong> Constant Optimization</p>
+<p>- <strong>12.1.3.3.2</strong> Memory Optimization</p>
+<p>- <strong>12.1.3.3.3</strong> Cache-friendly Code</p>
+
+
+
+
+
+<h3 id="-12-2-system-design-">12.2 System Design</h3>
+
+<p>⭐ <strong>12.2.1 Scalability Principles</strong></p>
+
+<p>- <strong>12.2.1.1 Horizontal vs Vertical Scaling</strong></p>
+
+<p>- <strong>12.2.1.1.1</strong> Scale-out Strategies</p>
+<p>- <strong>12.2.1.1.2</strong> Scale-up Limitations</p>
+<p>- <strong>12.2.1.1.3</strong> Cost Considerations</p>
+
+
+
+<p>- <strong>12.2.1.2 Load Distribution</strong></p>
+
+<p>- <strong>12.2.1.2.1</strong> Load Balancing Algorithms</p>
+<p>- <strong>12.2.1.2.2</strong> Session Affinity</p>
+<p>- <strong>12.2.1.2.3</strong> Health Checks</p>
+
+
+
+<p>- <strong>12.2.1.3 Caching Strategies</strong></p>
+
+<p>- <strong>12.2.1.3.1</strong> Browser Caching</p>
+<p>- <strong>12.2.1.3.2</strong> CDN Implementation</p>
+<p>- <strong>12.2.1.3.3</strong> Application Caching</p>
+<p>- <strong>12.2.1.3.4</strong> Database Caching</p>
+
+
+
+
+
+<p>⭐ <strong>12.2.2 Architecture Patterns</strong></p>
+
+<p>- <strong>12.2.2.1 Microservices Architecture</strong></p>
+
+<p>- <strong>12.2.2.1.1</strong> Service Decomposition</p>
+<p>- <strong>12.2.2.1.2</strong> Inter-service Communication</p>
+<p>- <strong>12.2.2.1.3</strong> Data Management</p>
+<p>- <strong>12.2.2.1.4</strong> Deployment Strategies</p>
+
+
+
+<p>- <strong>12.2.2.2 Event-Driven Architecture</strong></p>
+
+<p>- <strong>12.2.2.2.1</strong> Event Sourcing</p>
+<p>- <strong>12.2.2.2.2</strong> CQRS Pattern</p>
+<p>- <strong>12.2.2.2.3</strong> Message Queues</p>
+
+
+
+<p>- <strong>12.2.2.3 Serverless Architecture</strong></p>
+
+<p>- <strong>12.2.2.3.1</strong> Function as a Service</p>
+<p>- <strong>12.2.2.3.2</strong> Event Triggers</p>
+<p>- <strong>12.2.2.3.3</strong> Cold Start Optimization</p>
+
+
+
+
+
+<p>⭐ <strong>12.2.3 Performance Optimization</strong></p>
+
+<p>- <strong>12.2.3.1 Frontend Optimization</strong></p>
+
+<p>- <strong>12.2.3.1.1</strong> Bundle Optimization</p>
+<p>- <strong>12.2.3.1.2</strong> Code Splitting</p>
+<p>- <strong>12.2.3.1.3</strong> Lazy Loading</p>
+<p>- <strong>12.2.3.1.4</strong> Image Optimization</p>
+
+
+
+<p>- <strong>12.2.3.2 Backend Optimization</strong></p>
+
+<p>- <strong>12.2.3.2.1</strong> Database Optimization</p>
+<p>- <strong>12.2.3.2.2</strong> Query Optimization</p>
+<p>- <strong>12.2.3.2.3</strong> Connection Pooling</p>
+
+
+
+<p>- <strong>12.2.3.3 Network Optimization</strong></p>
+
+<p>- <strong>12.2.3.3.1</strong> HTTP/2 Implementation</p>
+<p>- <strong>12.2.3.3.2</strong> Compression Techniques</p>
+<p>- <strong>12.2.3.3.3</strong> Resource Bundling</p>
+
+
+
+
+
+<h3 id="-12-3-debugging-troubleshooting-">12.3 Debugging & Troubleshooting</h3>
+
+<p>⭐ <strong>12.3.1 Debugging Methodologies</strong></p>
+
+<p>- <strong>12.3.1.1 Systematic Debugging</strong></p>
+
+<p>- <strong>12.3.1.1.1</strong> Problem Reproduction</p>
+
+<p>- <strong>12.3.1.1.1.1</strong> Minimal Test Cases</p>
+<p>- <strong>12.3.1.1.1.2</strong> Environment Isolation</p>
+<p>- <strong>12.3.1.1.1.3</strong> Consistent Reproduction</p>
+
+
+
+<p>- <strong>12.3.1.1.2</strong> Root Cause Analysis</p>
+
+<p>- <strong>12.3.1.1.2.1</strong> Hypothesis Formation</p>
+<p>- <strong>12.3.1.1.2.2</strong> Evidence Collection</p>
+<p>- <strong>12.3.1.1.2.3</strong> Cause Validation</p>
+
+
+
+<p>- <strong>12.3.1.1.3</strong> Binary Search Debugging</p>
+
+<p>- <strong>12.3.1.1.3.1</strong> Code Bisection</p>
+<p>- <strong>12.3.1.1.3.2</strong> Timeline Narrowing</p>
+<p>- <strong>12.3.1.1.3.3</strong> Feature Isolation</p>
+
+
+
+
+
+
+<p>- <strong>12.3.1.2 Debugging Tools</strong></p>
+
+<p>- <strong>12.3.1.2.1</strong> Browser DevTools</p>
+
+<p>- <strong>12.3.1.2.1.1</strong> Console Debugging</p>
+<p>- <strong>12.3.1.2.1.2</strong> Breakpoint Management</p>
+<p>- <strong>12.3.1.2.1.3</strong> Network Analysis</p>
+<p>- <strong>12.3.1.2.1.4</strong> Performance Profiling</p>
+
+
+
+<p>- <strong>12.3.1.2.2</strong> Node.js Debugging</p>
+
+<p>- <strong>12.3.1.2.2.1</strong> Inspector Protocol</p>
+<p>- <strong>12.3.1.2.2.2</strong> Debug Module</p>
+<p>- <strong>12.3.1.2.2.3</strong> Memory Profiling</p>
+
+
+
+<p>- <strong>12.3.1.2.3</strong> Third-party Tools</p>
+
+<p>- <strong>12.3.1.2.3.1</strong> Sentry Error Tracking</p>
+<p>- <strong>12.3.1.2.3.2</strong> LogRocket Session Replay</p>
+<p>- <strong>12.3.1.2.3.3</strong> New Relic APM</p>
+
+
+
+
+
+
+<p>- <strong>12.3.1.3 Logging Strategies</strong></p>
+
+<p>- <strong>12.3.1.3.1</strong> Structured Logging</p>
+
+<p>- <strong>12.3.1.3.1.1</strong> JSON Format</p>
+<p>- <strong>12.3.1.3.1.2</strong> Correlation IDs</p>
+<p>- <strong>12.3.1.3.1.3</strong> Context Preservation</p>
+
+
+
+<p>- <strong>12.3.1.3.2</strong> Log Levels</p>
+
+<p>- <strong>12.3.1.3.2.1</strong> Error Logging</p>
+<p>- <strong>12.3.1.3.2.2</strong> Warning Logging</p>
+<p>- <strong>12.3.1.3.2.3</strong> Info Logging</p>
+<p>- <strong>12.3.1.3.2.4</strong> Debug Logging</p>
+
+
+
+<p>- <strong>12.3.1.3.3</strong> Log Analysis</p>
+
+<p>- <strong>12.3.1.3.3.1</strong> Pattern Recognition</p>
+<p>- <strong>12.3.1.3.3.2</strong> Anomaly Detection</p>
+<p>- <strong>12.3.1.3.3.3</strong> Trend Analysis</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>12.3.2 Performance Debugging</strong></p>
+
+<p>- <strong>12.3.2.1 Performance Profiling</strong></p>
+
+<p>- <strong>12.3.2.1.1</strong> CPU Profiling</p>
+
+<p>- <strong>12.3.2.1.1.1</strong> Call Stack Analysis</p>
+<p>- <strong>12.3.2.1.1.2</strong> Hot Path Identification</p>
+<p>- <strong>12.3.2.1.1.3</strong> Function Timing</p>
+
+
+
+<p>- <strong>12.3.2.1.2</strong> Memory Profiling</p>
+
+<p>- <strong>12.3.2.1.2.1</strong> Heap Snapshots</p>
+<p>- <strong>12.3.2.1.2.2</strong> Memory Leak Detection</p>
+<p>- <strong>12.3.2.1.2.3</strong> Allocation Tracking</p>
+
+
+
+<p>- <strong>12.3.2.1.3</strong> Network Profiling</p>
+
+<p>- <strong>12.3.2.1.3.1</strong> Request Timing</p>
+<p>- <strong>12.3.2.1.3.2</strong> Payload Analysis</p>
+<p>- <strong>12.3.2.1.3.3</strong> Caching Effectiveness</p>
+
+
+
+
+
+
+<p>- <strong>12.3.2.2 Performance Metrics</strong></p>
+
+<p>- <strong>12.3.2.2.1</strong> Core Web Vitals</p>
+
+<p>- <strong>12.3.2.2.1.1</strong> Largest Contentful Paint (LCP)</p>
+<p>- <strong>12.3.2.2.1.2</strong> First Input Delay (FID)</p>
+<p>- <strong>12.3.2.2.1.3</strong> Cumulative Layout Shift (CLS)</p>
+
+
+
+<p>- <strong>12.3.2.2.2</strong> Custom Metrics</p>
+
+<p>- <strong>12.3.2.2.2.1</strong> Time to Interactive</p>
+<p>- <strong>12.3.2.2.2.2</strong> First Meaningful Paint</p>
+<p>- <strong>12.3.2.2.2.3</strong> Speed Index</p>
+
+
+
+<p>- <strong>12.3.2.2.3</strong> Business Metrics</p>
+
+<p>- <strong>12.3.2.2.3.1</strong> Conversion Rate Impact</p>
+<p>- <strong>12.3.2.2.3.2</strong> User Engagement</p>
+<p>- <strong>12.3.2.2.3.3</strong> Bounce Rate Correlation</p>
+
+
+
+
+
+
+<p>- <strong>12.3.2.3 Optimization Strategies</strong></p>
+
+<p>- <strong>12.3.2.3.1</strong> Critical Path Optimization</p>
+
+<p>- <strong>12.3.2.3.1.1</strong> Above-fold Content</p>
+<p>- <strong>12.3.2.3.1.2</strong> Resource Prioritization</p>
+<p>- <strong>12.3.2.3.1.3</strong> Render Blocking Elimination</p>
+
+
+
+<p>- <strong>12.3.2.3.2</strong> Runtime Optimization</p>
+
+<p>- <strong>12.3.2.3.2.1</strong> Algorithm Improvement</p>
+<p>- <strong>12.3.2.3.2.2</strong> Data Structure Optimization</p>
+<p>- <strong>12.3.2.3.2.3</strong> Caching Implementation</p>
+
+
+
+<p>- <strong>12.3.2.3.3</strong> Resource Optimization</p>
+
+<p>- <strong>12.3.2.3.3.1</strong> Asset Compression</p>
+<p>- <strong>12.3.2.3.3.2</strong> Image Optimization</p>
+<p>- <strong>12.3.2.3.3.3</strong> Font Loading Optimization</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>12.3.3 Production Debugging</strong></p>
+
+<p>- <strong>12.3.3.1 Error Monitoring</strong></p>
+
+<p>- <strong>12.3.3.1.1</strong> Error Aggregation</p>
+
+<p>- <strong>12.3.3.1.1.1</strong> Error Grouping</p>
+<p>- <strong>12.3.3.1.1.2</strong> Frequency Analysis</p>
+<p>- <strong>12.3.3.1.1.3</strong> Impact Assessment</p>
+
+
+
+<p>- <strong>12.3.3.1.2</strong> Real-time Alerting</p>
+
+<p>- <strong>12.3.3.1.2.1</strong> Threshold-based Alerts</p>
+<p>- <strong>12.3.3.1.2.2</strong> Anomaly Detection</p>
+<p>- <strong>12.3.3.1.2.3</strong> Escalation Procedures</p>
+
+
+
+<p>- <strong>12.3.3.1.3</strong> Error Context</p>
+
+<p>- <strong>12.3.3.1.3.1</strong> User Session Data</p>
+<p>- <strong>12.3.3.1.3.2</strong> Environment Information</p>
+<p>- <strong>12.3.3.1.3.3</strong> Stack Trace Analysis</p>
+
+
+
+
+
+
+<p>- <strong>12.3.3.2 Distributed Tracing</strong></p>
+
+<p>- <strong>12.3.3.2.1</strong> Request Tracing</p>
+
+<p>- <strong>12.3.3.2.1.1</strong> Trace ID Propagation</p>
+<p>- <strong>12.3.3.2.1.2</strong> Span Creation</p>
+<p>- <strong>12.3.3.2.1.3</strong> Service Mapping</p>
+
+
+
+<p>- <strong>12.3.3.2.2</strong> Performance Tracing</p>
+
+<p>- <strong>12.3.3.2.2.1</strong> Latency Analysis</p>
+<p>- <strong>12.3.3.2.2.2</strong> Bottleneck Identification</p>
+<p>- <strong>12.3.3.2.2.3</strong> Dependency Analysis</p>
+
+
+
+<p>- <strong>12.3.3.2.3</strong> Error Correlation</p>
+
+<p>- <strong>12.3.3.2.3.1</strong> Cross-service Errors</p>
+<p>- <strong>12.3.3.2.3.2</strong> Cascade Failure Analysis</p>
+<p>- <strong>12.3.3.2.3.3</strong> Root Cause Tracing</p>
+
+
+
+
+
+
+<p>- <strong>12.3.3.3 Incident Response</strong></p>
+
+<p>- <strong>12.3.3.3.1</strong> Incident Detection</p>
+
+<p>- <strong>12.3.3.3.1.1</strong> Automated Monitoring</p>
+<p>- <strong>12.3.3.3.1.2</strong> User Reports</p>
+<p>- <strong>12.3.3.3.1.3</strong> Health Checks</p>
+
+
+
+<p>- <strong>12.3.3.3.2</strong> Incident Management</p>
+
+<p>- <strong>12.3.3.3.2.1</strong> Severity Classification</p>
+<p>- <strong>12.3.3.3.2.2</strong> Response Team Assembly</p>
+<p>- <strong>12.3.3.3.2.3</strong> Communication Protocols</p>
+
+
+
+<p>- <strong>12.3.3.3.3</strong> Post-incident Analysis</p>
+
+<p>- <strong>12.3.3.3.3.1</strong> Root Cause Analysis</p>
+<p>- <strong>12.3.3.3.3.2</strong> Prevention Strategies</p>
+<p>- <strong>12.3.3.3.3.3</strong> Process Improvement</p>
+
+
+
+
+
+
+
+
+<h2 id="-13-real-world-applications-">13. REAL-WORLD APPLICATIONS</h2>
+
+<h3 id="-13-1-enterprise-applications-">13.1 Enterprise Applications</h3>
+
+<p>⭐ <strong>13.1.1 Large-Scale Architecture</strong></p>
+
+<p>- <strong>13.1.1.1 Microservices Implementation</strong></p>
+
+<p>- <strong>13.1.1.1.1</strong> Service Boundaries</p>
+
+<p>- <strong>13.1.1.1.1.1</strong> Domain-Driven Design</p>
+<p>- <strong>13.1.1.1.1.2</strong> Bounded Contexts</p>
+<p>- <strong>13.1.1.1.1.3</strong> Service Decomposition</p>
+
+
+
+<p>- <strong>13.1.1.1.2</strong> Inter-Service Communication</p>
+
+<p>- <strong>13.1.1.1.2.1</strong> Synchronous Communication</p>
+<p>- <strong>13.1.1.1.2.2</strong> Asynchronous Messaging</p>
+<p>- <strong>13.1.1.1.2.3</strong> Event-Driven Architecture</p>
+
+
+
+<p>- <strong>13.1.1.1.3</strong> Data Management</p>
+
+<p>- <strong>13.1.1.1.3.1</strong> Database per Service</p>
+<p>- <strong>13.1.1.1.3.2</strong> Distributed Transactions</p>
+<p>- <strong>13.1.1.1.3.3</strong> Eventual Consistency</p>
+
+
+
+
+
+
+<p>- <strong>13.1.1.2 API Design</strong></p>
+
+<p>- <strong>13.1.1.2.1</strong> RESTful APIs</p>
+
+<p>- <strong>13.1.1.2.1.1</strong> Resource Modeling</p>
+<p>- <strong>13.1.1.2.1.2</strong> HTTP Method Usage</p>
+<p>- <strong>13.1.1.2.1.3</strong> Status Code Standards</p>
+
+
+
+<p>- <strong>13.1.1.2.2</strong> GraphQL APIs</p>
+
+<p>- <strong>13.1.1.2.2.1</strong> Schema Design</p>
+<p>- <strong>13.1.1.2.2.2</strong> Query Optimization</p>
+<p>- <strong>13.1.1.2.2.3</strong> Subscription Handling</p>
+
+
+
+<p>- <strong>13.1.1.2.3</strong> API Versioning</p>
+
+<p>- <strong>13.1.1.2.3.1</strong> Semantic Versioning</p>
+<p>- <strong>13.1.1.2.3.2</strong> Backward Compatibility</p>
+<p>- <strong>13.1.1.2.3.3</strong> Deprecation Strategies</p>
+
+
+
+
+
+
+<p>- <strong>13.1.1.3 Security Architecture</strong></p>
+
+<p>- <strong>13.1.1.3.1</strong> Zero Trust Security</p>
+
+<p>- <strong>13.1.1.3.1.1</strong> Identity Verification</p>
+<p>- <strong>13.1.1.3.1.2</strong> Least Privilege Access</p>
+<p>- <strong>13.1.1.3.1.3</strong> Continuous Monitoring</p>
+
+
+
+<p>- <strong>13.1.1.3.2</strong> API Security</p>
+
+<p>- <strong>13.1.1.3.2.1</strong> Authentication Mechanisms</p>
+<p>- <strong>13.1.1.3.2.2</strong> Rate Limiting</p>
+<p>- <strong>13.1.1.3.2.3</strong> Input Validation</p>
+
+
+
+<p>- <strong>13.1.1.3.3</strong> Data Protection</p>
+
+<p>- <strong>13.1.1.3.3.1</strong> Encryption at Rest</p>
+<p>- <strong>13.1.1.3.3.2</strong> Encryption in Transit</p>
+<p>- <strong>13.1.1.3.3.3</strong> Key Management</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>13.1.2 Performance at Scale</strong></p>
+
+<p>- <strong>13.1.2.1 Caching Strategies</strong></p>
+
+<p>- <strong>13.1.2.1.1</strong> Multi-level Caching</p>
+
+<p>- <strong>13.1.2.1.1.1</strong> Browser Cache</p>
+<p>- <strong>13.1.2.1.1.2</strong> CDN Cache</p>
+<p>- <strong>13.1.2.1.1.3</strong> Application Cache</p>
+<p>- <strong>13.1.2.1.1.4</strong> Database Cache</p>
+
+
+
+<p>- <strong>13.1.2.1.2</strong> Cache Invalidation</p>
+
+<p>- <strong>13.1.2.1.2.1</strong> Time-based Expiration</p>
+<p>- <strong>13.1.2.1.2.2</strong> Event-based Invalidation</p>
+<p>- <strong>13.1.2.1.2.3</strong> Manual Purging</p>
+
+
+
+<p>- <strong>13.1.2.1.3</strong> Cache Patterns</p>
+
+<p>- <strong>13.1.2.1.3.1</strong> Cache-Aside</p>
+<p>- <strong>13.1.2.1.3.2</strong> Write-Through</p>
+<p>- <strong>13.1.2.1.3.3</strong> Write-Behind</p>
+
+
+
+
+
+
+<p>- <strong>13.1.2.2 Database Optimization</strong></p>
+
+<p>- <strong>13.1.2.2.1</strong> Query Optimization</p>
+
+<p>- <strong>13.1.2.2.1.1</strong> Index Strategy</p>
+<p>- <strong>13.1.2.2.1.2</strong> Query Planning</p>
+<p>- <strong>13.1.2.2.1.3</strong> Execution Analysis</p>
+
+
+
+<p>- <strong>13.1.2.2.2</strong> Database Scaling</p>
+
+<p>- <strong>13.1.2.2.2.1</strong> Read Replicas</p>
+<p>- <strong>13.1.2.2.2.2</strong> Sharding Strategies</p>
+<p>- <strong>13.1.2.2.2.3</strong> Connection Pooling</p>
+
+
+
+<p>- <strong>13.1.2.2.3</strong> NoSQL Integration</p>
+
+<p>- <strong>13.1.2.2.3.1</strong> Document Stores</p>
+<p>- <strong>13.1.2.2.3.2</strong> Key-Value Stores</p>
+<p>- <strong>13.1.2.2.3.3</strong> Graph Databases</p>
+
+
+
+
+
+
+<p>- <strong>13.1.2.3 Load Management</strong></p>
+
+<p>- <strong>13.1.2.3.1</strong> Load Balancing</p>
+
+<p>- <strong>13.1.2.3.1.1</strong> Round Robin</p>
+<p>- <strong>13.1.2.3.1.2</strong> Least Connections</p>
+<p>- <strong>13.1.2.3.1.3</strong> Weighted Distribution</p>
+
+
+
+<p>- <strong>13.1.2.3.2</strong> Auto Scaling</p>
+
+<p>- <strong>13.1.2.3.2.1</strong> Horizontal Scaling</p>
+<p>- <strong>13.1.2.3.2.2</strong> Vertical Scaling</p>
+<p>- <strong>13.1.2.3.2.3</strong> Predictive Scaling</p>
+
+
+
+<p>- <strong>13.1.2.3.3</strong> Circuit Breakers</p>
+
+<p>- <strong>13.1.2.3.3.1</strong> Failure Detection</p>
+<p>- <strong>13.1.2.3.3.2</strong> Fallback Mechanisms</p>
+<p>- <strong>13.1.2.3.3.3</strong> Recovery Strategies</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>13.1.3 DevOps Integration</strong></p>
+
+<p>- <strong>13.1.3.1 CI/CD Pipelines</strong></p>
+
+<p>- <strong>13.1.3.1.1</strong> Continuous Integration</p>
+
+<p>- <strong>13.1.3.1.1.1</strong> Automated Testing</p>
+<p>- <strong>13.1.3.1.1.2</strong> Code Quality Gates</p>
+<p>- <strong>13.1.3.1.1.3</strong> Build Automation</p>
+
+
+
+<p>- <strong>13.1.3.1.2</strong> Continuous Deployment</p>
+
+<p>- <strong>13.1.3.1.2.1</strong> Blue-Green Deployment</p>
+<p>- <strong>13.1.3.1.2.2</strong> Canary Releases</p>
+<p>- <strong>13.1.3.1.2.3</strong> Rolling Updates</p>
+
+
+
+<p>- <strong>13.1.3.1.3</strong> Infrastructure as Code</p>
+
+<p>- <strong>13.1.3.1.3.1</strong> Terraform</p>
+<p>- <strong>13.1.3.1.3.2</strong> CloudFormation</p>
+<p>- <strong>13.1.3.1.3.3</strong> Kubernetes Manifests</p>
+
+
+
+
+
+
+<p>- <strong>13.1.3.2 Monitoring & Observability</strong></p>
+
+<p>- <strong>13.1.3.2.1</strong> Application Monitoring</p>
+
+<p>- <strong>13.1.3.2.1.1</strong> Metrics Collection</p>
+<p>- <strong>13.1.3.2.1.2</strong> Log Aggregation</p>
+<p>- <strong>13.1.3.2.1.3</strong> Distributed Tracing</p>
+
+
+
+<p>- <strong>13.1.3.2.2</strong> Infrastructure Monitoring</p>
+
+<p>- <strong>13.1.3.2.2.1</strong> Resource Utilization</p>
+<p>- <strong>13.1.3.2.2.2</strong> Network Performance</p>
+<p>- <strong>13.1.3.2.2.3</strong> Security Events</p>
+
+
+
+<p>- <strong>13.1.3.2.3</strong> Business Monitoring</p>
+
+<p>- <strong>13.1.3.2.3.1</strong> KPI Tracking</p>
+<p>- <strong>13.1.3.2.3.2</strong> User Behavior Analytics</p>
+<p>- <strong>13.1.3.2.3.3</strong> Revenue Impact Analysis</p>
+
+
+
+
+
+
+<p>- <strong>13.1.3.3 Container Orchestration</strong></p>
+
+<p>- <strong>13.1.3.3.1</strong> Docker Containerization</p>
+
+<p>- <strong>13.1.3.3.1.1</strong> Image Optimization</p>
+<p>- <strong>13.1.3.3.1.2</strong> Multi-stage Builds</p>
+<p>- <strong>13.1.3.3.1.3</strong> Security Scanning</p>
+
+
+
+<p>- <strong>13.1.3.3.2</strong> Kubernetes Management</p>
+
+<p>- <strong>13.1.3.3.2.1</strong> Pod Orchestration</p>
+<p>- <strong>13.1.3.3.2.2</strong> Service Discovery</p>
+<p>- <strong>13.1.3.3.2.3</strong> Resource Management</p>
+
+
+
+<p>- <strong>13.1.3.3.3</strong> Service Mesh</p>
+
+<p>- <strong>13.1.3.3.3.1</strong> Traffic Management</p>
+<p>- <strong>13.1.3.3.3.2</strong> Security Policies</p>
+<p>- <strong>13.1.3.3.3.3</strong> Observability</p>
+
+
+
+
+
+
+
+
+<h3 id="-13-2-frontend-frameworks-integration-">13.2 Frontend Frameworks Integration</h3>
+
+<p>⭐ <strong>13.2.1 React Ecosystem</strong></p>
+
+<p>- <strong>13.2.1.1 Advanced React Patterns</strong></p>
+
+<p>- <strong>13.2.1.1.1</strong> Higher-Order Components</p>
+
+<p>- <strong>13.2.1.1.1.1</strong> Component Enhancement</p>
+<p>- <strong>13.2.1.1.1.2</strong> Props Manipulation</p>
+<p>- <strong>13.2.1.1.1.3</strong> Conditional Rendering</p>
+
+
+
+<p>- <strong>13.2.1.1.2</strong> Render Props</p>
+
+<p>- <strong>13.2.1.1.2.1</strong> Logic Sharing</p>
+<p>- <strong>13.2.1.1.2.2</strong> Component Composition</p>
+<p>- <strong>13.2.1.1.2.3</strong> Flexible APIs</p>
+
+
+
+<p>- <strong>13.2.1.1.3</strong> Custom Hooks</p>
+
+<p>- <strong>13.2.1.1.3.1</strong> State Logic Extraction</p>
+<p>- <strong>13.2.1.1.3.2</strong> Side Effect Management</p>
+<p>- <strong>13.2.1.1.3.3</strong> Reusable Logic</p>
+
+
+
+
+
+
+<p>- <strong>13.2.1.2 State Management</strong></p>
+
+<p>- <strong>13.2.1.2.1</strong> Redux Toolkit</p>
+
+<p>- <strong>13.2.1.2.1.1</strong> Store Configuration</p>
+<p>- <strong>13.2.1.2.1.2</strong> Slice Creation</p>
+<p>- <strong>13.2.1.2.1.3</strong> Async Thunks</p>
+
+
+
+<p>- <strong>13.2.1.2.2</strong> Zustand</p>
+
+<p>- <strong>13.2.1.2.2.1</strong> Simple State Management</p>
+<p>- <strong>13.2.1.2.2.2</strong> Middleware Integration</p>
+<p>- <strong>13.2.1.2.2.3</strong> TypeScript Support</p>
+
+
+
+<p>- <strong>13.2.1.2.3</strong> React Query</p>
+
+<p>- <strong>13.2.1.2.3.1</strong> Server State Management</p>
+<p>- <strong>13.2.1.2.3.2</strong> Caching Strategies</p>
+<p>- <strong>13.2.1.2.3.3</strong> Background Updates</p>
+
+
+
+
+
+
+<p>- <strong>13.2.1.3 Performance Optimization</strong></p>
+
+<p>- <strong>13.2.1.3.1</strong> React.memo</p>
+
+<p>- <strong>13.2.1.3.1.1</strong> Component Memoization</p>
+<p>- <strong>13.2.1.3.1.2</strong> Props Comparison</p>
+<p>- <strong>13.2.1.3.1.3</strong> Custom Comparison</p>
+
+
+
+<p>- <strong>13.2.1.3.2</strong> useMemo & useCallback</p>
+
+<p>- <strong>13.2.1.3.2.1</strong> Expensive Calculations</p>
+<p>- <strong>13.2.1.3.2.2</strong> Function Memoization</p>
+<p>- <strong>13.2.1.3.2.3</strong> Dependency Arrays</p>
+
+
+
+<p>- <strong>13.2.1.3.3</strong> Code Splitting</p>
+
+<p>- <strong>13.2.1.3.3.1</strong> React.lazy</p>
+<p>- <strong>13.2.1.3.3.2</strong> Suspense Boundaries</p>
+<p>- <strong>13.2.1.3.3.3</strong> Route-based Splitting</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>13.2.2 Vue.js Ecosystem</strong></p>
+
+<p>- <strong>13.2.2.1 Vue 3 Composition API</strong></p>
+
+<p>- <strong>13.2.2.1.1</strong> Reactive References</p>
+
+<p>- <strong>13.2.2.1.1.1</strong> ref() Usage</p>
+<p>- <strong>13.2.2.1.1.2</strong> reactive() Objects</p>
+<p>- <strong>13.2.2.1.1.3</strong> Reactivity Principles</p>
+
+
+
+<p>- <strong>13.2.2.1.2</strong> Lifecycle Hooks</p>
+
+<p>- <strong>13.2.2.1.2.1</strong> onMounted</p>
+<p>- <strong>13.2.2.1.2.2</strong> onUpdated</p>
+<p>- <strong>13.2.2.1.2.3</strong> onUnmounted</p>
+
+
+
+<p>- <strong>13.2.2.1.3</strong> Composables</p>
+
+<p>- <strong>13.2.2.1.3.1</strong> Logic Composition</p>
+<p>- <strong>13.2.2.1.3.2</strong> Reusable Functions</p>
+<p>- <strong>13.2.2.1.3.3</strong> State Sharing</p>
+
+
+
+
+
+
+<p>- <strong>13.2.2.2 Vuex/Pinia State Management</strong></p>
+
+<p>- <strong>13.2.2.2.1</strong> Store Architecture</p>
+
+<p>- <strong>13.2.2.2.1.1</strong> State Definition</p>
+<p>- <strong>13.2.2.2.1.2</strong> Getters Implementation</p>
+<p>- <strong>13.2.2.2.1.3</strong> Actions & Mutations</p>
+
+
+
+<p>- <strong>13.2.2.2.2</strong> Module System</p>
+
+<p>- <strong>13.2.2.2.2.1</strong> Namespaced Modules</p>
+<p>- <strong>13.2.2.2.2.2</strong> Dynamic Registration</p>
+<p>- <strong>13.2.2.2.2.3</strong> Module Communication</p>
+
+
+
+<p>- <strong>13.2.2.2.3</strong> DevTools Integration</p>
+
+<p>- <strong>13.2.2.2.3.1</strong> Time Travel Debugging</p>
+<p>- <strong>13.2.2.2.3.2</strong> State Inspection</p>
+<p>- <strong>13.2.2.2.3.3</strong> Action Logging</p>
+
+
+
+
+
+
+<p>- <strong>13.2.2.3 Vue Router</strong></p>
+
+<p>- <strong>13.2.2.3.1</strong> Route Configuration</p>
+
+<p>- <strong>13.2.2.3.1.1</strong> Dynamic Routes</p>
+<p>- <strong>13.2.2.3.1.2</strong> Nested Routes</p>
+<p>- <strong>13.2.2.3.1.3</strong> Route Guards</p>
+
+
+
+<p>- <strong>13.2.2.3.2</strong> Navigation</p>
+
+<p>- <strong>13.2.2.3.2.1</strong> Programmatic Navigation</p>
+<p>- <strong>13.2.2.3.2.2</strong> Route Transitions</p>
+<p>- <strong>13.2.2.3.2.3</strong> Lazy Loading</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>13.2.3 Angular Framework</strong></p>
+
+<p>- <strong>13.2.3.1 Angular Architecture</strong></p>
+
+<p>- <strong>13.2.3.1.1</strong> Component Architecture</p>
+
+<p>- <strong>13.2.3.1.1.1</strong> Component Lifecycle</p>
+<p>- <strong>13.2.3.1.1.2</strong> Data Binding</p>
+<p>- <strong>13.2.3.1.1.3</strong> Component Communication</p>
+
+
+
+<p>- <strong>13.2.3.1.2</strong> Services & Dependency Injection</p>
+
+<p>- <strong>13.2.3.1.2.1</strong> Injectable Services</p>
+<p>- <strong>13.2.3.1.2.2</strong> Provider Configuration</p>
+<p>- <strong>13.2.3.1.2.3</strong> Hierarchical Injection</p>
+
+
+
+<p>- <strong>13.2.3.1.3</strong> Modules</p>
+
+<p>- <strong>13.2.3.1.3.1</strong> Feature Modules</p>
+<p>- <strong>13.2.3.1.3.2</strong> Shared Modules</p>
+<p>- <strong>13.2.3.1.3.3</strong> Lazy Loading Modules</p>
+
+
+
+
+
+
+<p>- <strong>13.2.3.2 RxJS Integration</strong></p>
+
+<p>- <strong>13.2.3.2.1</strong> Observables</p>
+
+<p>- <strong>13.2.3.2.1.1</strong> Observable Creation</p>
+<p>- <strong>13.2.3.2.1.2</strong> Subscription Management</p>
+<p>- <strong>13.2.3.2.1.3</strong> Error Handling</p>
+
+
+
+<p>- <strong>13.2.3.2.2</strong> Operators</p>
+
+<p>- <strong>13.2.3.2.2.1</strong> Transformation Operators</p>
+<p>- <strong>13.2.3.2.2.2</strong> Filtering Operators</p>
+<p>- <strong>13.2.3.2.2.3</strong> Combination Operators</p>
+
+
+
+<p>- <strong>13.2.3.2.3</strong> Reactive Patterns</p>
+
+<p>- <strong>13.2.3.2.3.1</strong> Subject Usage</p>
+<p>- <strong>13.2.3.2.3.2</strong> BehaviorSubject</p>
+<p>- <strong>13.2.3.2.3.3</strong> ReplaySubject</p>
+
+
+
+
+
+
+<p>- <strong>13.2.3.3 Angular CLI & Tooling</strong></p>
+
+<p>- <strong>13.2.3.3.1</strong> Project Generation</p>
+
+<p>- <strong>13.2.3.3.1.1</strong> Workspace Configuration</p>
+<p>- <strong>13.2.3.3.1.2</strong> Schematic Usage</p>
+<p>- <strong>13.2.3.3.1.3</strong> Custom Schematics</p>
+
+
+
+<p>- <strong>13.2.3.3.2</strong> Build Optimization</p>
+
+<p>- <strong>13.2.3.3.2.1</strong> AOT Compilation</p>
+<p>- <strong>13.2.3.3.2.2</strong> Tree Shaking</p>
+<p>- <strong>13.2.3.3.2.3</strong> Bundle Analysis</p>
+
+
+
+<p>- <strong>13.2.3.3.3</strong> Testing Framework</p>
+
+<p>- <strong>13.2.3.3.3.1</strong> Unit Testing with Jasmine</p>
+<p>- <strong>13.2.3.3.3.2</strong> E2E Testing with Protractor</p>
+<p>- <strong>13.2.3.3.3.3</strong> Component Testing</p>
+
+
+
+
+
+
+
+
+<h3 id="-13-3-full-stack-development-">13.3 Full-Stack Development</h3>
+
+<p>⭐ <strong>13.3.1 Node.js Backend</strong></p>
+
+<p>- <strong>13.3.1.1 Express.js Framework</strong></p>
+
+<p>- <strong>13.3.1.1.1</strong> Middleware Architecture</p>
+
+<p>- <strong>13.3.1.1.1.1</strong> Built-in Middleware</p>
+<p>- <strong>13.3.1.1.1.2</strong> Third-party Middleware</p>
+<p>- <strong>13.3.1.1.1.3</strong> Custom Middleware</p>
+
+
+
+<p>- <strong>13.3.1.1.2</strong> Routing</p>
+
+<p>- <strong>13.3.1.1.2.1</strong> Route Parameters</p>
+<p>- <strong>13.3.1.1.2.2</strong> Route Handlers</p>
+<p>- <strong>13.3.1.1.2.3</strong> Router Modules</p>
+
+
+
+<p>- <strong>13.3.1.1.3</strong> Error Handling</p>
+
+<p>- <strong>13.3.1.1.3.1</strong> Error Middleware</p>
+<p>- <strong>13.3.1.1.3.2</strong> Async Error Handling</p>
+<p>- <strong>13.3.1.1.3.3</strong> Custom Error Classes</p>
+
+
+
+
+
+
+<p>- <strong>13.3.1.2 Database Integration</strong></p>
+
+<p>- <strong>13.3.1.2.1</strong> SQL Databases</p>
+
+<p>- <strong>13.3.1.2.1.1</strong> PostgreSQL Integration</p>
+<p>- <strong>13.3.1.2.1.2</strong> MySQL Integration</p>
+<p>- <strong>13.3.1.2.1.3</strong> SQLite Usage</p>
+
+
+
+<p>- <strong>13.3.1.2.2</strong> NoSQL Databases</p>
+
+<p>- <strong>13.3.1.2.2.1</strong> MongoDB Integration</p>
+<p>- <strong>13.3.1.2.2.2</strong> Redis Caching</p>
+<p>- <strong>13.3.1.2.2.3</strong> Elasticsearch</p>
+
+
+
+<p>- <strong>13.3.1.2.3</strong> ORM/ODM</p>
+
+<p>- <strong>13.3.1.2.3.1</strong> Sequelize ORM</p>
+<p>- <strong>13.3.1.2.3.2</strong> Mongoose ODM</p>
+<p>- <strong>13.3.1.2.3.3</strong> Prisma ORM</p>
+
+
+
+
+
+
+<p>- <strong>13.3.1.3 API Development</strong></p>
+
+<p>- <strong>13.3.1.3.1</strong> RESTful API Design</p>
+
+<p>- <strong>13.3.1.3.1.1</strong> Resource Modeling</p>
+<p>- <strong>13.3.1.3.1.2</strong> HTTP Status Codes</p>
+<p>- <strong>13.3.1.3.1.3</strong> API Documentation</p>
+
+
+
+<p>- <strong>13.3.1.3.2</strong> GraphQL Implementation</p>
+
+<p>- <strong>13.3.1.3.2.1</strong> Schema Definition</p>
+<p>- <strong>13.3.1.3.2.2</strong> Resolver Functions</p>
+<p>- <strong>13.3.1.3.2.3</strong> Query Optimization</p>
+
+
+
+<p>- <strong>13.3.1.3.3</strong> API Security</p>
+
+<p>- <strong>13.3.1.3.3.1</strong> Authentication Middleware</p>
+<p>- <strong>13.3.1.3.3.2</strong> Rate Limiting</p>
+<p>- <strong>13.3.1.3.3.3</strong> Input Validation</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>13.3.2 Real-time Applications</strong></p>
+
+<p>- <strong>13.3.2.1 WebSocket Implementation</strong></p>
+
+<p>- <strong>13.3.2.1.1</strong> Socket.io Integration</p>
+
+<p>- <strong>13.3.2.1.1.1</strong> Connection Management</p>
+<p>- <strong>13.3.2.1.1.2</strong> Room Management</p>
+<p>- <strong>13.3.2.1.1.3</strong> Event Handling</p>
+
+
+
+<p>- <strong>13.3.2.1.2</strong> Native WebSocket</p>
+
+<p>- <strong>13.3.2.1.2.1</strong> Connection Lifecycle</p>
+<p>- <strong>13.3.2.1.2.2</strong> Message Broadcasting</p>
+<p>- <strong>13.3.2.1.2.3</strong> Error Recovery</p>
+
+
+
+<p>- <strong>13.3.2.1.3</strong> Scaling WebSockets</p>
+
+<p>- <strong>13.3.2.1.3.1</strong> Load Balancing</p>
+<p>- <strong>13.3.2.1.3.2</strong> Session Persistence</p>
+<p>- <strong>13.3.2.1.3.3</strong> Message Queuing</p>
+
+
+
+
+
+
+<p>- <strong>13.3.2.2 Real-time Data Sync</strong></p>
+
+<p>- <strong>13.3.2.2.1</strong> Operational Transform</p>
+
+<p>- <strong>13.3.2.2.1.1</strong> Conflict Resolution</p>
+<p>- <strong>13.3.2.2.1.2</strong> State Synchronization</p>
+<p>- <strong>13.3.2.2.1.3</strong> Collaborative Editing</p>
+
+
+
+<p>- <strong>13.3.2.2.2</strong> CRDT Implementation</p>
+
+<p>- <strong>13.3.2.2.2.1</strong> Conflict-free Replicated Data Types</p>
+<p>- <strong>13.3.2.2.2.2</strong> Eventual Consistency</p>
+<p>- <strong>13.3.2.2.2.3</strong> Distributed Systems</p>
+
+
+
+<p>- <strong>13.3.2.2.3</strong> Event Sourcing</p>
+
+<p>- <strong>13.3.2.2.3.1</strong> Event Store</p>
+<p>- <strong>13.3.2.2.3.2</strong> Event Replay</p>
+<p>- <strong>13.3.2.2.3.3</strong> Snapshot Management</p>
+
+
+
+
+
+
+<p>- <strong>13.3.2.3 Push Notifications</strong></p>
+
+<p>- <strong>13.3.2.3.1</strong> Web Push Protocol</p>
+
+<p>- <strong>13.3.2.3.1.1</strong> VAPID Implementation</p>
+<p>- <strong>13.3.2.3.1.2</strong> Push Service Integration</p>
+<p>- <strong>13.3.2.3.1.3</strong> Payload Encryption</p>
+
+
+
+<p>- <strong>13.3.2.3.2</strong> Mobile Push</p>
+
+<p>- <strong>13.3.2.3.2.1</strong> FCM Integration</p>
+<p>- <strong>13.3.2.3.2.2</strong> APNs Integration</p>
+<p>- <strong>13.3.2.3.2.3</strong> Cross-platform Solutions</p>
+
+
+
+<p>- <strong>13.3.2.3.3</strong> Notification Management</p>
+
+<p>- <strong>13.3.2.3.3.1</strong> Subscription Management</p>
+<p>- <strong>13.3.2.3.3.2</strong> Delivery Tracking</p>
+<p>- <strong>13.3.2.3.3.3</strong> A/B Testing</p>
+
+
+
+
+
+
+
+
+<p>⭐ <strong>13.3.3 Cloud Integration</strong></p>
+
+<p>- <strong>13.3.3.1 AWS Services</strong></p>
+
+<p>- <strong>13.3.3.1.1</strong> Lambda Functions</p>
+
+<p>- <strong>13.3.3.1.1.1</strong> Serverless Architecture</p>
+<p>- <strong>13.3.3.1.1.2</strong> Event Triggers</p>
+<p>- <strong>13.3.3.1.1.3</strong> Cold Start Optimization</p>
+
+
+
+<p>- <strong>13.3.3.1.2</strong> DynamoDB</p>
+
+<p>- <strong>13.3.3.1.2.1</strong> NoSQL Data Modeling</p>
+<p>- <strong>13.3.3.1.2.2</strong> Query Optimization</p>
+<p>- <strong>13.3.3.1.2.3</strong> Global Tables</p>
+
+
+
+<p>- <strong>13.3.3.1.3</strong> S3 Storage</p>
+
+<p>- <strong>13.3.3.1.3.1</strong> Object Storage</p>
+<p>- <strong>13.3.3.1.3.2</strong> CDN Integration</p>
+<p>- <strong>13.3.3.1.3.3</strong> Security Policies</p>
+
+
+
+
+
+
+<p>- <strong>13.3.3.2 Google Cloud Platform</strong></p>
+
+<p>- <strong>13.3.3.2.1</strong> Cloud Functions</p>
+
+<p>- <strong>13.3.3.2.1.1</strong> HTTP Triggers</p>
+<p>- <strong>13.3.3.2.1.2</strong> Pub/Sub Integration</p>
+<p>- <strong>13.3.3.2.1.3</strong> Firebase Integration</p>
+
+
+
+<p>- <strong>13.3.3.2.2</strong> Firestore</p>
+
+<p>- <strong>13.3.3.2.2.1</strong> Document Database</p>
+<p>- <strong>13.3.3.2.2.2</strong> Real-time Updates</p>
+<p>- <strong>13.3.3.2.2.3</strong> Security Rules</p>
+
+
+
+<p>- <strong>13.3.3.2.3</strong> Cloud Storage</p>
+
+<p>- <strong>13.3.3.2.3.1</strong> File Upload/Download</p>
+<p>- <strong>13.3.3.2.3.2</strong> Image Processing</p>
+<p>- <strong>13.3.3.2.3.3</strong> Access Control</p>
+
+
+
+
+
+
+<p>- <strong>13.3.3.3 Azure Services</strong></p>
+
+<p>- <strong>13.3.3.3.1</strong> Azure Functions</p>
+
+<p>- <strong>13.3.3.3.1.1</strong> Consumption Plan</p>
+<p>- <strong>13.3.3.3.1.2</strong> Premium Plan</p>
+<p>- <strong>13.3.3.3.1.3</strong> Dedicated Plan</p>
+
+
+
+<p>- <strong>13.3.3.3.2</strong> Cosmos DB</p>
+
+<p>- <strong>13.3.3.3.2.1</strong> Multi-model Database</p>
+<p>- <strong>13.3.3.3.2.2</strong> Global Distribution</p>
+<p>- <strong>13.3.3.3.2.3</strong> Consistency Levels</p>
+
+
+
+<p>- <strong>13.3.3.3.3</strong> Blob Storage</p>
+
+<p>- <strong>13.3.3.3.3.1</strong> Hot/Cool/Archive Tiers</p>
+<p>- <strong>13.3.3.3.3.2</strong> Lifecycle Management</p>
+<p>- <strong>13.3.3.3.3.3</strong> Data Encryption</p>
+
+
+
+
+            </div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        
+        // Initialize TOC
+        document.getElementById('toc-list').innerHTML = `<li><a href="#-complete-javascript-mastery-course-" class="h1-link">COMPLETE JAVASCRIPT MASTERY COURSE</a></li><li><a href="#-1-javascript-fundamentals-" class="h2-link">1. JAVASCRIPT FUNDAMENTALS</a></li><li><a href="#-1-1-language-foundation-" class="h3-link" style="padding-left: 1rem;">1.1 Language Foundation</a></li><li><a href="#-1-2-memory-model-execution-context-" class="h3-link" style="padding-left: 1rem;">1.2 Memory Model & Execution Context</a></li><li><a href="#-2-advanced-data-types-structures-" class="h2-link">2. ADVANCED DATA TYPES & STRUCTURES</a></li><li><a href="#-2-1-primitive-types-mastery-" class="h3-link" style="padding-left: 1rem;">2.1 Primitive Types Mastery</a></li><li><a href="#-2-2-object-architecture-" class="h3-link" style="padding-left: 1rem;">2.2 Object Architecture</a></li><li><a href="#-2-3-array-advanced-concepts-" class="h3-link" style="padding-left: 1rem;">2.3 Array Advanced Concepts</a></li><li><a href="#-3-function-mastery-closures-" class="h2-link">3. FUNCTION MASTERY & CLOSURES</a></li><li><a href="#-3-1-function-architecture-" class="h3-link" style="padding-left: 1rem;">3.1 Function Architecture</a></li><li><a href="#-3-2-closure-deep-dive-" class="h3-link" style="padding-left: 1rem;">3.2 Closure Deep Dive</a></li><li><a href="#-3-3-this-binding-mastery-" class="h3-link" style="padding-left: 1rem;">3.3 this Binding Mastery</a></li><li><a href="#-4-asynchronous-programming-mastery-" class="h2-link">4. ASYNCHRONOUS PROGRAMMING MASTERY</a></li><li><a href="#-4-1-event-loop-architecture-" class="h3-link" style="padding-left: 1rem;">4.1 Event Loop Architecture</a></li><li><a href="#-4-2-promise-architecture-" class="h3-link" style="padding-left: 1rem;">4.2 Promise Architecture</a></li><li><a href="#-4-3-async-await-mastery-" class="h3-link" style="padding-left: 1rem;">4.3 Async/Await Mastery</a></li><li><a href="#-4-4-generators-iterators-" class="h3-link" style="padding-left: 1rem;">4.4 Generators & Iterators</a></li><li><a href="#-5-object-oriented-programming-advanced-" class="h2-link">5. OBJECT-ORIENTED PROGRAMMING ADVANCED</a></li><li><a href="#-5-1-class-system-deep-dive-" class="h3-link" style="padding-left: 1rem;">5.1 Class System Deep Dive</a></li><li><a href="#-5-2-advanced-oop-patterns-" class="h3-link" style="padding-left: 1rem;">5.2 Advanced OOP Patterns</a></li><li><a href="#-6-metaprogramming-reflection-" class="h2-link">6. METAPROGRAMMING & REFLECTION</a></li><li><a href="#-6-1-proxy-deep-dive-" class="h3-link" style="padding-left: 1rem;">6.1 Proxy Deep Dive</a></li><li><a href="#-6-2-reflect-api-" class="h3-link" style="padding-left: 1rem;">6.2 Reflect API</a></li><li><a href="#-6-3-dynamic-programming-techniques-" class="h3-link" style="padding-left: 1rem;">6.3 Dynamic Programming Techniques</a></li><li><a href="#-7-performance-optimization-" class="h2-link">7. PERFORMANCE OPTIMIZATION</a></li><li><a href="#-7-1-memory-management-mastery-" class="h3-link" style="padding-left: 1rem;">7.1 Memory Management Mastery</a></li><li><a href="#-7-2-execution-performance-" class="h3-link" style="padding-left: 1rem;">7.2 Execution Performance</a></li><li><a href="#-7-3-algorithmic-optimization-" class="h3-link" style="padding-left: 1rem;">7.3 Algorithmic Optimization</a></li><li><a href="#-8-data-structures-algorithms-" class="h2-link">8. DATA STRUCTURES & ALGORITHMS</a></li><li><a href="#-8-1-linear-data-structures-" class="h3-link" style="padding-left: 1rem;">8.1 Linear Data Structures</a></li><li><a href="#-8-2-non-linear-data-structures-" class="h3-link" style="padding-left: 1rem;">8.2 Non-Linear Data Structures</a></li><li><a href="#-8-3-advanced-algorithms-" class="h3-link" style="padding-left: 1rem;">8.3 Advanced Algorithms</a></li><li><a href="#-9-modern-javascript-ecosystem-" class="h2-link">9. MODERN JAVASCRIPT ECOSYSTEM</a></li><li><a href="#-9-1-module-systems-" class="h3-link" style="padding-left: 1rem;">9.1 Module Systems</a></li><li><a href="#-9-2-build-tools-transpilation-" class="h3-link" style="padding-left: 1rem;">9.2 Build Tools & Transpilation</a></li><li><a href="#-9-3-testing-frameworks-" class="h3-link" style="padding-left: 1rem;">9.3 Testing Frameworks</a></li><li><a href="#-9-4-package-management-" class="h3-link" style="padding-left: 1rem;">9.4 Package Management</a></li><li><a href="#-10-browser-apis-web-platform-" class="h2-link">10. BROWSER APIs & WEB PLATFORM</a></li><li><a href="#-10-1-dom-manipulation-mastery-" class="h3-link" style="padding-left: 1rem;">10.1 DOM Manipulation Mastery</a></li><li><a href="#-10-2-web-apis-" class="h3-link" style="padding-left: 1rem;">10.2 Web APIs</a></li><li><a href="#-10-3-progressive-web-apps-" class="h3-link" style="padding-left: 1rem;">10.3 Progressive Web Apps</a></li><li><a href="#-10-4-performance-apis-" class="h3-link" style="padding-left: 1rem;">10.4 Performance APIs</a></li><li><a href="#-11-security-best-practices-" class="h2-link">11. SECURITY & BEST PRACTICES</a></li><li><a href="#-11-1-web-security-" class="h3-link" style="padding-left: 1rem;">11.1 Web Security</a></li><li><a href="#-11-2-secure-coding-practices-" class="h3-link" style="padding-left: 1rem;">11.2 Secure Coding Practices</a></li><li><a href="#-11-3-privacy-compliance-" class="h3-link" style="padding-left: 1rem;">11.3 Privacy & Compliance</a></li><li><a href="#-12-advanced-problem-solving-" class="h2-link">12. ADVANCED PROBLEM SOLVING</a></li><li><a href="#-12-1-algorithmic-problem-solving-" class="h3-link" style="padding-left: 1rem;">12.1 Algorithmic Problem Solving</a></li><li><a href="#-12-2-system-design-" class="h3-link" style="padding-left: 1rem;">12.2 System Design</a></li><li><a href="#-12-3-debugging-troubleshooting-" class="h3-link" style="padding-left: 1rem;">12.3 Debugging & Troubleshooting</a></li><li><a href="#-13-real-world-applications-" class="h2-link">13. REAL-WORLD APPLICATIONS</a></li><li><a href="#-13-1-enterprise-applications-" class="h3-link" style="padding-left: 1rem;">13.1 Enterprise Applications</a></li><li><a href="#-13-2-frontend-frameworks-integration-" class="h3-link" style="padding-left: 1rem;">13.2 Frontend Frameworks Integration</a></li><li><a href="#-13-3-full-stack-development-" class="h3-link" style="padding-left: 1rem;">13.3 Full-Stack Development</a></li>`;
+        
+        // Initialize theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        const themeButton = document.getElementById('theme-toggle');
+        themeButton.textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+        
+        // Set initial theme stylesheets
+        const lightTheme = document.getElementById('light-theme');
+        const darkTheme = document.getElementById('dark-theme');
+        if (savedTheme === 'dark') {
+            lightTheme.disabled = true;
+            darkTheme.disabled = false;
+        } else {
+            lightTheme.disabled = false;
+            darkTheme.disabled = true;
+        }
+        
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            const isOpen = sidebar.classList.contains('mobile-open');
+            
+            if (isOpen) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            } else {
+                sidebar.classList.add('mobile-open');
+                overlay.classList.add('active');
+            }
+        }
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.getElementById('theme-toggle');
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            button.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+            localStorage.setItem('theme', newTheme);
+            
+            const lightTheme = document.getElementById('light-theme');
+            const darkTheme = document.getElementById('dark-theme');
+            if (newTheme === 'dark') {
+                lightTheme.disabled = true;
+                darkTheme.disabled = false;
+            } else {
+                lightTheme.disabled = false;
+                darkTheme.disabled = true;
+            }
+            
+            // Re-highlight code after theme change
+            setTimeout(() => {
+                if (typeof Prism !== 'undefined') {
+                    Prism.highlightAll();
+                }
+            }, 100);
+        }
+        
+        // Copy code functionality
+        function copyCode(text, button) {
+            // Modern clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    button.textContent = 'Copied!';
+                    button.style.background = '#10b981';
+                    setTimeout(() => {
+                        button.textContent = 'Copy';
+                        button.style.background = 'var(--accent-color)';
+                    }, 2000);
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(text, button);
+                });
+            } else {
+                fallbackCopyTextToClipboard(text, button);
+            }
+        }
+        
+        // Fallback copy function for older browsers
+        function fallbackCopyTextToClipboard(text, button) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    button.textContent = 'Copied!';
+                    button.style.background = '#10b981';
+                    setTimeout(() => {
+                        button.textContent = 'Copy';
+                        button.style.background = 'var(--accent-color)';
+                    }, 2000);
+                } else {
+                    throw new Error('Copy command failed');
+                }
+            } catch (err) {
+                console.error('Copy failed:', err);
+                button.textContent = 'Copy failed';
+                button.style.background = '#ef4444';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.style.background = 'var(--accent-color)';
+                }, 2000);
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu button
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+            
+            // Theme toggle button
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', toggleTheme);
+            }
+            
+            // Copy buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('copy-btn')) {
+                    const encodedCode = e.target.getAttribute('data-code');
+                    if (encodedCode) {
+                        const code = decodeURIComponent(encodedCode);
+                        copyCode(code, e.target);
+                    }
+                }
+            });
+            
+            // Overlay and TOC link clicks
+            const overlay = document.getElementById('mobile-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    const sidebar = document.getElementById('sidebar');
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                });
+            }
+            
+            // TOC links
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('.toc a')) {
+                    const sidebar = document.getElementById('sidebar');
+                    const overlay = document.getElementById('mobile-overlay');
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                }
+            });
+            
+            // Highlight code after page load
+            setTimeout(() => {
+                if (typeof Prism !== 'undefined') {
+                    Prism.highlightAll();
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
